@@ -1,5 +1,13 @@
 ---
+import { getCollection } from 'astro:content';
+import '../styles/global.css' // Import Tailwind styles
 
+const events = await getCollection('events');
+const upcoming = events
+  .filter(e => new Date(e.data.date) >= new Date())
+  .sort((a, b) => +new Date(a.data.date) - +new Date(b.data.date));
+
+const next = upcoming[0];
 ---
 
 <html lang="en">
@@ -8,9 +16,20 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Mindful Ina – Next Event</title>
 	</head>
-	<body>
-		<h1>Astro</h1>
+	<body class="prose mx-auto p-8">
+		{next ? (
+			<>
+				<h1 class="text-3xl font-bold mb-4">{next.data.title}</h1>
+				<p><strong>When:</strong> {new Date(next.data.date).toLocaleString('en-US',{dateStyle:'full',timeStyle:'short'})}</p>
+				<p><strong>Where:</strong> {next.data.location}</p>
+				{next.data.cover && <img src={next.data.cover} alt={next.data.title + " cover image"} class="my-4" />}
+				<p class="mt-6">{next.body}</p>
+				<a href="/events" class="underline mt-8 inline-block">See all upcoming sessions →</a>
+			</>
+		) : (
+			<h1>No events scheduled – check back soon!</h1>
+		)}
 	</body>
 </html>

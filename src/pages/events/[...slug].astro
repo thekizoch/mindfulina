@@ -1,0 +1,33 @@
+import { getCollection } from 'astro:content';
+import '../../styles/global.css' // Import Tailwind styles
+
+export async function getStaticPaths() {
+  const events = await getCollection('events');
+  return events.map(event => ({
+    params: { slug: event.slug }, props: { event },
+  }));
+}
+
+const { event } = Astro.props;
+const { Content } = await event.render();
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Mindful Ina – {event.data.title}</title>
+  </head>
+  <body class="prose mx-auto p-8">
+    <h1 class="text-3xl font-bold mb-4">{event.data.title}</h1>
+    <p><strong>When:</strong> {new Date(event.data.date).toLocaleString('en-US',{dateStyle:'full',timeStyle:'short'})}</p>
+    <p><strong>Where:</strong> {event.data.location}</p>
+    <!-- Display cover image if available -->
+    {event.data.cover && <img src={event.data.cover} alt={event.data.title + " cover image"} class="my-4" />}
+    <div class="mt-6">
+      <Content />
+    </div>
+    <a href="/events" class="underline mt-8 inline-block">← Back to All Events</a>
+  </body>
+</html> 
