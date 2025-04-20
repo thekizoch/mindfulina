@@ -1,1 +1,10 @@
+/* Updated: Import Pacifico font, add gradient background and theme styles */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 @import "tailwindcss";
+
+body {
+  @apply min-h-screen bg-gradient-to-br from-sand via-white to-sky-100 text-gray-800;
+}
+
+a   { @apply text-ocean underline decoration-2 hover:text-hibisc transition; }
+h1, h2, h3 { @apply font-display text-hibisc; }

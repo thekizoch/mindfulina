@@ -1,0 +1,40 @@
+<!-- New file: Base layout component -->
+---
+import '../styles/global.css';
+
+interface Props { title?: string }
+const { title = 'Mindful Ina' } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="font-sans">
+    <!-- Header -->
+    <header class="text-center py-8">
+      <h1 class="text-4xl font-display text-hibisc drop-shadow-lg">
+        Mindful Ina
+      </h1>
+      <p class="text-ocean mt-2">Island‑inspired Sound Journeys</p>
+    </header>
+
+    <!-- Decorative wave -->
+    <svg class="w-full h-8 text-ocean/30" viewBox="0 0 1440 60" fill="currentColor">
+      <path d="M0,30 C150,60 300,0 450,30 C600,60 750,0 900,30 C1050,60 1200,0 1350,30 C1420,45 1440,40 1440,40 L1440,0 L0,0 Z"/>
+    </svg>
+
+    <!-- Main slot -->
+    <main class="max-w-3xl mx-auto p-6">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center text-sm py-10 text-gray-500">
+      © {new Date().getFullYear()} Mindful Ina
+    </footer>
+  </body>
+</html> 

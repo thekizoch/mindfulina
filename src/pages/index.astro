@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import '../styles/global.css' // Import Tailwind styles
+import Base from '../layouts/BaseLayout.astro'; // Import BaseLayout
 
 const events = await getCollection('events');
 const upcoming = events
@@ -8,28 +8,25 @@ const upcoming = events
   .sort((a, b) => +new Date(a.data.date) - +new Date(b.data.date));
 
 const next = upcoming[0];
+const pageTitle = next ? `Mindful Ina – ${next.data.title}` : 'Mindful Ina – Next Event';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Mindful Ina – Next Event</title>
-	</head>
-	<body class="prose mx-auto p-8">
-		{next ? (
-			<>
+<Base title={pageTitle}>
+	{next ? (
+			<article class="bg-white/60 backdrop-blur-md p-8 rounded-2xl shadow-lg">
 				<h1 class="text-3xl font-bold mb-4">{next.data.title}</h1>
 				<p><strong>When:</strong> {new Date(next.data.date).toLocaleString('en-US',{dateStyle:'full',timeStyle:'short'})}</p>
 				<p><strong>Where:</strong> {next.data.location}</p>
-				{next.data.cover && <img src={next.data.cover} alt={next.data.title + " cover image"} class="my-4" />}
-				<p class="mt-6">{next.body}</p>
-				<a href="/events" class="underline mt-8 inline-block">See all upcoming sessions →</a>
-			</>
+				{next.data.cover && <img src={next.data.cover} alt={next.data.title + " cover image"} class="my-4 rounded-lg" />}
+				<div class="prose mt-6">
+					{next.body}  {/* Render markdown content if needed, assuming next.body is raw markdown */}
+				</div>
+				<a href="/events" class="mt-8 inline-block">See all upcoming sessions →</a>
+			</article>
 		) : (
-			<h1>No events scheduled – check back soon!</h1>
+			<div class="bg-white/60 backdrop-blur-md p-8 rounded-2xl shadow-lg text-center">
+        <h1 class="text-3xl font-bold">No events scheduled</h1>
+        <p class="mt-4">Please check back soon!</p>
+      </div>
 		)}
-	</body>
-</html>
+</Base>
