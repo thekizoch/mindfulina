@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Mindfulina - Brand Identity">
+  <div class="content-section">
+    <h1>Mindfulina Brand Identity</h1>
+    <p class="text-xl mb-8">A comprehensive guide to our visual language and brand elements.</p>
+    
+    <!-- Color Palette -->
+    <section class="mb-12">
+      <h2>Color Palette</h2>
+      
+      <div class="space-y-4">
+        <h3>Primary Colors</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-6 rounded-lg bg-primary text-white">
+            <strong class="block">Primary (Ocean)</strong>
+            <span class="text-white/90">#0e7f9e</span>
+          </div>
+          <div class="p-6 rounded-lg bg-secondary text-white">
+            <strong class="block">Secondary (Hibiscus)</strong>
+            <span class="text-white/90">#ff5e6c</span>
+          </div>
+          <div class="p-6 rounded-lg bg-accent border border-gray-200">
+            <strong class="block">Accent (Sand)</strong>
+            <span class="text-gray-700">#fde7c3</span>
+          </div>
+        </div>
+        
+        <h3>Ocean Shades</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-6 rounded-lg bg-ocean-light text-white">
+            <strong>Ocean Light</strong>
+            <span class="block text-white/90">#45a5c4</span>
+          </div>
+          <div class="p-6 rounded-lg bg-ocean text-white">
+            <strong>Ocean</strong>
+            <span class="block text-white/90">#0e7f9e</span>
+          </div>
+          <div class="p-6 rounded-lg bg-ocean-dark text-white">
+            <strong>Ocean Dark</strong>
+            <span class="block text-white/90">#0a5b71</span>
+          </div>
+        </div>
+        
+        <h3>Hibiscus Shades</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-6 rounded-lg bg-hibisc-light text-white">
+            <strong>Hibiscus Light</strong>
+            <span class="block text-white/90">#ff8c96</span>
+          </div>
+          <div class="p-6 rounded-lg bg-hibisc text-white">
+            <strong>Hibiscus</strong>
+            <span class="block text-white/90">#ff5e6c</span>
+          </div>
+          <div class="p-6 rounded-lg bg-hibisc-dark text-white">
+            <strong>Hibiscus Dark</strong>
+            <span class="block text-white/90">#e63e4c</span>
+          </div>
+        </div>
+        
+        <h3>Sand Shades</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-6 rounded-lg bg-sand-light border border-gray-200">
+            <strong>Sand Light</strong>
+            <span class="block text-gray-700">#fff2dc</span>
+          </div>
+          <div class="p-6 rounded-lg bg-sand border border-gray-200">
+            <strong>Sand</strong>
+            <span class="block text-gray-700">#fde7c3</span>
+          </div>
+          <div class="p-6 rounded-lg bg-sand-dark border border-gray-200">
+            <strong>Sand Dark</strong>
+            <span class="block text-gray-700">#f8d49b</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Typography -->
+    <section class="mb-12">
+      <h2>Typography</h2>
+      
+      <div class="card p-8 space-y-6">
+        <div>
+          <h3>Display Font: Pacifico</h3>
+          <p class="font-display text-3xl">Mindfulina Sound Healing</p>
+          <p class="text-sm text-gray-500">Used for main headings and logo text</p>
+        </div>
+        
+        <div>
+          <h3>Serif Font: Lora</h3>
+          <p class="font-serif text-2xl">Healing through sound vibration</p>
+          <p class="font-serif">Lora is used for section headings and accent text. It conveys elegance and tranquility.</p>
+          <p class="text-sm text-gray-500">Used for secondary headings and quotes</p>
+        </div>
+        
+        <div>
+          <h3>Body Font: Inter</h3>
+          <p class="font-body">
+            Inter is our primary body text font. It's clean, modern, and highly readable at all sizes. 
+            All paragraph text, navigation items, and most UI elements use this font.
+          </p>
+          <p class="text-sm text-gray-500">Used for body text and UI elements</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- UI Components -->
+    <section class="mb-12">
+      <h2>UI Components</h2>
+      
+      <div class="card p-8 space-y-8">
+        <div>
+          <h3>Buttons</h3>
+          <div class="flex flex-wrap gap-4">
+            <button class="btn-primary">Primary Button</button>
+            <button class="btn-secondary">Secondary Button</button>
+            <button class="btn-outline">Outline Button</button>
+          </div>
+        </div>
+        
+        <div>
+          <h3>Cards</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="card p-4">
+              <h4 class="font-serif text-ocean text-lg mb-2">Basic Card</h4>
+              <p class="text-sm">Cards use a subtle white background with slight transparency and blur effect.</p>
+            </div>
+            <div class="card p-4 border-l-4 border-hibisc">
+              <h4 class="font-serif text-hibisc text-lg mb-2">Accent Card</h4>
+              <p class="text-sm">Cards can include accent borders for emphasis.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3>Links & Text Styles</h3>
+          <p>
+            Regular paragraph text with <a href="#">standard links</a> that use our primary color.
+            Text can be <strong>bold for emphasis</strong> or use <span class="text-secondary">color for highlighting</span>.
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Example Content -->
+    <section class="mb-12">
+      <h2>Example Event Card</h2>
+      
+      <div class="card p-6">
+        <h3 class="font-display text-secondary text-2xl">Morning Ocean Sound Bath</h3>
+        <p><strong>When:</strong> Sunday, April 27, 2025 at 10:00 AM</p>
+        <p><strong>Where:</strong> Mākālei Beach Park, Honolulu</p>
+        
+        <div class="my-4">
+          <img src="/images/wide-shot.jpeg" alt="Event cover image" class="rounded-lg shadow-soft w-full h-48 object-cover">
+        </div>
+        
+        <div class="prose my-4">
+          <p>Join us for a rejuvenating 30-minute sound bath to reset and relax your mind, body, and spirit.</p>
+          
+          <h4 class="font-serif text-ocean-dark text-lg mt-4 mb-2">Before You Arrive</h4>
+          <p>Consider taking a peaceful walk along the shoreline to connect with nature.</p>
+          
+          <h4 class="font-serif text-ocean-dark text-lg mt-4 mb-2">What to Bring</h4>
+          <ul class="list-disc pl-5">
+            <li>Towel, yoga mat, or blanket</li>
+            <li>Swimsuit and sunscreen</li>
+            <li>Optional: hat, sunglasses, water bottle</li>
+          </ul>
+        </div>
+        
+        <div class="mt-6">
+          <a href="#" class="btn-primary">Register Now</a>
+        </div>
+      </div>
+    </section>
+    
+    <a href="/" class="btn-outline mt-8 inline-block">← Back to Home</a>
+  </div>
+</BaseLayout> 

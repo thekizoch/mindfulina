@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import Base from '../../layouts/BaseLayout.astro'; // Import BaseLayout
+import Event from '../../layouts/EventLayout.astro';
 
 const events = await getCollection('events');
 const upcoming = events
@@ -10,7 +10,7 @@ const upcoming = events
 const pageTitle = 'Mindfulina – Upcoming Events';
 ---
 
-<Base title={pageTitle}>
+<Event title={pageTitle}>
   <h1 class="text-3xl font-bold mb-8 text-center">Upcoming Events</h1>
   {upcoming.length > 0 ? (
     <ul class="space-y-8">
@@ -43,4 +43,4 @@ const pageTitle = 'Mindfulina – Upcoming Events';
   <div class="text-center mt-8">
     <a href="/" class="inline-block">← Back to Next Event</a>
   </div>
-</Base> 
+</Event> 

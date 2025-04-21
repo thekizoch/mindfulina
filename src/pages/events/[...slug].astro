@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import Base from '../../layouts/BaseLayout.astro'; // Import BaseLayout
+import Event from '../../layouts/EventLayout.astro';
 
 export async function getStaticPaths() {
   const events = await getCollection('events');
@@ -14,7 +14,7 @@ const { Content } = await event.render();
 const pageTitle = `Mindfulina – ${event.data.title}`;
 ---
 
-<Base title={pageTitle}>
+<Event title={pageTitle}>
   <article class="bg-white/60 backdrop-blur-md p-8 rounded-2xl shadow-lg">
     <h1 class="text-3xl font-bold mb-4">{event.data.title}</h1>
     <p><strong>When:</strong> {new Date(event.data.date).toLocaleString('en-US',{dateStyle:'full',timeStyle:'short'})}</p>
@@ -28,4 +28,4 @@ const pageTitle = `Mindfulina – ${event.data.title}`;
       <a href="/events" class="mt-8 inline-block">← Back to All Events</a>
     </div>
   </article>
-</Base> 
+</Event> 

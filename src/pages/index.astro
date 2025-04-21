@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-import Base from '../layouts/BaseLayout.astro'; // Import BaseLayout
+import Base from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
 
 const events = await getCollection('events');
 const upcoming = events
@@ -9,9 +10,15 @@ const upcoming = events
 
 const next = upcoming[0];
 const pageTitle = next ? `Mindfulina – ${next.data.title}` : 'Mindfulina – Next Event';
+// Render the content if available
+const { Content } = next ? await next.render() : { Content: null };
 ---
 
 <Base title={pageTitle}>
+  <div class="hidden md:block">
+    <Hero />
+  </div>
+  
 	{next ? (
 			<article class="bg-white/60 backdrop-blur-md p-8 rounded-2xl shadow-lg">
 				<h1 class="text-3xl font-bold mb-4">{next.data.title}</h1>
@@ -19,7 +26,7 @@ const pageTitle = next ? `Mindfulina – ${next.data.title}` : 'Mindfulina – N
 				<p><strong>Where:</strong> {next.data.location}</p>
 				{next.data.cover && <img src={next.data.cover} alt={next.data.title + " cover image"} class="my-4 rounded-lg" />}
 				<div class="prose mt-6">
-					{next.body}  {/* Render markdown content if needed, assuming next.body is raw markdown */}
+					<Content />
 				</div>
 				<a href="/events" class="mt-8 inline-block">See all upcoming sessions →</a>
 			</article>

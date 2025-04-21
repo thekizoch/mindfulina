@@ -1,12 +1,77 @@
-/* Updated: Import Pacifico font, add gradient background and theme styles */
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+/* 
+ * Mindfulina Global Styles
+ * Updated theme with consistent brand colors and typography
+ */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply min-h-screen bg-gradient-to-br from-amber-100 via-white to-sky-100 text-gray-800;
+@layer base {
+  body {
+    @apply min-h-screen bg-gradient-to-br from-sand-light via-white to-ocean-light/10 text-gray-800 font-body;
+  }
+
+  /* Typography */
+  h1 {
+    @apply font-display text-secondary text-4xl mb-4;
+  }
+  
+  h2, h3 {
+    @apply font-serif text-ocean-dark;
+  }
+  
+  h2 {
+    @apply text-2xl mb-3 mt-6;
+  }
+  
+  h3 {
+    @apply text-xl mb-2 mt-4;
+  }
+  
+  p {
+    @apply mb-4;
+  }
+  
+  a {
+    @apply text-primary underline decoration-2 hover:text-secondary transition-colors duration-200;
+  }
+  
+  ul, ol {
+    @apply mb-4 pl-5;
+  }
+  
+  li {
+    @apply mb-1;
+  }
+  
+  strong {
+    @apply font-semibold text-gray-900;
+  }
 }
 
-a   { @apply text-blue-600 underline decoration-2 hover:text-rose-500 transition; }
-h1, h2, h3 { @apply font-serif text-rose-500; }
+@layer components {
+  .card {
+    @apply bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-soft;
+  }
+  
+  .btn {
+    @apply inline-block px-6 py-3 rounded-xl font-medium transition-all duration-200 no-underline;
+  }
+  
+  .btn-primary {
+    @apply btn bg-primary text-white hover:bg-ocean-dark;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-secondary text-white hover:bg-hibisc-dark;
+  }
+  
+  .btn-outline {
+    @apply btn border-2 border-ocean text-ocean hover:bg-ocean hover:text-white;
+  }
+  
+  .content-section {
+    @apply max-w-3xl mx-auto px-4 py-6;
+  }
+}
