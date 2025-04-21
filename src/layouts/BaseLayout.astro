@@ -16,11 +16,23 @@ const { title = 'Mindfulina' } = Astro.props;
   <body class="font-sans">
     <!-- Header -->
     <header class="text-center py-8">
-      <h1 class="text-4xl font-display text-hibisc drop-shadow-lg">
-        Mindfulina
-      </h1>
-      <p class="text-ocean mt-2">Island‑inspired Sound Journeys</p>
+      <div class="flex justify-center items-center flex-col">
+        <img src="/images/logo.png" alt="Mindfulina Logo" class="h-24 w-auto mb-2" />
+        <p class="text-ocean mt-2">Island‑inspired Sound Journeys</p>
+      </div>
     </header>
+
+    <!-- Hero image - only shown on homepage -->
+    {Astro.url.pathname === '/' && (
+      <div class="relative h-64 md:h-96 overflow-hidden mb-8">
+        <img 
+          src="/images/tall-shot.jpeg" 
+          alt="Mindfulina sound bath session" 
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-white/80"></div>
+      </div>
+    )}
 
     <!-- Decorative wave -->
     <svg class="w-full h-8 text-ocean/30" viewBox="0 0 1440 60" fill="currentColor">

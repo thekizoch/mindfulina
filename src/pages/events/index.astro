@@ -13,21 +13,34 @@ const pageTitle = 'Mindfulina – Upcoming Events';
 <Base title={pageTitle}>
   <h1 class="text-3xl font-bold mb-8 text-center">Upcoming Events</h1>
   {upcoming.length > 0 ? (
-    <ul class="space-y-6">
+    <ul class="space-y-8">
       {upcoming.map(event => (
-        <li class="bg-white/60 backdrop-blur-md p-6 rounded-2xl shadow-lg">
-          <a href={`/events/${event.slug}`} class="text-xl font-semibold no-underline hover:underline block mb-2">{event.data.title}</a>
-          <p class="text-sm text-gray-700">{new Date(event.data.date).toLocaleString('en-US',{dateStyle:'full',timeStyle:'short'})}</p>
-          <p class="text-sm text-gray-700">{event.data.location}</p>
+        <li class="bg-white/60 backdrop-blur-md p-6 rounded-2xl shadow-lg overflow-hidden">
+          <div class="flex flex-col md:flex-row gap-6">
+            {event.data.cover && (
+              <div class="md:w-1/3">
+                <img src={event.data.cover} alt={event.data.title} class="w-full h-48 object-cover rounded-lg" />
+              </div>
+            )}
+            <div class="md:w-2/3">
+              <a href={`/events/${event.slug}`} class="text-xl font-semibold no-underline hover:underline block mb-2">{event.data.title}</a>
+              <p class="text-sm text-gray-700">{new Date(event.data.date).toLocaleString('en-US',{dateStyle:'full',timeStyle:'short'})}</p>
+              <p class="text-sm text-gray-700 mb-3">{event.data.location}</p>
+              <a href={`/events/${event.slug}`} class="text-ocean hover:text-hibisc">Learn more &rarr;</a>
+            </div>
+          </div>
         </li>
       ))}
     </ul>
   ) : (
     <div class="bg-white/60 backdrop-blur-md p-8 rounded-2xl shadow-lg text-center">
       <p>No upcoming events scheduled. Please check back later!</p>
+      <div class="mt-6">
+        <img src="/images/tall-shot.jpeg" alt="Mindfulina sound bath" class="max-w-md mx-auto rounded-lg shadow-md" />
+      </div>
     </div>
   )}
-  <div class="text-center">
-    <a href="/" class="mt-8 inline-block">← Back to Next Event</a>
+  <div class="text-center mt-8">
+    <a href="/" class="inline-block">← Back to Next Event</a>
   </div>
 </Base> 
