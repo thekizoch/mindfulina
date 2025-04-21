@@ -1,3 +1,4 @@
+---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/BaseLayout.astro'; // Import BaseLayout
 
@@ -6,7 +7,8 @@ const upcoming = events
   .filter(e => new Date(e.data.date) >= new Date())
   .sort((a, b) => +new Date(a.data.date) - +new Date(b.data.date));
 
-const pageTitle = 'Mindful Ina – Upcoming Events';
+const pageTitle = 'Mindfulina – Upcoming Events';
+---
 
 <Base title={pageTitle}>
   <h1 class="text-3xl font-bold mb-8 text-center">Upcoming Events</h1>

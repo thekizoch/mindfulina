@@ -8,7 +8,7 @@ const upcoming = events
   .sort((a, b) => +new Date(a.data.date) - +new Date(b.data.date));
 
 const next = upcoming[0];
-const pageTitle = next ? `Mindful Ina – ${next.data.title}` : 'Mindful Ina – Next Event';
+const pageTitle = next ? `Mindfulina – ${next.data.title}` : 'Mindfulina – Next Event';
 ---
 
 <Base title={pageTitle}>
