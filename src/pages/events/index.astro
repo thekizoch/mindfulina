@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Event from '../../layouts/EventLayout.astro';
+import { formatHawaiian } from '../../utils/format';
 
 const events = await getCollection('events');
 const upcoming = events
@@ -24,7 +25,7 @@ const pageTitle = 'Mindfulina – Upcoming Events';
             )}
             <div class="md:w-2/3">
               <a href={`/events/${event.slug}`} class="text-xl font-semibold no-underline hover:underline block mb-2">{event.data.title}</a>
-              <p class="text-sm text-gray-700">{new Date(event.data.date).toLocaleString('en-US',{dateStyle:'full',timeStyle:'short'})}</p>
+              <p class="text-sm text-gray-700"><Fragment set:html={formatHawaiian(event.data.date)} /></p>
               <p class="text-sm text-gray-700 mb-3">{event.data.location}</p>
               <a href={`/events/${event.slug}`} class="text-ocean hover:text-hibisc">Learn more &rarr;</a>
             </div>

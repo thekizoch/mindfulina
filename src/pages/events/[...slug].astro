@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Event from '../../layouts/EventLayout.astro';
+import { formatHawaiian, getGoogleCalendarLink } from '../../utils/format';
 
 export async function getStaticPaths() {
   const events = await getCollection('events');
@@ -12,13 +13,28 @@ export async function getStaticPaths() {
 const { event } = Astro.props;
 const { Content } = await event.render();
 const pageTitle = `Mindfulina – ${event.data.title}`;
+const calendarLink = getGoogleCalendarLink({
+  title: event.data.title,
+  date: event.data.date,
+  location: event.data.location,
+  description: event.data.description
+});
 ---
 
 <Event title={pageTitle}>
   <article class="bg-white/60 backdrop-blur-md p-8 rounded-2xl shadow-lg">
     <h1 class="text-3xl font-bold mb-4">{event.data.title}</h1>
-    <p><strong>When:</strong> {new Date(event.data.date).toLocaleString('en-US',{dateStyle:'full',timeStyle:'short'})}</p>
+    <p><strong>When:</strong> <Fragment set:html={formatHawaiian(event.data.date)} /></p>
     <p><strong>Where:</strong> {event.data.location}</p>
+    <p class="mt-2">
+      <a href={calendarLink} target="_blank" class="text-sm inline-flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        Add to Google Calendar
+      </a>
+    </p>
+    
     <!-- Display cover image if available -->
     {event.data.cover && <img src={event.data.cover} alt={event.data.title + " cover image"} class="my-4 rounded-lg" />}
     <div class="prose mt-6">
