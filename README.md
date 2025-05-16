@@ -1,3 +1,8 @@
+# Mindfulina
+
+Code is deployed with CI CD on Cloudflare
+
+
 # Astro Starter Kit: Minimal
 
 ```sh
