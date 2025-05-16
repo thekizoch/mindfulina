@@ -10,7 +10,7 @@ const GITHUB_BRANCH = "main";
 
 const DEFAULT_COVER_IMAGE = "/images/wide-shot.jpeg";
 const DEFAULT_LOCATION = "Mākālei Beach Park, Honolulu"; // Added
-const DEFAULT_EVENT_DESCRIPTION_MARKDOWN = `Join us for a rejuvenating 30-minute sound bath to reset and relax your mind, body, and spirit.
+const DEFAULT_EVENT_DESCRIPTION_MARKDOWN = `Join us for a rejuvenating sound bath to reset and relax your mind, body, and spirit.
 
 ## What to know
 Mākālei Beach Park features a small beach used by surfers, plus a tree-shaded area with picnic tables. Dogs allowed. Located at 3111 Diamond Head Rd, Honolulu, HI 96815. 

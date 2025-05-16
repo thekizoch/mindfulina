@@ -1,0 +1,4 @@
+name = "mindfulina-event-automation"
+main = "eventAutomation.js"
+compatibility_date = "2025-05-16" # Replace with the actual current date when setting up
+account_id = "" # Will be sourced from CF_ACCOUNT_ID GitHub secret during CI/CD

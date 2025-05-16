@@ -1,0 +1,37 @@
+name: Deploy Cloudflare Worker
+
+on:
+  push:
+    branches:
+      - main # Or your default branch
+    paths:
+      - 'cloudflare-worker/**' # Only run if files in this directory change
+      - '.github/workflows/deploy-cf-worker.yml' # Also run if the workflow itself changes
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy Worker to Cloudflare
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Or a recent LTS version
+
+      - name: Install Wrangler
+        run: npm install -g wrangler
+
+      - name: Deploy Cloudflare Worker
+        # Ensure this path is correct relative to the repository root
+        working-directory: ./cloudflare-worker 
+        run: wrangler deploy
+        env:
+          # This secret is used by Wrangler to authenticate
+          # Ensure CF_API_TOKEN is set in your GitHub repository secrets
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          # This secret is used by Wrangler to identify your Cloudflare account
+          # Ensure CF_ACCOUNT_ID is set in your GitHub repository secrets
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
