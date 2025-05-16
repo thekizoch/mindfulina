@@ -2,12 +2,28 @@
 
 // Expected environment variables (secrets) to be set in Worker settings:
 // GITHUB_TOKEN
+// APPS_SCRIPT_SECRET (optional, for basic auth from Apps Script)
 
-const GITHUB_REPO_OWNER = "thekizoch"; // Hardcoded repository owner
-const GITHUB_REPO_NAME = "mindfulina";  // Hardcoded repository name
-const GITHUB_BRANCH = "main";          // Your default branch for new content
+const GITHUB_REPO_OWNER = "thekizoch";
+const GITHUB_REPO_NAME = "mindfulina";
+const GITHUB_BRANCH = "main"; 
 
-const DEFAULT_COVER_IMAGE = "/images/wide-shot.jpg"; // Define your default
+const DEFAULT_COVER_IMAGE = "/images/wide-shot.jpeg";
+const DEFAULT_LOCATION = "Mākālei Beach Park, Honolulu"; // Added
+const DEFAULT_EVENT_DESCRIPTION_MARKDOWN = `Join us for a rejuvenating 30-minute sound bath to reset and relax your mind, body, and spirit.
+
+## What to know
+Mākālei Beach Park features a small beach used by surfers, plus a tree-shaded area with picnic tables. Dogs allowed. Located at 3111 Diamond Head Rd, Honolulu, HI 96815. 
+
+## Before You Arrive
+Consider taking a peaceful walk along the shoreline to connect with nature.
+
+## What to Bring
+- Towel, yoga mat, or blanket
+- Swimsuit and sunscreen
+- Optional: hat, sunglasses, water bottle
+
+Let the ocean breeze and sound healing waves guide you into deep rest. See you there.`; // Added
 
 export default {
   async fetch(request, env, ctx) {
@@ -15,7 +31,6 @@ export default {
       return new Response('Expected POST request', { status: 405 });
     }
 
-    // Optional: Basic secret validation if APPS_SCRIPT_SECRET is set
     if (env.APPS_SCRIPT_SECRET) {
       const authHeader = request.headers.get('X-AppsScript-Secret');
       if (authHeader !== env.APPS_SCRIPT_SECRET) {
@@ -35,31 +50,29 @@ export default {
 
     console.log('Worker: Received event data:', JSON.stringify(eventData, null, 2));
 
-    // Basic Validation (expand as needed)
     if (!eventData.title || !eventData.startTime || !eventData.googleCalendarEventId) {
       console.error('Worker: Missing critical event data fields (title, startTime, googleCalendarEventId).');
       return new Response('Missing required event data fields', { status: 400 });
     }
 
     try {
-      // 1. Create GitHub Markdown File
       console.log('Worker: Attempting to create GitHub event file...');
       const githubResult = await createGithubEventFile(eventData, env);
       
       const githubStatus = githubResult.status;
-      const githubResponseText = await githubResult.text(); // Get text for logging regardless of status
+      const githubResponseText = await githubResult.text(); 
 
       console.log(`Worker: GitHub API response status: ${githubStatus}`);
-      console.log(`Worker: GitHub API response body: ${githubResponseText}`);
+      console.log(`Worker: GitHub API response body (first 500 chars): ${githubResponseText.substring(0,500)}`);
 
-      if (githubStatus !== 201 && githubStatus !== 200) { // 201 for created, 200 for updated (though we only create now)
+      if (githubStatus !== 201 && githubStatus !== 200) {
         console.error(`Worker: Failed to create GitHub file. Status: ${githubStatus}, Body: ${githubResponseText}`);
         return new Response(`Failed to create GitHub file: ${githubStatus} - ${githubResponseText}`, { status: 500 });
       }
       
       let githubFileUrl = "N/A";
       try {
-        const githubJson = JSON.parse(githubResponseText); // Parse the response text
+        const githubJson = JSON.parse(githubResponseText);
         if (githubJson.content && githubJson.content.html_url) {
             githubFileUrl = githubJson.content.html_url;
         }
@@ -84,38 +97,42 @@ export default {
 
 // --- GitHub File Creation ---
 async function createGithubEventFile(eventData, env) {
-  const { title, startTime, location, description, googleCalendarEventId, isAllDay } = eventData;
+  const { title, startTime, isAllDay, googleCalendarEventId } = eventData; // Destructure core needed ones
+  
+  // Use provided location or default; use provided description or default
+  const locationToUse = (eventData.location && eventData.location.trim() !== '') ? eventData.location : DEFAULT_LOCATION;
+  const descriptionToUse = (eventData.description && eventData.description.trim() !== '') ? eventData.description : DEFAULT_EVENT_DESCRIPTION_MARKDOWN;
 
-  // Sanitize title for filename (simple slugify)
-  let slug = 'event'; // default slug
+  let slug = 'event'; 
   if (title) {
     slug = title.toLowerCase()
-      .replace(/\s+/g, '-')          // Replace spaces with -
-      .replace(/[^\w-]+/g, '')       // Remove all non-word chars (except hyphen)
-      .replace(/--+/g, '-')          // Replace multiple - with single -
-      .replace(/^-+/, '')             // Trim - from start of text
-      .replace(/-+$/, '');            // Trim - from end of text
-    if (!slug) slug = 'event'; // if title was all special characters
+      .replace(/\s+/g, '-')         
+      .replace(/[^\w-]+/g, '')      
+      .replace(/--+/g, '-')         
+      .replace(/^-+/, '')            
+      .replace(/-+$/, '');           
+    if (!slug) slug = 'event'; 
   }
   
-  const datePrefix = new Date(startTime).toISOString().split('T')[0]; // YYYY-MM-DD
+  const datePrefix = new Date(startTime).toISOString().split('T')[0]; 
   const eventPath = `src/content/events/${datePrefix}-${slug}.md`;
   console.log(`Worker: Determined event file path: ${eventPath}`);
   
-  const eventDescriptionForFrontmatter = description ? description.substring(0, 160).replace(/"/g, '\\"').replace(/\n/g, ' ') : `Join us for ${title ? title.replace(/"/g, '\\"') : 'this event'}!`;
-
+  // Frontmatter content using the determined location and default cover
   const frontmatterContent = `---
 title: "${title ? title.replace(/"/g, '\\"') : 'Mindfulina Event'}"
 date: "${startTime}"
-location: "${location ? location.replace(/"/g, '\\"') : 'To be announced'}"
+location: "${locationToUse.replace(/"/g, '\\"')}"
 cover: "${DEFAULT_COVER_IMAGE}"
-description: "${eventDescriptionForFrontmatter}"
 googleCalendarEventId: "${googleCalendarEventId}"
 isAllDay: ${isAllDay || false}
 ---
 
-${description || 'Event details coming soon.'}
+${descriptionToUse}
 `;
+  // The conditional logic for appending "What to know" etc. is removed because
+  // DEFAULT_EVENT_DESCRIPTION_MARKDOWN now contains the full desired default structure.
+  // If eventData.description is provided, that will be used in its entirety instead.
 
   const fileContentBase64 = btoa(unescape(encodeURIComponent(frontmatterContent)));
 
@@ -136,7 +153,7 @@ ${description || 'Event details coming soon.'}
     method: 'PUT',
     headers: {
       'Authorization': `token ${env.GITHUB_TOKEN}`,
-      'User-Agent': 'Mindfulina-Event-Automation-Worker/1.0', 
+      'User-Agent': 'Mindfulina-Event-Automation-Worker/1.0.3', // Incremented version
       'Content-Type': 'application/json',
       'Accept': 'application/vnd.github.v3+json',
     },
