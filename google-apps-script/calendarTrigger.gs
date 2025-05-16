@@ -1,7 +1,7 @@
 
 // Google Apps Script: Calendar Trigger for Mindfulina Event Automation
 // Uses Advanced Calendar Service for precise identification of newly created events.
-
+// below is alina.dvortsen@gmail.com's calendar Mindfulina Event (Automated) calendar
 const DESIGNATED_CALENDAR_ID = '59304c420efed529578b52fcf9f05481fc59372a74721d10a1587f08fcd15174@group.calendar.google.com';
 
 // Placeholder: Replace with your actual Cloudflare Worker URL once deployed
