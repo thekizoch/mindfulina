@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "astro": "^5.7.4",
+    "dotenv": "^16.5.0",
+    "formdata-node": "^6.0.3",
     "tailwindcss": "^3.3.5"
   },
   "devDependencies": {
