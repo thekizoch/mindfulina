@@ -1,163 +1,138 @@
-// Cloudflare Worker for Mindfulina Event Automation (GitHub Only)
+// mindfulina/cloudflare-worker/eventAutomation.js
+// Main Cloudflare Worker for Mindfulina Event Automation.
+// Orchestrates GitHub and Eventbrite integrations.
 
-// Expected environment variables (secrets) to be set in Worker settings:
-// GITHUB_TOKEN
-// APPS_SCRIPT_SECRET (optional, for basic auth from Apps Script)
+import { createGithubEventFile } from './githubManager.js';
+import { createMindfulinaEventOnEventbrite } from './eventbriteManager.js';
 
-const GITHUB_REPO_OWNER = "thekizoch";
-const GITHUB_REPO_NAME = "mindfulina";
-const GITHUB_BRANCH = "main"; 
-
-const DEFAULT_COVER_IMAGE = "/images/wide-shot.jpeg";
-const DEFAULT_LOCATION = "Mākālei Beach Park, Honolulu"; // Added
-const DEFAULT_EVENT_DESCRIPTION_MARKDOWN = `Join us for a rejuvenating sound bath to reset and relax your mind, body, and spirit.
-
-## What to know
-Mākālei Beach Park features a small beach used by surfers, plus a tree-shaded area with picnic tables. Dogs allowed. Located at 3111 Diamond Head Rd, Honolulu, HI 96815. 
-
-## Before You Arrive
-Consider taking a peaceful walk along the shoreline to connect with nature.
-
-## What to Bring
-- Towel, yoga mat, or blanket
-- Swimsuit and sunscreen
-- Optional: hat, sunglasses, water bottle
-
-Let the ocean breeze and sound healing waves guide you into deep rest. See you there.`; // Added
+// Eventbrite Configuration Constants (not secrets, can be managed here or passed if they change per-event type)
+const EVENTBRITE_ORGANIZER_ID = '2736604261351'; // Your actual Organizer ID
+const EVENTBRITE_VENUE_ID = '266927653';     // Your actual Venue ID for Mākālei Beach Park
+// The default image ID is now a constant within eventbriteManager.js (DEFAULT_EVENTBRITE_IMAGE_ID)
+// If you needed to override it on a per-call basis from eventAutomation.js, you could define a constant here:
+// const SPECIFIC_EVENT_IMAGE_ID = 'some_other_image_id'; // And pass this to createMindfulinaEventOnEventbrite
 
 export default {
   async fetch(request, env, ctx) {
     if (request.method !== 'POST') {
-      return new Response('Expected POST request', { status: 405 });
+      return new Response('Expected POST request from Google Apps Script', { status: 405 });
     }
 
+    // Optional: Basic secret validation if Apps Script sends one
     if (env.APPS_SCRIPT_SECRET) {
       const authHeader = request.headers.get('X-AppsScript-Secret');
       if (authHeader !== env.APPS_SCRIPT_SECRET) {
-        console.error('Worker: Unauthorized - Missing or incorrect X-AppsScript-Secret header.');
+        console.error('Worker/Automation: Unauthorized - Missing or incorrect X-AppsScript-Secret header.');
         return new Response('Unauthorized', { status: 401 });
       }
-      console.log('Worker: X-AppsScript-Secret validated.');
+      console.log('Worker/Automation: X-AppsScript-Secret validated.');
     }
 
     let eventData;
     try {
       eventData = await request.json();
     } catch (e) {
-      console.error('Worker: Failed to parse JSON body:', e);
+      console.error('Worker/Automation: Failed to parse JSON body:', e);
       return new Response('Invalid JSON payload', { status: 400 });
     }
 
-    console.log('Worker: Received event data:', JSON.stringify(eventData, null, 2));
+    console.log('Worker/Automation: Received event data:', JSON.stringify(eventData, null, 2));
 
-    if (!eventData.title || !eventData.startTime || !eventData.googleCalendarEventId) {
-      console.error('Worker: Missing critical event data fields (title, startTime, googleCalendarEventId).');
-      return new Response('Missing required event data fields', { status: 400 });
+    // Validate critical event data fields from Google Calendar
+    if (!eventData.title || !eventData.startTime || !eventData.endTime || !eventData.googleCalendarEventId) {
+      console.error('Worker/Automation: Missing critical event data fields (title, startTime, endTime, googleCalendarEventId).');
+      return new Response('Missing required event data fields from Google Calendar', { status: 400 });
+    }
+    // Validate required secrets
+    if (!env.GITHUB_TOKEN) {
+        console.error('Worker/Automation: Missing GITHUB_TOKEN secret.');
+        return new Response('Configuration error: GitHub token not set.', { status: 500 });
+    }
+    if (!env.EVENTBRITE_PRIVATE_TOKEN) {
+        console.error('Worker/Automation: Missing EVENTBRITE_PRIVATE_TOKEN secret.');
+        return new Response('Configuration error: Eventbrite token not set.', { status: 500 });
     }
 
+    let githubResultSummary = { success: false, message: "GitHub processing not initiated.", fileUrl: null, status: null, error: null };
+    let eventbriteResultSummary = { success: false, message: "Eventbrite processing not initiated.", eventUrl: null, eventId: null, published: false, error: null };
+
     try {
-      console.log('Worker: Attempting to create GitHub event file...');
-      const githubResult = await createGithubEventFile(eventData, env);
+      // --- Step 1: Create GitHub Event File ---
+      console.log('Worker/Automation: Attempting to create GitHub event file...');
+      const githubApiResponse = await createGithubEventFile(eventData, env.GITHUB_TOKEN);
       
-      const githubStatus = githubResult.status;
-      const githubResponseText = await githubResult.text(); 
+      githubResultSummary.status = githubApiResponse.status;
+      const githubResponseText = await githubApiResponse.text(); 
 
-      console.log(`Worker: GitHub API response status: ${githubStatus}`);
-      console.log(`Worker: GitHub API response body (first 500 chars): ${githubResponseText.substring(0,500)}`);
-
-      if (githubStatus !== 201 && githubStatus !== 200) {
-        console.error(`Worker: Failed to create GitHub file. Status: ${githubStatus}, Body: ${githubResponseText}`);
-        return new Response(`Failed to create GitHub file: ${githubStatus} - ${githubResponseText}`, { status: 500 });
-      }
-      
-      let githubFileUrl = "N/A";
-      try {
-        const githubJson = JSON.parse(githubResponseText);
-        if (githubJson.content && githubJson.content.html_url) {
-            githubFileUrl = githubJson.content.html_url;
+      if (!githubApiResponse.ok) { 
+        const errorMsg = `Failed to create GitHub file: ${githubResultSummary.status} - ${githubResponseText.substring(0, 200)}`;
+        console.error(`Worker/Automation: ${errorMsg}`);
+        githubResultSummary.message = errorMsg;
+        githubResultSummary.error = githubResponseText;
+      } else {
+        githubResultSummary.success = true;
+        githubResultSummary.message = 'GitHub event file processed successfully.';
+        try {
+          const githubJson = JSON.parse(githubResponseText);
+          if (githubJson.content && githubJson.content.html_url) {
+            githubResultSummary.fileUrl = githubJson.content.html_url;
+          }
+        } catch (parseError) {
+          console.warn("Worker/Automation: Could not parse GitHub response JSON to get html_url, but operation succeeded based on status.", parseError);
         }
-      } catch (parseError) {
-          console.warn("Worker: Could not parse GitHub response JSON to get html_url, but operation might have succeeded based on status.", parseError);
+        console.log(`Worker/Automation: Successfully created/updated GitHub file. URL: ${githubResultSummary.fileUrl || 'N/A'}`);
       }
 
-      console.log(`Worker: Successfully created/updated GitHub file. URL (if available): ${githubFileUrl}`);
+      // --- Step 2: Create Eventbrite Event ---
+      // Only proceed with Eventbrite if GitHub was successful.
+      if (githubResultSummary.success) {
+        console.log('Worker/Automation: Attempting to create Eventbrite event...');
+        // The default image ID is handled within eventbriteManager.js (DEFAULT_EVENTBRITE_IMAGE_ID)
+        // It's passed implicitly by eventbriteManager unless an explicit imageId is provided as the last arg.
+        eventbriteResultSummary = await createMindfulinaEventOnEventbrite(
+          eventData,
+          env.EVENTBRITE_PRIVATE_TOKEN,
+          EVENTBRITE_ORGANIZER_ID, // Constant defined in this file
+          EVENTBRITE_VENUE_ID      // Constant defined in this file
+          // If you wanted to pass a specific image ID different from the default in eventbriteManager:
+          // , 'your_specific_image_id_here_if_needed' 
+        );
+
+        if (eventbriteResultSummary.success) {
+            console.log(`Worker/Automation: Eventbrite event processing completed. URL: ${eventbriteResultSummary.eventUrl || 'N/A'}`);
+        } else {
+            console.error(`Worker/Automation: Eventbrite event processing failed. Message: ${eventbriteResultSummary.message}`);
+            // eventbriteResultSummary already contains error details from the manager
+        }
+      } else {
+          eventbriteResultSummary.message = "Eventbrite processing skipped due to GitHub failure.";
+          console.warn("Worker/Automation: " + eventbriteResultSummary.message);
+      }
+
+      // --- Step 3: Construct Final Response ---
+      // Consider overall success if both operations are successful.
+      const overallSuccess = githubResultSummary.success && eventbriteResultSummary.success;
+      // Use 207 Multi-Status if you want to indicate partial success.
+      // For simplicity, 200 if all good, 500 if any part critical to the flow failed.
+      const finalStatus = overallSuccess ? 200 : (githubResultSummary.success ? 207 : 500);
+
 
       return new Response(JSON.stringify({ 
-        message: 'GitHub event file processed successfully', 
-        githubFileUrl: githubFileUrl,
-        githubResponseStatus: githubStatus
-      }), { status: 200, headers: { 'Content-Type': 'application/json' }});
+        overallStatus: overallSuccess ? "Success" : "One or more operations failed.",
+        github: githubResultSummary,
+        eventbrite: eventbriteResultSummary
+      }), { status: finalStatus, headers: { 'Content-Type': 'application/json' }});
 
-    } catch (error) {
-      console.error('Worker: Unhandled error processing event:', error.stack || error);
-      return new Response('Internal Server Error: ' + error.message, { status: 500 });
+    } catch (error) { // Catch errors from the orchestration logic itself or unhandled ones from modules
+      console.error('Worker/Automation: Unhandled error during event processing orchestration:', error.stack || error);
+      // Ensure partial results are included if available
+      return new Response(JSON.stringify({
+        overallStatus: "Critical Orchestration Failure",
+        message: 'Internal Server Error: ' + (error.message || "Unknown error"),
+        github: githubResultSummary, 
+        eventbrite: eventbriteResultSummary,
+        errorDetails: error.stack // Provide stack for critical errors
+      }), { status: 500, headers: { 'Content-Type': 'application/json' }});
     }
   },
 };
-
-// --- GitHub File Creation ---
-async function createGithubEventFile(eventData, env) {
-  const { title, startTime, isAllDay, googleCalendarEventId } = eventData; // Destructure core needed ones
-  
-  // Use provided location or default; use provided description or default
-  const locationToUse = (eventData.location && eventData.location.trim() !== '') ? eventData.location : DEFAULT_LOCATION;
-  const descriptionToUse = (eventData.description && eventData.description.trim() !== '') ? eventData.description : DEFAULT_EVENT_DESCRIPTION_MARKDOWN;
-
-  let slug = 'event'; 
-  if (title) {
-    slug = title.toLowerCase()
-      .replace(/\s+/g, '-')         
-      .replace(/[^\w-]+/g, '')      
-      .replace(/--+/g, '-')         
-      .replace(/^-+/, '')            
-      .replace(/-+$/, '');           
-    if (!slug) slug = 'event'; 
-  }
-  
-  const datePrefix = new Date(startTime).toISOString().split('T')[0]; 
-  const eventPath = `src/content/events/${datePrefix}-${slug}.md`;
-  console.log(`Worker: Determined event file path: ${eventPath}`);
-  
-  // Frontmatter content using the determined location and default cover
-  const frontmatterContent = `---
-title: "${title ? title.replace(/"/g, '\\"') : 'Mindfulina Event'}"
-date: "${startTime}"
-location: "${locationToUse.replace(/"/g, '\\"')}"
-cover: "${DEFAULT_COVER_IMAGE}"
-googleCalendarEventId: "${googleCalendarEventId}"
-isAllDay: ${isAllDay || false}
----
-
-${descriptionToUse}
-`;
-  // The conditional logic for appending "What to know" etc. is removed because
-  // DEFAULT_EVENT_DESCRIPTION_MARKDOWN now contains the full desired default structure.
-  // If eventData.description is provided, that will be used in its entirety instead.
-
-  const fileContentBase64 = btoa(unescape(encodeURIComponent(frontmatterContent)));
-
-  const githubApiUrl = `https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/contents/${eventPath}`;
-  console.log(`Worker: GitHub API URL for PUT: ${githubApiUrl}`);
-
-  const commitMessage = `feat: Add event "${title || 'New Event'}" from GCal ID ${googleCalendarEventId}`;
-
-  const requestBody = {
-    message: commitMessage,
-    content: fileContentBase64,
-    branch: GITHUB_BRANCH,
-  };
-
-  console.log(`Worker: Sending PUT request to GitHub with message: "${commitMessage}"`);
-
-  const response = await fetch(githubApiUrl, {
-    method: 'PUT',
-    headers: {
-      'Authorization': `token ${env.GITHUB_TOKEN}`,
-      'User-Agent': 'Mindfulina-Event-Automation-Worker/1.0.3', // Incremented version
-      'Content-Type': 'application/json',
-      'Accept': 'application/vnd.github.v3+json',
-    },
-    body: JSON.stringify(requestBody),
-  });
-  return response;
-}

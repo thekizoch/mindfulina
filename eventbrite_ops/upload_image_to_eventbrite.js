@@ -24,7 +24,7 @@ dotenv.config({ path: path.resolve(projectRoot, '.env') });
 
 const EVENTBRITE_PRIVATE_TOKEN = process.env.EVENTBRITE_PRIVATE_TOKEN;
 // Path to the image relative to the project root
-const RELATIVE_IMAGE_PATH = 'public/images/wide-shot.jpeg';
+const RELATIVE_IMAGE_PATH = 'public/images/eventbrite-cover.jpeg'
 const IMAGE_FILE_PATH = path.resolve(projectRoot, RELATIVE_IMAGE_PATH);
 
 async function fullImageUpload() {
