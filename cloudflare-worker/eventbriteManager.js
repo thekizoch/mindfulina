@@ -6,7 +6,16 @@ const EVENT_TIMEZONE = 'Pacific/Honolulu'; // Default timezone for Eventbrite ev
 const DEFAULT_EVENTBRITE_IMAGE_ID = '1033232763'; // Default uploaded image ID - UPDATED
 
 // Default HTML content if GCal description is empty
-const DEFAULT_EVENTBRITE_DESCRIPTION_HTML = `<p>Join us for a rejuvenating experience!</p><p>More details will be provided soon. Please check our website.</p>`;
+const DEFAULT_EVENTBRITE_DESCRIPTION_HTML = `<p>Join us for a sound bath to reset and relax your mind, body, and spirit — reconnecting with your mana and the healing rhythms of the moana.</p>
+<h2>Before You Arrive:</h2>
+<p>Consider moving your body beforehand; take a gentle walk, stretch, or run before the session to release stagnant energy.</p>
+<h2>Bring:</h2>
+<ul>
+  <li>Towel, mat, or blanket for the ‘āina</li>
+  <li>Swimsuit, sunscreen, and water bottle if you feel called to connect with the moana after our gathering</li>
+</ul>
+<p>Let the makani (breeze) and sounds of the moana guide your naʻau (inner heart) into deep rest.</p>
+<p>E komo mai — all are welcome!</p>`;
 
 async function eventbriteApiCall(url, method, token, body = null) {
   // console.log(`Worker/eventbriteManager: API Call - ${method} ${url}`);

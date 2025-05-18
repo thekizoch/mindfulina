@@ -6,20 +6,21 @@ const GITHUB_BRANCH = "main";
 // Defaults for the website Markdown content
 const DEFAULT_WEBSITE_COVER_IMAGE = "/images/wide-shot.jpeg"; // Default cover image for the website event page
 const DEFAULT_WEBSITE_LOCATION = "Mākālei Beach Park, Honolulu";
-const DEFAULT_WEBSITE_EVENT_DESCRIPTION_MARKDOWN = `Join us for a rejuvenating sound bath to reset and relax your mind, body, and spirit.
-
-## What to know
-Mākālei Beach Park features a small beach used by surfers, plus a tree-shaded area with picnic tables. Dogs allowed. Located at 3111 Diamond Head Rd, Honolulu, HI 96815. 
+const DEFAULT_WEBSITE_EVENT_DESCRIPTION_MARKDOWN = `Join us for a sound bath to reset and relax your mind, body, and spirit — reconnecting with your mana and the healing rhythms of the moana.
 
 ## Before You Arrive
-Consider taking a peaceful walk along the shoreline to connect with nature.
+Consider moving your body beforehand; take a gentle walk, stretch, or run before the session to release stagnant energy.
 
-## What to Bring
-- Towel, yoga mat, or blanket
-- Swimsuit and sunscreen
-- Optional: hat, sunglasses, water bottle
+## Bring
+- Towel, mat, or blanket for the ‘āina
+- Swimsuit, sunscreen, and water bottle if you feel called to connect with the moana after our gathering
 
-Let the ocean breeze and sound healing waves guide you into deep rest. See you there.`;
+Let the makani (breeze) and sounds of the moana guide your naʻau (inner heart) into deep rest.
+
+E komo mai — all are welcome!`;
+
+
+
 
 /**
  * Creates an event Markdown file in the GitHub repository
