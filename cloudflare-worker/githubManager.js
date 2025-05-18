@@ -22,7 +22,7 @@ Consider taking a peaceful walk along the shoreline to connect with nature.
 Let the ocean breeze and sound healing waves guide you into deep rest. See you there.`;
 
 /**
- * Creates an event Markdown file in the GitHub repository.
+ * Creates an event Markdown file in the GitHub repository
  * @param {object} eventData - Event data from Google Calendar (title, startTime, isAllDay, googleCalendarEventId, location, description).
  * @param {string} githubToken - GitHub PAT.
  * @returns {Promise<Response>} - The raw response from the GitHub API.
