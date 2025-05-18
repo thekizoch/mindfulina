@@ -1,5 +1,3 @@
-// mindfulina/cloudflare-worker/githubManager.js
-
 // Constants for GitHub interaction (website page creation)
 const GITHUB_REPO_OWNER = "thekizoch";
 const GITHUB_REPO_NAME = "mindfulina";
