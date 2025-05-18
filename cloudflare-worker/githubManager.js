@@ -24,7 +24,7 @@ Let the ocean breeze and sound healing waves guide you into deep rest. See you t
 /**
  * Creates an event Markdown file in the GitHub repository.
  * @param {object} eventData - Event data from Google Calendar (title, startTime, isAllDay, googleCalendarEventId, location, description).
- * @param {string} githubToken - GitHub Personal Access Token.
+ * @param {string} githubToken - GitHub PAT.
  * @returns {Promise<Response>} - The raw response from the GitHub API.
  */
 export async function createGithubEventFile(eventData, githubToken) {
