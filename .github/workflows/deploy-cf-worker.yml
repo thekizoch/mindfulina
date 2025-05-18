@@ -29,23 +29,40 @@ jobs:
         run: npm install wrangler # Installs wrangler locally
 
       - name: Upload GitHub Token Secret for Worker Runtime
-        if: ${{ secrets.WORKER_GITHUB_TOKEN }} # Simplified condition
-        run: echo "${{ secrets.WORKER_GITHUB_TOKEN }}" | npx wrangler secret put GITHUB_TOKEN --env production
+        # No step-level 'if' condition here
+        run: |
+          if [ -n "${{ secrets.WORKER_GITHUB_TOKEN }}" ]; then
+            echo "Uploading GITHUB_TOKEN secret..."
+            echo "${{ secrets.WORKER_GITHUB_TOKEN }}" | npx wrangler secret put GITHUB_TOKEN --env production
+          else
+            echo "WORKER_GITHUB_TOKEN secret is not set in GitHub. Skipping upload."
+          fi
         env:
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
 
       - name: Upload Eventbrite Private Token Secret for Worker Runtime
-        if: ${{ secrets.EVENTBRITE_PRIVATE_TOKEN }} # Simplified condition
-        run: echo "${{ secrets.EVENTBRITE_PRIVATE_TOKEN }}" | npx wrangler secret put EVENTBRITE_PRIVATE_TOKEN --env production
+        # No step-level 'if' condition here
+        run: |
+          if [ -n "${{ secrets.EVENTBRITE_PRIVATE_TOKEN }}" ]; then
+            echo "Uploading EVENTBRITE_PRIVATE_TOKEN secret..."
+            echo "${{ secrets.EVENTBRITE_PRIVATE_TOKEN }}" | npx wrangler secret put EVENTBRITE_PRIVATE_TOKEN --env production
+          else
+            echo "EVENTBRITE_PRIVATE_TOKEN secret is not set in GitHub. Skipping upload."
+          fi
         env:
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
 
       # Example for APPS_SCRIPT_SECRET if you add it later
       # - name: Upload Apps Script Secret (Optional)
-      #   if: ${{ secrets.YOUR_REPO_SECRET_NAME_FOR_APPS_SCRIPT }} # Simplified condition
-      #   run: echo "${{ secrets.YOUR_REPO_SECRET_NAME_FOR_APPS_SCRIPT }}" | npx wrangler secret put APPS_SCRIPT_SECRET --env production
+      #   run: |
+      #     if [ -n "${{ secrets.YOUR_REPO_SECRET_NAME_FOR_APPS_SCRIPT }}" ]; then
+      #       echo "Uploading APPS_SCRIPT_SECRET secret..."
+      #       echo "${{ secrets.YOUR_REPO_SECRET_NAME_FOR_APPS_SCRIPT }}" | npx wrangler secret put APPS_SCRIPT_SECRET --env production
+      #     else
+      #       echo "YOUR_REPO_SECRET_NAME_FOR_APPS_SCRIPT secret is not set in GitHub. Skipping upload."
+      #     fi
       #   env:
       #     CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
       #     CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}

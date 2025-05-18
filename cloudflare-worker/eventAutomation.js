@@ -16,7 +16,7 @@ export default {
       return new Response('Expected POST request from Google Apps Script', { status: 405 });
     }
 
-    // Optional: Basic secret validation if Apps Script sends one
+    // Optional: 
     if (env.APPS_SCRIPT_SECRET) {
       const authHeader = request.headers.get('X-AppsScript-Secret');
       if (authHeader !== env.APPS_SCRIPT_SECRET) {
