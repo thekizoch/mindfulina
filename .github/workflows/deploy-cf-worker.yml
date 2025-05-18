@@ -5,13 +5,17 @@ on:
     branches:
       - main # Or your default branch
     paths:
-      - 'cloudflare-worker/**' # Only run if files in this directory change
-      - '.github/workflows/deploy-cf-worker.yml' # Also run if the workflow itself changes
+      - 'cloudflare-worker/**' 
+      - '.github/workflows/deploy-cf-worker.yml'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy Worker to Cloudflare
+    defaults:
+      run:
+        working-directory: ./cloudflare-worker
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -19,19 +23,40 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Or a recent LTS version
+          node-version: '20' 
 
       - name: Install Wrangler
-        run: npm install -g wrangler
+        run: npm install wrangler # Installs wrangler locally
+
+      # Upload secrets before deploying the worker code
+      # Using direct piping for better security of the secret value itself
+      - name: Upload GitHub Token Secret for Worker Runtime
+        # This is the token the worker code (eventAutomation.js) will use as env.GITHUB_TOKEN
+        if: secrets.WORKER_GITHUB_TOKEN != '' 
+        run: echo "${{ secrets.WORKER_GITHUB_TOKEN }}" | npx wrangler secret put GITHUB_TOKEN --env production
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+
+      - name: Upload Eventbrite Private Token Secret for Worker Runtime
+        # This is the token the worker code (eventAutomation.js) will use as env.EVENTBRITE_PRIVATE_TOKEN
+        if: secrets.EVENTBRITE_PRIVATE_TOKEN != ''
+        run: echo "${{ secrets.EVENTBRITE_PRIVATE_TOKEN }}" | npx wrangler secret put EVENTBRITE_PRIVATE_TOKEN --env production
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+
+      # Example for APPS_SCRIPT_SECRET if you decide to add it to GitHub secrets later
+      # Ensure you have a corresponding GitHub repository secret (e.g., WORKER_APPS_SCRIPT_SECRET_FROM_GH)
+      # - name: Upload Apps Script Secret (Optional)
+      #   if: secrets.WORKER_APPS_SCRIPT_SECRET_FROM_GH != '' 
+      #   run: echo "${{ secrets.WORKER_APPS_SCRIPT_SECRET_FROM_GH }}" | npx wrangler secret put APPS_SCRIPT_SECRET --env production
+      #   env:
+      #     CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+      #     CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
 
       - name: Deploy Cloudflare Worker
-        # Ensure this path is correct relative to the repository root
-        working-directory: ./cloudflare-worker 
-        run: wrangler deploy
+        run: npx wrangler deploy --env production # Explicitly deploy to production environment
         env:
-          # This secret is used by Wrangler to authenticate
-          # Ensure CF_API_TOKEN is set in your GitHub repository secrets
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-          # This secret is used by Wrangler to identify your Cloudflare account
-          # Ensure CF_ACCOUNT_ID is set in your GitHub repository secrets
           CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
