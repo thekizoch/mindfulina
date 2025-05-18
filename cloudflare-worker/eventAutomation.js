@@ -9,8 +9,6 @@ import { createMindfulinaEventOnEventbrite } from './eventbriteManager.js';
 const EVENTBRITE_ORGANIZER_ID = '2736604261351'; // Your actual Organizer ID
 const EVENTBRITE_VENUE_ID = '266927653';     // Your actual Venue ID for Mākālei Beach Park.
 // The default image ID is now a constant within eventbriteManager.js (DEFAULT_EVENTBRITE_IMAGE_ID)
-// If you needed to override it on a per-call basis from eventAutomation.js, you could define a constant here:
-// const SPECIFIC_EVENT_IMAGE_ID = 'some_other_image_id'; // And pass this to createMindfulinaEventOnEventbrite
 
 export default {
   async fetch(request, env, ctx) {

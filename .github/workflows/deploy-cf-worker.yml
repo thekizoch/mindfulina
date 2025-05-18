@@ -29,26 +29,23 @@ jobs:
         run: npm install wrangler # Installs wrangler locally
 
       - name: Upload GitHub Token Secret for Worker Runtime
-        # This is the token the worker code (eventAutomation.js) will use as env.GITHUB_TOKEN
-        if: ${{ secrets.WORKER_GITHUB_TOKEN != '' }} # Corrected 'if' condition
+        if: ${{ secrets.WORKER_GITHUB_TOKEN }} # Simplified condition
         run: echo "${{ secrets.WORKER_GITHUB_TOKEN }}" | npx wrangler secret put GITHUB_TOKEN --env production
         env:
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
 
       - name: Upload Eventbrite Private Token Secret for Worker Runtime
-        # This is the token the worker code (eventAutomation.js) will use as env.EVENTBRITE_PRIVATE_TOKEN
-        if: ${{ secrets.EVENTBRITE_PRIVATE_TOKEN != '' }} # Corrected 'if' condition
+        if: ${{ secrets.EVENTBRITE_PRIVATE_TOKEN }} # Simplified condition
         run: echo "${{ secrets.EVENTBRITE_PRIVATE_TOKEN }}" | npx wrangler secret put EVENTBRITE_PRIVATE_TOKEN --env production
         env:
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
 
-      # Example for APPS_SCRIPT_SECRET if you decide to add it to GitHub secrets later
-      # Ensure you have a corresponding GitHub repository secret (e.g., WORKER_APPS_SCRIPT_SECRET_FROM_GH)
+      # Example for APPS_SCRIPT_SECRET if you add it later
       # - name: Upload Apps Script Secret (Optional)
-      #   if: ${{ secrets.WORKER_APPS_SCRIPT_SECRET_FROM_GH != '' }} # Corrected 'if' condition
-      #   run: echo "${{ secrets.WORKER_APPS_SCRIPT_SECRET_FROM_GH }}" | npx wrangler secret put APPS_SCRIPT_SECRET --env production
+      #   if: ${{ secrets.YOUR_REPO_SECRET_NAME_FOR_APPS_SCRIPT }} # Simplified condition
+      #   run: echo "${{ secrets.YOUR_REPO_SECRET_NAME_FOR_APPS_SCRIPT }}" | npx wrangler secret put APPS_SCRIPT_SECRET --env production
       #   env:
       #     CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
       #     CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
