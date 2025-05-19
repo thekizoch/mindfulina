@@ -1,5 +1,3 @@
-// mindfulina/cloudflare-worker/eventbriteManager.js
-
 // Constants for Eventbrite event creation
 const EVENT_CAPACITY = 25;
 const EVENT_TIMEZONE = 'Pacific/Honolulu'; // Default timezone for Eventbrite events
@@ -12,6 +10,7 @@ const DEFAULT_EVENTBRITE_DESCRIPTION_HTML = `<p>Join us for a sound bath to rese
 <h2>Bring:</h2>
 <ul>
   <li>Towel, mat, or blanket for the ‘āina</li>
+  <li>Eye mask if you wish to shut out visual stimulation and the sun</li>
   <li>Swimsuit, sunscreen, and water bottle if you feel called to connect with the moana after our gathering</li>
 </ul>
 <p>Let the makani (breeze) and sounds of the moana guide your naʻau (inner heart) into deep rest.</p>

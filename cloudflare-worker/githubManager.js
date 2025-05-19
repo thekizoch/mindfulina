@@ -13,6 +13,7 @@ Consider moving your body beforehand; take a gentle walk, stretch, or run before
 
 ## Bring
 - Towel, mat, or blanket for the ‘āina
+- Eye mask if you wish to shut out visual stimulation and the sun
 - Swimsuit, sunscreen, and water bottle if you feel called to connect with the moana after our gathering
 
 Let the makani (breeze) and sounds of the moana guide your naʻau (inner heart) into deep rest.
