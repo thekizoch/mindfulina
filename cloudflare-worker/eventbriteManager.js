@@ -157,7 +157,14 @@ export async function createMindfulinaEventOnEventbrite(
     // --- Step 3: Create Free Ticket Class ---
     console.log("Worker/eventbriteManager: Creating Eventbrite ticket class...");
     const ticketClassPayload = {
-      ticket_class: { name: "General Admission", free: true, quantity_total: EVENT_CAPACITY, minimum_quantity: 1, maximum_quantity: 10 },
+      ticket_class: {
+        name: "General Admission",
+        free: false,
+        cost: "USD,2500", // 25 USD
+        quantity_total: EVENT_CAPACITY,
+        minimum_quantity: 1,
+        maximum_quantity: 10
+      },
     };
     const createTicketClassUrl = `https://www.eventbriteapi.com/v3/events/${eventbriteEventId}/ticket_classes/`;
     await eventbriteApiCall(createTicketClassUrl, 'POST', ebToken, ticketClassPayload);

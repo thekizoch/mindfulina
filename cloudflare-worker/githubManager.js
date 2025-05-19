@@ -27,9 +27,10 @@ E komo mai — all are welcome!`;
  * Creates an event Markdown file in the GitHub repository
  * @param {object} eventData - Event data from Google Calendar (title, startTime, isAllDay, googleCalendarEventId, location, description).
  * @param {string} githubToken - GitHub PAT.
+ * @param {string} [eventbriteLink=""] - The URL for the Eventbrite event.
  * @returns {Promise<Response>} - The raw response from the GitHub API.
  */
-export async function createGithubEventFile(eventData, githubToken) {
+export async function createGithubEventFile(eventData, githubToken, eventbriteLink = "") {
   const { title, startTime, isAllDay, googleCalendarEventId, location, description } = eventData;
 
   const locationToUse = (location && location.trim() !== '') ? location : DEFAULT_WEBSITE_LOCATION;
@@ -63,7 +64,7 @@ location: "${locationToUse.replace(/"/g, '\\"')}"
 cover: "${DEFAULT_WEBSITE_COVER_IMAGE}"
 googleCalendarEventId: "${googleCalendarEventId}"
 isAllDay: ${isAllDay || false}
-eventbriteLink: "" # Placeholder, can be updated later if desired
+eventbriteLink: "${eventbriteLink}"
 ---
 
 ${descriptionToUse}

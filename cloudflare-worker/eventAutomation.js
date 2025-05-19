@@ -55,64 +55,79 @@ export default {
     let eventbriteResultSummary = { success: false, message: "Eventbrite processing not initiated.", eventUrl: null, eventId: null, published: false, error: null };
 
     try {
-      // --- Step 1: Create GitHub Event File ---
-      console.log('Worker/Automation: Attempting to create GitHub event file...');
-      const githubApiResponse = await createGithubEventFile(eventData, env.GITHUB_TOKEN);
-      
-      githubResultSummary.status = githubApiResponse.status;
-      const githubResponseText = await githubApiResponse.text(); 
+      // --- Step 1: Create Eventbrite Event ---
+      console.log('Worker/Automation: Attempting to create Eventbrite event...');
+      // The default image ID is handled within eventbriteManager.js (DEFAULT_EVENTBRITE_IMAGE_ID)
+      // It's passed implicitly by eventbriteManager unless an explicit imageId is provided as the last arg.
+      eventbriteResultSummary = await createMindfulinaEventOnEventbrite(
+        eventData,
+        env.EVENTBRITE_PRIVATE_TOKEN,
+        EVENTBRITE_ORGANIZER_ID, // Constant defined in this file
+        EVENTBRITE_VENUE_ID      // Constant defined in this file
+        // If you wanted to pass a specific image ID different from the default in eventbriteManager:
+        // , 'your_specific_image_id_here_if_needed'
+      );
 
-      if (!githubApiResponse.ok) { 
-        const errorMsg = `Failed to create GitHub file: ${githubResultSummary.status} - ${githubResponseText.substring(0, 200)}`;
-        console.error(`Worker/Automation: ${errorMsg}`);
-        githubResultSummary.message = errorMsg;
-        githubResultSummary.error = githubResponseText;
-      } else {
-        githubResultSummary.success = true;
-        githubResultSummary.message = 'GitHub event file processed successfully.';
-        try {
-          const githubJson = JSON.parse(githubResponseText);
-          if (githubJson.content && githubJson.content.html_url) {
-            githubResultSummary.fileUrl = githubJson.content.html_url;
+      if (eventbriteResultSummary.success) {
+          console.log(`Worker/Automation: Eventbrite event processing completed. URL: ${eventbriteResultSummary.eventUrl || 'N/A'}`);
+          if (!eventbriteResultSummary.eventUrl) {
+              console.warn("Worker/Automation: Eventbrite processing succeeded but did not return an event URL. GitHub file creation will be skipped.");
+              // This scenario might need specific handling if an Eventbrite event without a URL is problematic
           }
-        } catch (parseError) {
-          console.warn("Worker/Automation: Could not parse GitHub response JSON to get html_url, but operation succeeded based on status.", parseError);
-        }
-        console.log(`Worker/Automation: Successfully created/updated GitHub file. URL: ${githubResultSummary.fileUrl || 'N/A'}`);
+      } else {
+          console.error(`Worker/Automation: Eventbrite event processing failed. Message: ${eventbriteResultSummary.message}`);
+          // eventbriteResultSummary already contains error details from the manager
       }
 
-      // --- Step 2: Create Eventbrite Event ---
-      // Only proceed with Eventbrite if GitHub was successful.
-      if (githubResultSummary.success) {
-        console.log('Worker/Automation: Attempting to create Eventbrite event...');
-        // The default image ID is handled within eventbriteManager.js (DEFAULT_EVENTBRITE_IMAGE_ID)
-        // It's passed implicitly by eventbriteManager unless an explicit imageId is provided as the last arg.
-        eventbriteResultSummary = await createMindfulinaEventOnEventbrite(
-          eventData,
-          env.EVENTBRITE_PRIVATE_TOKEN,
-          EVENTBRITE_ORGANIZER_ID, // Constant defined in this file
-          EVENTBRITE_VENUE_ID      // Constant defined in this file
-          // If you wanted to pass a specific image ID different from the default in eventbriteManager:
-          // , 'your_specific_image_id_here_if_needed' 
-        );
+      // --- Step 2: Create GitHub Event File ---
+      // Only proceed with GitHub if Eventbrite was successful and returned an event URL.
+      if (eventbriteResultSummary.success && eventbriteResultSummary.eventUrl) {
+        console.log('Worker/Automation: Attempting to create GitHub event file with Eventbrite URL...');
+        const githubApiResponse = await createGithubEventFile(eventData, env.GITHUB_TOKEN, eventbriteResultSummary.eventUrl);
+        
+        githubResultSummary.status = githubApiResponse.status;
+        const githubResponseText = await githubApiResponse.text();
 
-        if (eventbriteResultSummary.success) {
-            console.log(`Worker/Automation: Eventbrite event processing completed. URL: ${eventbriteResultSummary.eventUrl || 'N/A'}`);
+        if (!githubApiResponse.ok) {
+          const errorMsg = `Failed to create GitHub file: ${githubResultSummary.status} - ${githubResponseText.substring(0, 200)}`;
+          console.error(`Worker/Automation: ${errorMsg}`);
+          githubResultSummary.message = errorMsg;
+          githubResultSummary.error = githubResponseText;
+          // githubResultSummary.success remains false
         } else {
-            console.error(`Worker/Automation: Eventbrite event processing failed. Message: ${eventbriteResultSummary.message}`);
-            // eventbriteResultSummary already contains error details from the manager
+          githubResultSummary.success = true;
+          githubResultSummary.message = 'GitHub event file processed successfully.';
+          try {
+            const githubJson = JSON.parse(githubResponseText);
+            if (githubJson.content && githubJson.content.html_url) {
+              githubResultSummary.fileUrl = githubJson.content.html_url;
+            }
+          } catch (parseError) {
+            console.warn("Worker/Automation: Could not parse GitHub response JSON to get html_url, but operation succeeded based on status.", parseError);
+          }
+          console.log(`Worker/Automation: Successfully created/updated GitHub file. URL: ${githubResultSummary.fileUrl || 'N/A'}`);
         }
       } else {
-          eventbriteResultSummary.message = "Eventbrite processing skipped due to GitHub failure.";
-          console.warn("Worker/Automation: " + eventbriteResultSummary.message);
+        if (!eventbriteResultSummary.success) {
+             githubResultSummary.message = `GitHub processing skipped due to Eventbrite failure: ${eventbriteResultSummary.message || "Unknown Eventbrite error"}`;
+        } else if (!eventbriteResultSummary.eventUrl) { // This implies Eventbrite succeeded but no URL
+             githubResultSummary.message = "GitHub processing skipped: Eventbrite processing succeeded but did not return an event URL.";
+        } else { // Should ideally not be reached if the outer condition is exhaustive
+            githubResultSummary.message = "GitHub processing skipped for an unspecified reason after Eventbrite processing step.";
+        }
+        console.warn("Worker/Automation: " + githubResultSummary.message);
+        // githubResultSummary.success remains false (its default)
       }
 
       // --- Step 3: Construct Final Response ---
       // Consider overall success if both operations are successful.
-      const overallSuccess = githubResultSummary.success && eventbriteResultSummary.success;
+      const overallSuccess = eventbriteResultSummary.success && githubResultSummary.success;
       // Use 207 Multi-Status if you want to indicate partial success.
       // For simplicity, 200 if all good, 500 if any part critical to the flow failed.
-      const finalStatus = overallSuccess ? 200 : (githubResultSummary.success ? 207 : 500);
+      // With the new sequential flow (Eventbrite then GitHub), if Eventbrite fails, GitHub is skipped.
+      // If Eventbrite succeeds but GitHub fails, it's still an overall failure of the automation.
+      // Thus, any failure in the sequence results in a 500.
+      const finalStatus = overallSuccess ? 200 : 500;
 
 
       return new Response(JSON.stringify({ 
