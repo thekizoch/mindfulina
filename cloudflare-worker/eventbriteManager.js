@@ -26,7 +26,7 @@ async function eventbriteApiCall(url, method, token, body = null) {
   const headers = {
     'Authorization': `Bearer ${token}`,
     'Content-Type': 'application/json',
-    'User-Agent': 'Mindfulina-Cloudflare-Worker/1.0.3', // Version bump for new strategy
+    'User-Agent': 'Mindfulina-Cloudflare-Worker/1.0.3', 
   };
   const options = { method, headers };
   if (body) {
@@ -90,8 +90,8 @@ function formatDescriptionToHtml(textDescription) {
 export async function createMindfulinaEventOnEventbrite(
     gcalEventData, 
     ebToken, 
-    ebOrganizerId, // Included for consistency, though copy inherits from template
-    ebVenueId,     // Included for consistency, though copy inherits from template
+    ebOrganizerId, 
+    ebVenueId,     
     imageIdToUse = DEFAULT_EVENTBRITE_IMAGE_ID
 ) {
   const { title, startTime: gcalStartTime, endTime: gcalEndTime, description: gcalDescription, googleCalendarEventId } = gcalEventData;
@@ -105,8 +105,8 @@ export async function createMindfulinaEventOnEventbrite(
       throw new Error("Event data error: startTime, endTime, and googleCalendarEventId are required.");
   }
 
-  const uniqueSuffix = googleCalendarEventId.substring(0, 8) + '_' + new Date().getTime().toString().slice(-5);
-  const newEventName = `${title || "Mindfulina Event"} (${uniqueSuffix})`;
+  // Use the Google Calendar title directly, or a default if it's missing.
+  const newEventName = title || "Mindfulina Event";
   
   const startTimeObj = new Date(gcalStartTime);
   const endTimeObj = new Date(gcalEndTime);
@@ -122,7 +122,7 @@ export async function createMindfulinaEventOnEventbrite(
     console.log(`Worker/eventbriteManager: Copying template event ID: ${EVENTBRITE_TEMPLATE_ID} to create "${newEventName}"...`);
     const copyEventUrlApi = `https://www.eventbriteapi.com/v3/events/${EVENTBRITE_TEMPLATE_ID}/copy/`;
     const copyPayload = {
-      name: newEventName,
+      name: newEventName, // Use the GCal title (or default)
       start_date: eventbriteStartUTC,
       end_date: eventbriteEndUTC,
       timezone: EVENT_TIMEZONE, 
@@ -155,24 +155,22 @@ export async function createMindfulinaEventOnEventbrite(
     if (imageIdToUse) {
       structuredContentModules.push({ type: "image", data: { image: { image_id: imageIdToUse } } });
     }
-    const structuredContentPayload = { modules: structuredContentModules, publish: true, purpose: "listing" }; // publish:true here updates the listing page content
+    const structuredContentPayload = { modules: structuredContentModules, publish: true, purpose: "listing" }; 
     const structuredContentUrlApi = `https://www.eventbriteapi.com/v3/events/${copiedEventId}/structured_content/1/`;
     await eventbriteApiCall(structuredContentUrlApi, 'POST', ebToken, structuredContentPayload);
     console.log(`Worker/eventbriteManager: Structured content updated for event ID: ${copiedEventId}`);
 
     // --- Step 4: Update Ticket Class Capacity ---
-    // (This step assumes the template has compatible ticket classes that just need capacity adjustment)
     console.log(`Worker/eventbriteManager: Fetching ticket classes for event ID: ${copiedEventId} to verify/update capacity...`);
     const listTicketClassesUrlApi = `https://www.eventbriteapi.com/v3/events/${copiedEventId}/ticket_classes/`;
     const ticketClassesData = await eventbriteApiCall(listTicketClassesUrlApi, 'GET', ebToken);
 
     if (ticketClassesData && ticketClassesData.ticket_classes && ticketClassesData.ticket_classes.length > 0) {
-      const mainTicketClass = ticketClassesData.ticket_classes[0]; // Assuming the first one is the primary one to update
+      const mainTicketClass = ticketClassesData.ticket_classes[0]; 
       if (mainTicketClass.quantity_total !== EVENT_CAPACITY) {
         console.log(`Worker/eventbriteManager: Updating capacity of ticket class ID ${mainTicketClass.id} from ${mainTicketClass.quantity_total} to ${EVENT_CAPACITY}...`);
         const updateTicketClassUrlApi = `https://www.eventbriteapi.com/v3/events/${copiedEventId}/ticket_classes/${mainTicketClass.id}/`;
         const updateTicketPayload = { ticket_class: { quantity_total: EVENT_CAPACITY } };
-        // Note: Eventbrite's API for updating ticket classes uses POST, not PUT or PATCH.
         await eventbriteApiCall(updateTicketClassUrlApi, 'POST', ebToken, updateTicketPayload);
         console.log(`Worker/eventbriteManager: Capacity updated for ticket class ID ${mainTicketClass.id}.`);
       } else {
@@ -185,7 +183,7 @@ export async function createMindfulinaEventOnEventbrite(
     // --- Step 5: Publish Event ---
     console.log(`Worker/eventbriteManager: Publishing event ID: ${copiedEventId}...`);
     const publishUrlApi = `https://www.eventbriteapi.com/v3/events/${copiedEventId}/publish/`;
-    const publishResult = await eventbriteApiCall(publishUrlApi, 'POST', ebToken); // No body needed for publish
+    const publishResult = await eventbriteApiCall(publishUrlApi, 'POST', ebToken); 
     console.log(`Worker/eventbriteManager: Event publish attempt completed for ID: ${copiedEventId}. Result: ${JSON.stringify(publishResult)}`);
 
     return { 
@@ -193,7 +191,7 @@ export async function createMindfulinaEventOnEventbrite(
       message: "Eventbrite event copied, updated, and publish process completed.", 
       eventId: copiedEventId, 
       eventUrl: copiedEventUrl,
-      published: publishResult?.published || false // Ensure boolean
+      published: publishResult?.published || false 
     };
   } catch (error) {
     console.error(`Worker/eventbriteManager: Error in copy/update/publish for GCal event "${title}" (ID: ${googleCalendarEventId}):`, error.stack || error.message);
@@ -201,8 +199,8 @@ export async function createMindfulinaEventOnEventbrite(
       success: false, 
       message: `Eventbrite integration (copy/update/publish) failed: ${error.message}`, 
       eventId: copiedEventId, 
-      eventUrl: copiedEventUrl,
-      errorDetails: error.message, // Provide a clean error message
+      eventUrl: copiedEventUrl, 
+      errorDetails: error.message, 
       published: false
     };
   }
