@@ -47,40 +47,35 @@ export default {
         return new Response('Configuration error: Eventbrite token not set.', { status: 500 });
     }
 
-    let eventbriteResultSummary = { success: false, message: "Eventbrite processing not initiated.", eventUrl: null, eventId: null, published: false, error: null };
     let githubResultSummary = { success: false, message: "GitHub processing not initiated.", fileUrl: null, status: null, error: null };
+    let eventbriteResultSummary = { success: false, message: "Eventbrite processing not initiated.", eventUrl: null, eventId: null, published: false, error: null };
 
     try {
-      // --- Step 1: Create Eventbrite Event (to get the URL) ---
+      // --- Step 1: Create Eventbrite Event (to get the link) ---
       console.log('Worker/Automation: Attempting to create Eventbrite event...');
       eventbriteResultSummary = await createMindfulinaEventOnEventbrite(
         eventData,
         env.EVENTBRITE_PRIVATE_TOKEN,
-        EVENTBRITE_ORGANIZER_ID,
-        EVENTBRITE_VENUE_ID
-        // DEFAULT_EVENTBRITE_IMAGE_ID is handled within eventbriteManager
+        EVENTBRITE_ORGANIZER_ID, 
+        EVENTBRITE_VENUE_ID      
       );
 
       if (eventbriteResultSummary.success && eventbriteResultSummary.published) {
-          console.log(`Worker/Automation: Eventbrite event processed successfully and published. URL: ${eventbriteResultSummary.eventUrl}`);
+          console.log(`Worker/Automation: Eventbrite event created and published successfully. URL: ${eventbriteResultSummary.eventUrl}`);
       } else if (eventbriteResultSummary.success && !eventbriteResultSummary.published) {
-          console.warn(`Worker/Automation: Eventbrite event created (ID: ${eventbriteResultSummary.eventId}) but NOT published. URL: ${eventbriteResultSummary.eventUrl}. Proceeding with GitHub page creation.`);
-          // This state is considered a partial success for the overall flow.
+          console.warn(`Worker/Automation: Eventbrite event created (ID: ${eventbriteResultSummary.eventId}) but NOT published. URL: ${eventbriteResultSummary.eventUrl}`);
+          // This is considered a partial success for Eventbrite, but overall success depends on GitHub too,
+          // and the website might not want to link to an unpublished event.
       } else {
-          console.error(`Worker/Automation: Eventbrite event processing failed. Message: ${eventbriteResultSummary.message}. GitHub page creation will proceed without an Eventbrite link.`);
+          console.error(`Worker/Automation: Eventbrite event processing failed. Message: ${eventbriteResultSummary.message}`);
       }
 
-      // --- Step 2: Create GitHub Event File (passing Eventbrite URL if available) ---
+      // --- Step 2: Create GitHub Event File (with Eventbrite link if available and published) ---
       console.log('Worker/Automation: Attempting to create GitHub event file...');
-      const eventbriteLinkForGithub = (eventbriteResultSummary.success && eventbriteResultSummary.eventUrl) 
-                                      ? eventbriteResultSummary.eventUrl 
-                                      : null;
-
-      const githubApiResponse = await createGithubEventFile(
-        eventData, 
-        env.GITHUB_TOKEN, 
-        eventbriteLinkForGithub 
-      );
+      // Only pass the Eventbrite link if the event was successfully created AND published.
+      const eventbriteLinkForGithub = (eventbriteResultSummary.success && eventbriteResultSummary.published) ? eventbriteResultSummary.eventUrl : '';
+      
+      const githubApiResponse = await createGithubEventFile(eventData, env.GITHUB_TOKEN, eventbriteLinkForGithub);
       
       githubResultSummary.status = githubApiResponse.status; 
       const githubResponseText = await githubApiResponse.text(); 
@@ -90,7 +85,7 @@ export default {
         console.error(`Worker/Automation: ${errorMsg}`);
         githubResultSummary.message = errorMsg;
         githubResultSummary.error = githubResponseText;
-        githubResultSummary.success = false;
+        githubResultSummary.success = false; 
       } else {
         githubResultSummary.success = true;
         githubResultSummary.message = 'GitHub event file processed successfully.';
@@ -100,19 +95,29 @@ export default {
             githubResultSummary.fileUrl = githubJson.content.html_url;
           }
         } catch (parseError) {
-          console.warn("Worker/Automation: Could not parse GitHub response JSON to get html_url, but operation succeeded based on status code.", parseError);
+          console.warn("Worker/Automation: Could not parse GitHub response JSON to get html_url, but operation succeeded based on status.", parseError);
         }
         console.log(`Worker/Automation: Successfully created/updated GitHub file. URL: ${githubResultSummary.fileUrl || 'N/A'}`);
       }
-
+      
       // --- Step 3: Construct Final Response ---
-      // Overall success requires Eventbrite to be created (published or not) AND GitHub file created.
-      // Publish status of Eventbrite is noted in its own summary.
-      const overallSuccess = eventbriteResultSummary.success && githubResultSummary.success;
-      const finalStatus = overallSuccess ? 200 : 207; // 200 for full success, 207 if any part had issues but didn't halt flow
+      // Overall success means Eventbrite event was created AND published, AND GitHub file was created.
+      const overallSuccess = eventbriteResultSummary.success && eventbriteResultSummary.published && githubResultSummary.success;
+      
+      // Use 207 Multi-Status if any part succeeded but not all critical parts.
+      // 200 if all critical parts (Eventbrite published, GitHub created) succeeded.
+      // 500 if both failed, or a critical part like Eventbrite creation (even if not published) plus GitHub failed.
+      let finalStatus;
+      if (overallSuccess) {
+        finalStatus = 200;
+      } else if (eventbriteResultSummary.success || githubResultSummary.success) { // At least one part had some form of success
+        finalStatus = 207; // Multi-Status
+      } else {
+        finalStatus = 500; // Both operations failed entirely
+      }
 
       return new Response(JSON.stringify({ 
-        overallStatus: overallSuccess ? "Success" : "One or more operations had issues.",
+        overallStatus: overallSuccess ? "Success" : "One or more operations faced issues or did not complete successfully.",
         eventbrite: eventbriteResultSummary,
         github: githubResultSummary
       }), { status: finalStatus, headers: { 'Content-Type': 'application/json' }});
@@ -122,8 +127,8 @@ export default {
       return new Response(JSON.stringify({
         overallStatus: "Critical Orchestration Failure",
         message: 'Internal Server Error: ' + (error.message || "Unknown error"),
-        eventbrite: eventbriteResultSummary, 
-        github: githubResultSummary,       
+        eventbrite: eventbriteResultSummary, // Include partial results if available
+        github: githubResultSummary,     // Include partial results if available
         errorDetails: error.stack 
       }), { status: 500, headers: { 'Content-Type': 'application/json' }});
     }

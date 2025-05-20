@@ -26,8 +26,23 @@ const calendarLink = getGoogleCalendarLink({
     <h1 class="text-3xl font-bold mb-4">{event.data.title}</h1>
     <p><strong>When:</strong> <Fragment set:html={formatHawaiian(event.data.date)} /></p>
     <p><strong>Where:</strong> {event.data.location}</p>
+
+    <!-- Eventbrite "Buy Tickets" Link -->
+    {event.data.eventbriteLink && (
+      <div class="my-4"> {/* Added margin for spacing */}
+        <a 
+          href={event.data.eventbriteLink} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="btn-primary" /* Using existing primary button style */
+        >
+          Buy Tickets on Eventbrite
+        </a>
+      </div>
+    )}
+
     <p class="mt-2">
-      <a href={calendarLink} target="_blank" class="text-sm inline-flex items-center">
+      <a href={calendarLink} target="_blank" rel="noopener noreferrer" class="text-sm inline-flex items-center">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
@@ -44,4 +59,4 @@ const calendarLink = getGoogleCalendarLink({
       <a href="/events" class="mt-8 inline-block">← Back to All Events</a>
     </div>
   </article>
-</Event> 
+</Event>
