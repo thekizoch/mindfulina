@@ -1,41 +1,38 @@
+<!-- 
+  Updated: BaseLayout has been simplified by moving the hero and wave to a separate component
+  Updated: Reduced padding for better mobile experience
+  Updated: Reduced spacing between logo and content
+-->
 ---
-import type { Props } from '@astrojs/starlight/props';
-import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
-import Head from '@astrojs/starlight/components/Head.astro';
-import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
-import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
-import Search from '@astrojs/starlight/components/Search.astro';
-import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
-import PageFrame from '@astrojs/starlight/components/PageFrame.astro';
-import SkipLink from '@astrojs/starlight/components/SkipLink.astro';
-import LeftSidebar from '@astrojs/starlight/components/LeftSidebar.astro';
-import PageSidebar from '@astrojs/starlight/components/PageSidebar.astro';
-import Footer from '@astrojs/starlight/components/Footer.astro';
-import { Astro } from 'astro:content';
+import '../styles/global.css';
 
-const { lang, dir, isFallback } = Astro.props;
-const frontmatter = Astro.props.frontmatter || {};
-const { template } = frontmatter;
+interface Props { title?: string }
+const { title = 'Mindfulina' } = Astro.props;
 ---
 
-<StarlightPage {...Astro.props}>
-  <html lang={lang} dir={dir} class="motion-safe:scroll-smooth" data-theme="light">
-    <Head {...Astro.props}><slot name="head" /></Head>
-    <body class={template === 'splash' ? 'overflow-hidden' : ''}>
-      <SkipLink />
-      <header class="text-center py-4">
-        <div class="flex justify-center items-center flex-col">
-          <img src="/images/logo.svg" alt="Mindfulina Logo" class="h-60 w-auto" />
-        </div>
-      </header>
-      <PageFrame {...Astro.props}>
-        <LeftSidebar {...Astro.props}><slot name="sidebar" /></LeftSidebar>
-        <div class="main-content">
-          <PageSidebar {...Astro.props} />
-          <main id="starlight__content"><slot /></main>
-          <Footer {...Astro.props} />
-        </div>
-      </PageFrame>
-    </body>
-  </html>
-</StarlightPage>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="font-sans">
+    <!-- Header -->
+    <header class="text-center py-4">
+      <div class="flex justify-center items-center flex-col">
+        <img src="/images/logo.png" alt="Mindfulina Logo" class="h-60 w-auto" />
+      </div>
+    </header>
+
+    <!-- Main slot -->
+    <main class="max-w-3xl mx-auto pt-2 p-4">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center text-sm py-10 text-gray-500">
+      © {new Date().getFullYear()} Mindfulina
+    </footer>
+  </body>
+</html> 
