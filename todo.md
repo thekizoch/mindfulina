@@ -1,7 +1,7 @@
 
-[] have google calendar events sync events
+[x] have google calendar events sync events
   [] create a free Eventbrite event with the eventrite api
-  [] make the event on the site that links to it
+  [] make the event on the site that links to to Eventbrite
   
   
   [] make it themed like in whatsapp chat

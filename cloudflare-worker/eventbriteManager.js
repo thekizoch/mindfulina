@@ -1,7 +1,10 @@
+// mindfulina/cloudflare-worker/eventbriteManager.js
+
 // Constants for Eventbrite event creation
 const EVENT_CAPACITY = 25;
 const EVENT_TIMEZONE = 'Pacific/Honolulu'; // Default timezone for Eventbrite events
-const DEFAULT_EVENTBRITE_IMAGE_ID = '1033232763'; // Default uploaded image ID - UPDATED
+const DEFAULT_EVENTBRITE_IMAGE_ID = '1033232763'; // Default uploaded image ID
+const EVENTBRITE_TEMPLATE_ID = '1371879341039'; // ID of the template event to copy
 
 // Default HTML content if GCal description is empty
 const DEFAULT_EVENTBRITE_DESCRIPTION_HTML = `<p>Join us for a sound bath to reset and relax your mind, body, and spirit — reconnecting with your mana and the healing rhythms of the moana.</p>
@@ -23,7 +26,7 @@ async function eventbriteApiCall(url, method, token, body = null) {
   const headers = {
     'Authorization': `Bearer ${token}`,
     'Content-Type': 'application/json',
-    'User-Agent': 'Mindfulina-Cloudflare-Worker/1.0.2', 
+    'User-Agent': 'Mindfulina-Cloudflare-Worker/1.0.3', // Version bump for new strategy
   };
   const options = { method, headers };
   if (body) {
@@ -39,7 +42,7 @@ async function eventbriteApiCall(url, method, token, body = null) {
     if (!response.ok) {
       throw new Error(`Eventbrite API Error: ${response.status} - ${response.statusText}. Response was not valid JSON.`);
     }
-    return { success: true, details: "Response was not JSON but request was successful.", status: response.status };
+    return { success: true, details: "Response was not JSON but request was successful.", status: response.status, raw_text: responseBodyText };
   }
   if (!response.ok) {
     console.error(`Worker/eventbriteManager: API Error (${method} ${url}) - Status: ${response.status}. Details: ${JSON.stringify(responseData, null,2)}`);
@@ -76,114 +79,131 @@ function formatDescriptionToHtml(textDescription) {
 }
 
 /**
- * Creates an event on Eventbrite using data from Google Calendar.
- * @param {object} gcalEventData - Event data from Google Calendar. Expected: title, startTime, endTime, [description]
+ * Creates an event on Eventbrite by copying a template and updating its content.
+ * @param {object} gcalEventData - Event data from Google Calendar. Expected: title, startTime, endTime, googleCalendarEventId, [description]
  * @param {string} ebToken - Eventbrite Private Token.
- * @param {string} ebOrganizerId - Eventbrite Organizer ID.
- * @param {string} ebVenueId - Eventbrite Venue ID.
+ * @param {string} ebOrganizerId - Eventbrite Organizer ID (less critical for copy, but good for context).
+ * @param {string} ebVenueId - Eventbrite Venue ID (less critical for copy, but good for context).
  * @param {string} [imageIdToUse=DEFAULT_EVENTBRITE_IMAGE_ID] - Eventbrite Image ID for logo and structured content.
  * @returns {Promise<object>} - Result of the event creation process.
  */
 export async function createMindfulinaEventOnEventbrite(
     gcalEventData, 
     ebToken, 
-    ebOrganizerId, 
-    ebVenueId, 
+    ebOrganizerId, // Included for consistency, though copy inherits from template
+    ebVenueId,     // Included for consistency, though copy inherits from template
     imageIdToUse = DEFAULT_EVENTBRITE_IMAGE_ID
 ) {
-  const { title, startTime: gcalStartTime, endTime: gcalEndTime, description: gcalDescription } = gcalEventData;
+  const { title, startTime: gcalStartTime, endTime: gcalEndTime, description: gcalDescription, googleCalendarEventId } = gcalEventData;
 
-  if (!ebToken || !ebOrganizerId || !ebVenueId) {
-    console.error("Worker/eventbriteManager: Missing required Eventbrite IDs (token, organizerId, venueId).");
-    throw new Error("Configuration error: Missing Eventbrite parameters for event creation.");
+  if (!ebToken) { 
+    console.error("Worker/eventbriteManager: Missing required Eventbrite Token.");
+    throw new Error("Configuration error: Missing Eventbrite token.");
   }
-  if (!gcalStartTime || !gcalEndTime) {
-      console.error("Worker/eventbriteManager: Missing startTime or endTime from gcalEventData. These are mandatory.");
-      throw new Error("Event data error: startTime and endTime are required from Google Calendar.");
+  if (!gcalStartTime || !gcalEndTime || !googleCalendarEventId) {
+      console.error("Worker/eventbriteManager: Missing startTime, endTime, or googleCalendarEventId from gcalEventData.");
+      throw new Error("Event data error: startTime, endTime, and googleCalendarEventId are required.");
   }
 
+  const uniqueSuffix = googleCalendarEventId.substring(0, 8) + '_' + new Date().getTime().toString().slice(-5);
+  const newEventName = `${title || "Mindfulina Event"} (${uniqueSuffix})`;
+  
   const startTimeObj = new Date(gcalStartTime);
   const endTimeObj = new Date(gcalEndTime);
 
   const eventbriteStartUTC = startTimeObj.toISOString().slice(0, 19) + 'Z';
   const eventbriteEndUTC = endTimeObj.toISOString().slice(0, 19) + 'Z';
-  const eventHtmlDescription = formatDescriptionToHtml(gcalDescription);
-
-  let eventbriteEventId;
-  let eventbriteEventUrl;
+  
+  let copiedEventId;
+  let copiedEventUrl;
 
   try {
-    // --- Step 1: Create Base Event ---
-    console.log("Worker/eventbriteManager: Creating base Eventbrite event...");
-    const eventPayload = {
-      event: {
-        name: { html: title || "Mindfulina Event" },
-        start: { timezone: EVENT_TIMEZONE, utc: eventbriteStartUTC },
-        end: { timezone: EVENT_TIMEZONE, utc: eventbriteEndUTC },
-        currency: "USD",
-        venue_id: ebVenueId,
-        capacity: EVENT_CAPACITY,
-        listed: true, 
-        shareable: true,
-        online_event: false,
-        ...(imageIdToUse && { logo_id: imageIdToUse }) 
-      },
+    // --- Step 1: Copy the Template Event ---
+    console.log(`Worker/eventbriteManager: Copying template event ID: ${EVENTBRITE_TEMPLATE_ID} to create "${newEventName}"...`);
+    const copyEventUrlApi = `https://www.eventbriteapi.com/v3/events/${EVENTBRITE_TEMPLATE_ID}/copy/`;
+    const copyPayload = {
+      name: newEventName,
+      start_date: eventbriteStartUTC,
+      end_date: eventbriteEndUTC,
+      timezone: EVENT_TIMEZONE, 
     };
-    const createEventUrl = `https://www.eventbriteapi.com/v3/organizations/${ebOrganizerId}/events/`;
-    const createdEvent = await eventbriteApiCall(createEventUrl, 'POST', ebToken, eventPayload);
+    const copiedEventData = await eventbriteApiCall(copyEventUrlApi, 'POST', ebToken, copyPayload);
     
-    if (!createdEvent || !createdEvent.id) { 
-        console.error("Worker/eventbriteManager: Eventbrite event creation call succeeded status-wise but did not return an event ID or essential data.", createdEvent);
-        throw new Error("Eventbrite event creation did not return an event ID.");
+    if (!copiedEventData || !copiedEventData.id || !copiedEventData.url) {
+        console.error("Worker/eventbriteManager: Event copy call response did not include an event ID or URL.", copiedEventData);
+        throw new Error("Failed to retrieve necessary details (ID, URL) from event copy response.");
     }
-    eventbriteEventId = createdEvent.id;
-    eventbriteEventUrl = createdEvent.url;
-    console.log(`Worker/eventbriteManager: Base Eventbrite event created. ID: ${eventbriteEventId}`);
+    copiedEventId = copiedEventData.id;
+    copiedEventUrl = copiedEventData.url;
+    console.log(`Worker/eventbriteManager: Event copied. New ID: ${copiedEventId}, URL: ${copiedEventUrl}`);
 
-    // --- Step 2: Set Structured Content ---
-    console.log("Worker/eventbriteManager: Setting Eventbrite structured content...");
+    // --- Step 2: Update Logo of the Copied Event ---
+    if (imageIdToUse) {
+      console.log(`Worker/eventbriteManager: Updating logo for event ID: ${copiedEventId} with image ID: ${imageIdToUse}...`);
+      const updateEventUrlApi = `https://www.eventbriteapi.com/v3/events/${copiedEventId}/`;
+      const updateLogoPayload = { event: { logo_id: imageIdToUse } };
+      await eventbriteApiCall(updateEventUrlApi, 'POST', ebToken, updateLogoPayload);
+      console.log(`Worker/eventbriteManager: Logo updated for event ID: ${copiedEventId}`);
+    } else {
+      console.log(`Worker/eventbriteManager: No imageIdToUse provided, skipping logo update for copied event.`);
+    }
+
+    // --- Step 3: Update Structured Content (Description and Image) ---
+    console.log(`Worker/eventbriteManager: Updating structured content for event ID: ${copiedEventId}...`);
+    const eventHtmlDescription = formatDescriptionToHtml(gcalDescription);
     const structuredContentModules = [{ type: "text", data: { body: { alignment: "left", text: eventHtmlDescription } } }];
     if (imageIdToUse) {
       structuredContentModules.push({ type: "image", data: { image: { image_id: imageIdToUse } } });
-      console.log("Worker/eventbriteManager: Image module added to structured content.");
-    } else {
-      console.log("Worker/eventbriteManager: No imageIdToUse provided, skipping image module in structured content.");
     }
-    const structuredContentPayload = { modules: structuredContentModules, publish: true, purpose: "listing" };
-    const structuredContentUrl = `https://www.eventbriteapi.com/v3/events/${eventbriteEventId}/structured_content/1/`; // Assuming version 1 for new events
-    await eventbriteApiCall(structuredContentUrl, 'POST', ebToken, structuredContentPayload);
-    console.log("Worker/eventbriteManager: Eventbrite structured content set.");
+    const structuredContentPayload = { modules: structuredContentModules, publish: true, purpose: "listing" }; // publish:true here updates the listing page content
+    const structuredContentUrlApi = `https://www.eventbriteapi.com/v3/events/${copiedEventId}/structured_content/1/`;
+    await eventbriteApiCall(structuredContentUrlApi, 'POST', ebToken, structuredContentPayload);
+    console.log(`Worker/eventbriteManager: Structured content updated for event ID: ${copiedEventId}`);
 
-    // --- Step 3: Create Free Ticket Class ---
-    console.log("Worker/eventbriteManager: Creating Eventbrite ticket class...");
-    const ticketClassPayload = {
-      ticket_class: { name: "General Admission", free: true, quantity_total: EVENT_CAPACITY, minimum_quantity: 1, maximum_quantity: 10 },
-    };
-    const createTicketClassUrl = `https://www.eventbriteapi.com/v3/events/${eventbriteEventId}/ticket_classes/`;
-    await eventbriteApiCall(createTicketClassUrl, 'POST', ebToken, ticketClassPayload);
-    console.log("Worker/eventbriteManager: Eventbrite ticket class created.");
+    // --- Step 4: Update Ticket Class Capacity ---
+    // (This step assumes the template has compatible ticket classes that just need capacity adjustment)
+    console.log(`Worker/eventbriteManager: Fetching ticket classes for event ID: ${copiedEventId} to verify/update capacity...`);
+    const listTicketClassesUrlApi = `https://www.eventbriteapi.com/v3/events/${copiedEventId}/ticket_classes/`;
+    const ticketClassesData = await eventbriteApiCall(listTicketClassesUrlApi, 'GET', ebToken);
 
-    // --- Step 4: Publish Event ---
-    console.log("Worker/eventbriteManager: Publishing Eventbrite event...");
-    const publishUrl = `https://www.eventbriteapi.com/v3/events/${eventbriteEventId}/publish/`;
-    const publishResult = await eventbriteApiCall(publishUrl, 'POST', ebToken);
-    console.log("Worker/eventbriteManager: Eventbrite event publish attempt completed.");
+    if (ticketClassesData && ticketClassesData.ticket_classes && ticketClassesData.ticket_classes.length > 0) {
+      const mainTicketClass = ticketClassesData.ticket_classes[0]; // Assuming the first one is the primary one to update
+      if (mainTicketClass.quantity_total !== EVENT_CAPACITY) {
+        console.log(`Worker/eventbriteManager: Updating capacity of ticket class ID ${mainTicketClass.id} from ${mainTicketClass.quantity_total} to ${EVENT_CAPACITY}...`);
+        const updateTicketClassUrlApi = `https://www.eventbriteapi.com/v3/events/${copiedEventId}/ticket_classes/${mainTicketClass.id}/`;
+        const updateTicketPayload = { ticket_class: { quantity_total: EVENT_CAPACITY } };
+        // Note: Eventbrite's API for updating ticket classes uses POST, not PUT or PATCH.
+        await eventbriteApiCall(updateTicketClassUrlApi, 'POST', ebToken, updateTicketPayload);
+        console.log(`Worker/eventbriteManager: Capacity updated for ticket class ID ${mainTicketClass.id}.`);
+      } else {
+        console.log(`Worker/eventbriteManager: Ticket class capacity (${mainTicketClass.quantity_total}) already matches EVENT_CAPACITY (${EVENT_CAPACITY}). No update needed.`);
+      }
+    } else {
+      console.warn(`Worker/eventbriteManager: No ticket classes found for event ID ${copiedEventId}, or API response malformed. Skipping capacity update. The template should have a ticket class.`);
+    }
+
+    // --- Step 5: Publish Event ---
+    console.log(`Worker/eventbriteManager: Publishing event ID: ${copiedEventId}...`);
+    const publishUrlApi = `https://www.eventbriteapi.com/v3/events/${copiedEventId}/publish/`;
+    const publishResult = await eventbriteApiCall(publishUrlApi, 'POST', ebToken); // No body needed for publish
+    console.log(`Worker/eventbriteManager: Event publish attempt completed for ID: ${copiedEventId}. Result: ${JSON.stringify(publishResult)}`);
 
     return { 
       success: true, 
-      message: "Eventbrite event creation process completed.", 
-      eventId: eventbriteEventId, 
-      eventUrl: eventbriteEventUrl,
-      published: publishResult?.published || false 
+      message: "Eventbrite event copied, updated, and publish process completed.", 
+      eventId: copiedEventId, 
+      eventUrl: copiedEventUrl,
+      published: publishResult?.published || false // Ensure boolean
     };
   } catch (error) {
-    console.error(`Worker/eventbriteManager: Error processing Eventbrite event for GCal title "${title}":`, error.stack || error.message);
+    console.error(`Worker/eventbriteManager: Error in copy/update/publish for GCal event "${title}" (ID: ${googleCalendarEventId}):`, error.stack || error.message);
     return { 
       success: false, 
-      message: `Eventbrite integration failed: ${error.message}`, 
-      eventId: eventbriteEventId, 
-      eventUrl: eventbriteEventUrl,
-      errorDetails: error.message 
+      message: `Eventbrite integration (copy/update/publish) failed: ${error.message}`, 
+      eventId: copiedEventId, 
+      eventUrl: copiedEventUrl,
+      errorDetails: error.message, // Provide a clean error message
+      published: false
     };
   }
 }
