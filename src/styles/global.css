@@ -34,7 +34,7 @@
   }
   
   a {
-    @apply text-gold underline decoration-2 hover:text-sunsetCoral transition-colors duration-200;
+    @apply text-gold underline decoration-2 hover:text-seafoamGreen transition-colors duration-200;
   }
   
   ul, ol {
@@ -60,7 +60,7 @@
   }
   
   .btn-primary {
-    @apply btn bg-gold text-textGray hover:bg-gold/80; /* text-textGray for contrast on gold */
+    @apply btn bg-gold text-textGray hover:bg-gold/80 hover:text-textGray; /* text-textGray for contrast on gold, ensure hover text color */
   }
   
   .btn-secondary {
