@@ -11,13 +11,16 @@ const upcoming = events
 
 const next = upcoming[0];
 const pageTitle = next ? `Mindfulina – ${next.data.title}` : 'Mindfulina – Next Event';
+
 // Render the content if available
 const { Content } = next ? await next.render() : { Content: null };
+
 const calendarLink = next ? getGoogleCalendarLink({
   title: next.data.title,
   date: next.data.date,
   location: next.data.location,
-  description: next.data.description
+  // Pass description to GCal link if it exists in frontmatter, otherwise fallback or omit
+  description: next.data.description || `Check out the event details for ${next.data.title} on Mindfulina.`
 }) : '';
 ---
 
@@ -25,14 +28,29 @@ const calendarLink = next ? getGoogleCalendarLink({
   <div class="hidden md:block">
     <Hero />
   </div>
-  
+
 	{next ? (
 			<article class="bg-white/60 backdrop-blur-md p-8 rounded-2xl shadow-lg">
 				<h1 class="text-3xl font-bold mb-4">{next.data.title}</h1>
 				<p><strong>When:</strong> <Fragment set:html={formatHawaiian(next.data.date)} /></p>
 				<p><strong>Where:</strong> {next.data.location}</p>
-				<p class="mt-2">
-          <a href={calendarLink} target="_blank" class="text-sm inline-flex items-center">
+
+        <!-- Eventbrite "Buy Tickets" Link for Homepage -->
+        {next.data.eventbriteLink && (
+          <div class="my-4"> {/* Margin for spacing */}
+            <a
+              href={next.data.eventbriteLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-primary" /* Using existing primary button style */
+            >
+              Buy Tickets on Eventbrite
+            </a>
+          </div>
+        )}
+
+				<p class="mt-2"> {/* Ensure Google Calendar link has some top margin */}
+          <a href={calendarLink} target="_blank" rel="noopener noreferrer" class="text-sm inline-flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
@@ -41,7 +59,7 @@ const calendarLink = next ? getGoogleCalendarLink({
         </p>
 				{next.data.cover && <img src={next.data.cover} alt={next.data.title + " cover image"} class="my-4 rounded-lg" />}
 				<div class="prose mt-6">
-					<Content />
+					{Content ? <Content /> : (next.data.description ? <p>{next.data.description}</p> : '')}
 				</div>
 				<a href="/events" class="mt-8 inline-block">See all upcoming sessions →</a>
 			</article>

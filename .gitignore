@@ -23,4 +23,4 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-repomix-output.xml
+# repomix-output.xml

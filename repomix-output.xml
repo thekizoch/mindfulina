@@ -1,0 +1,2646 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+<additional_info>
+
+</additional_info>
+
+</file_summary>
+
+<directory_structure>
+.github/
+  workflows/
+    deploy-cf-worker.yml
+cloudflare-worker/
+  eventAutomation.js
+  eventbrite-image-mapping.json
+  eventbriteManager.js
+  githubManager.js
+  wrangler.toml
+eventbrite_ops/
+  upload_image_to_eventbrite.js
+google-apps-script/
+  calendarTrigger.gs
+public/
+  images/
+    logo.svg
+  favicon.svg
+sandbox/
+  copy_and_publish_eventbrite_event.js
+  create_eventbrite_free_event.js
+  list_eventbrite_events.js
+src/
+  components/
+    Hero.astro
+  content/
+    brand/
+      brand-identity.md
+    events/
+      2025-04-27-sunset-sound-bath.md
+      2025-05-18.md
+      2025-06-22-morning-ocean-sound-bath.md
+    config.ts
+  layouts/
+    BaseLayout.astro
+    EventLayout.astro
+  pages/
+    events/
+      [...slug].astro
+      index.astro
+    brand.astro
+    index.astro
+  styles/
+    global.css
+  utils/
+    format.ts
+.gitignore
+astro.config.mjs
+package.json
+prd.md
+README.md
+tailwind.config.mjs
+todo.md
+tsconfig.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="cloudflare-worker/eventbrite-image-mapping.json">
+{
+  "public/images/wide-shot.jpeg": 1032924873,
+  "public/images/eventbrite-cover.jpeg": 1033232763
+}
+</file>
+
+<file path="cloudflare-worker/wrangler.toml">
+name = "mindfulina-event-automation"
+main = "eventAutomation.js"
+compatibility_date = "2025-05-16" # Replace with the actual current date when setting up
+account_id = "" # Will be sourced from CF_ACCOUNT_ID GitHub secret during CI/CD
+</file>
+
+<file path="public/images/logo.svg">
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+ "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="300.000000pt" height="300.000000pt" viewBox="0 0 300.000000 300.000000"
+ preserveAspectRatio="xMidYMid meet">
+<metadata>
+Created by potrace 1.10, written by Peter Selinger 2001-2011
+</metadata>
+<g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)"
+fill="#000000" stroke="none">
+<path d="M1482 2118 c3 -181 5 -213 18 -213 13 0 15 31 18 213 2 208 2 212
+-18 212 -20 0 -21 -4 -18 -212z"/>
+<path d="M1120 2222 c0 -25 159 -347 171 -347 8 0 13 8 11 18 -7 39 -156 337
+-169 337 -7 0 -13 -4 -13 -8z"/>
+<path d="M1815 2153 c-96 -201 -126 -276 -113 -284 9 -6 19 5 35 39 12 26 49
+105 83 176 55 118 63 146 41 146 -5 0 -26 -35 -46 -77z"/>
+<path d="M1361 2061 c-20 -13 16 -161 40 -161 15 0 15 5 2 58 -8 31 -18 69
+-21 84 -5 20 -11 25 -21 19z"/>
+<path d="M1626 2059 c-9 -26 -36 -137 -36 -148 0 -6 6 -11 14 -11 18 0 53 147
+38 162 -8 8 -13 7 -16 -3z"/>
+<path d="M860 1998 c0 -22 269 -272 276 -255 3 9 -41 59 -121 138 -122 120
+-155 145 -155 117z"/>
+<path d="M1999 1894 c-68 -64 -130 -122 -138 -130 -13 -11 -12 -14 3 -20 12
+-5 38 13 94 68 42 40 103 97 136 125 50 44 65 73 37 73 -4 0 -63 -52 -132
+-116z"/>
+<path d="M1826 1886 c-50 -70 -53 -76 -32 -76 17 0 107 120 100 132 -11 17
+-25 5 -68 -56z"/>
+<path d="M1106 1928 c4 -7 26 -37 47 -66 36 -48 56 -60 60 -38 4 16 -79 115
+-96 116 -12 0 -16 -4 -11 -12z"/>
+<path d="M1422 1849 c-154 -26 -296 -161 -336 -318 l-12 -46 -45 5 c-131 13
+-329 -8 -328 -35 0 -6 21 -8 52 -5 29 3 115 5 192 5 124 -1 159 -5 307 -38
+215 -48 299 -49 471 -8 194 47 248 54 375 47 65 -3 136 -9 160 -12 33 -5 42
+-3 42 9 0 23 -108 39 -251 39 l-127 -1 -5 32 c-9 58 -60 149 -112 202 -98 101
+-244 148 -383 124z m233 -60 c84 -32 181 -131 212 -214 34 -90 35 -87 -27
+-100 -30 -7 -102 -25 -159 -40 -133 -35 -227 -32 -434 15 -167 39 -158 28
+-107 135 52 108 124 173 239 217 65 25 196 19 276 -13z"/>
+<path d="M940 1736 c0 -17 126 -90 140 -81 16 10 3 22 -64 60 -71 39 -76 41
+-76 21z"/>
+<path d="M1987 1716 c-72 -41 -84 -53 -71 -66 13 -13 138 61 142 84 5 22 -5
+20 -71 -18z"/>
+<path d="M712 1685 c4 -22 319 -137 330 -121 11 16 4 20 -147 76 -175 65 -188
+68 -183 45z"/>
+<path d="M2110 1641 c-101 -37 -155 -62 -155 -72 0 -8 5 -14 10 -14 6 0 82 25
+168 55 122 43 157 59 157 73 0 9 -6 17 -12 16 -7 0 -83 -26 -168 -58z"/>
+<path d="M1032 1395 c3 -20 45 -34 188 -65 194 -42 408 -36 626 15 117 28 151
+42 137 56 -7 7 -47 1 -112 -16 -131 -33 -277 -55 -366 -55 -108 0 -334 38
+-458 76 -14 4 -18 1 -15 -11z"/>
+<path d="M484 1231 c-22 -10 -57 -38 -78 -62 -31 -37 -36 -50 -34 -84 2 -29 8
+-41 21 -43 13 -3 17 3 17 25 0 39 32 87 81 123 78 56 76 15 -10 -180 -28 -63
+-51 -125 -51 -137 0 -31 36 -31 44 0 3 12 27 62 53 112 49 90 139 195 169 195
+19 0 17 -7 -48 -169 -27 -68 -47 -130 -44 -137 12 -31 35 -10 71 62 38 79 151
+211 173 203 7 -3 -5 -42 -35 -109 -49 -113 -62 -174 -44 -209 12 -21 51 -28
+85 -15 28 11 17 24 -16 22 -33 -3 -33 -3 -31 39 1 23 20 85 42 139 45 108 51
+148 22 163 -23 13 -97 -32 -126 -78 -29 -45 -46 -46 -24 -1 20 42 27 89 15
+108 -16 26 -65 13 -111 -29 l-45 -42 6 45 c6 40 3 47 -17 62 -29 20 -35 20
+-85 -3z"/>
+<path d="M1963 1178 c-59 -61 -100 -132 -114 -195 -10 -45 -19 -59 -48 -79
+-34 -23 -36 -23 -39 -6 -2 11 6 43 17 73 24 63 25 69 8 69 -6 0 -23 -20 -36
+-44 -23 -45 -87 -116 -103 -116 -18 0 -6 50 26 102 26 43 30 58 20 62 -8 3
+-21 -6 -31 -21 -40 -59 -74 -83 -115 -83 l-40 0 56 62 c85 93 118 177 74 186
+-36 7 -135 -124 -158 -209 -6 -21 -25 -50 -45 -68 -77 -67 -73 -24 12 145 37
+74 64 136 60 140 -15 16 -39 -10 -76 -84 -37 -74 -41 -78 -68 -75 -37 6 -89
+-30 -126 -85 -31 -46 -61 -67 -83 -58 -12 4 -10 15 7 61 36 96 3 114 -69 38
+-27 -27 -43 -39 -39 -27 19 63 19 64 4 64 -8 0 -25 -21 -38 -47 -29 -56 -93
+-113 -110 -96 -9 9 -4 27 20 72 34 66 39 91 17 91 -17 0 -62 -84 -71 -133 -8
+-40 6 -67 32 -67 8 0 30 12 49 27 l35 26 -6 -26 c-10 -37 19 -37 39 1 19 36
+102 128 110 122 3 -3 -2 -26 -10 -50 -26 -74 15 -117 70 -75 17 13 21 13 33
+-5 22 -31 48 -24 94 23 32 32 40 37 34 20 -9 -32 3 -63 24 -63 10 0 30 9 44
+20 l26 21 -15 -45 c-19 -55 -15 -115 8 -130 40 -25 109 92 95 162 -5 26 -3 29
+33 39 l39 10 3 -36 c4 -49 34 -53 81 -11 35 30 36 31 39 8 4 -32 39 -34 74 -5
+l29 25 17 -29 c25 -42 67 -39 117 6 32 29 38 32 34 15 -6 -23 12 -50 35 -50 8
+0 30 11 49 25 33 26 33 26 30 4 -4 -36 18 -32 46 9 15 20 45 56 68 77 37 36
+41 37 34 15 -15 -52 -17 -91 -5 -105 17 -21 54 -19 75 5 18 20 18 20 29 -2 18
+-36 44 -34 88 9 31 30 39 33 34 17 -7 -24 15 -54 41 -54 19 0 103 82 103 100
+0 7 -20 -6 -45 -29 -24 -22 -49 -41 -54 -41 -22 0 -20 22 4 69 30 60 30 61 5
+61 -10 0 -24 -10 -31 -21 -19 -36 -91 -109 -106 -109 -12 0 -13 7 -8 28 15 63
+90 127 134 115 17 -4 20 -2 15 11 -10 25 -61 20 -102 -11 -21 -15 -55 -49 -78
+-77 -39 -50 -84 -73 -84 -43 0 7 7 35 16 60 16 48 14 77 -6 77 -6 0 -36 -23
+-66 -51 -57 -55 -63 -56 -38 -8 18 37 12 68 -11 49 -8 -6 -19 -27 -25 -45 -12
+-37 -81 -105 -106 -105 -19 0 -13 25 27 99 16 29 26 58 23 62 -13 21 -35 6
+-58 -39 -28 -55 -97 -122 -126 -122 -22 0 -43 32 -34 54 3 8 36 46 74 84 73
+75 112 150 93 181 -18 28 -37 23 -80 -21z m38 -55 c-26 -49 -111 -143 -111
+-123 0 38 122 208 128 177 2 -8 -6 -33 -17 -54z m-382 -5 c-19 -37 -81 -119
+-86 -114 -6 6 34 84 65 125 27 36 42 29 21 -11z m-239 -108 c0 -12 -80 -110
+-102 -124 -30 -19 -34 5 -7 52 28 52 109 105 109 72z m128 -145 c4 -35 -24
+-111 -43 -119 -20 -7 -19 11 2 90 18 66 35 79 41 29z"/>
+<path d="M955 1120 c-8 -13 4 -50 16 -50 11 0 29 41 22 53 -6 10 -31 9 -38 -3z"/>
+<path d="M2086 1115 c-6 -18 2 -45 15 -45 12 0 31 39 24 50 -9 15 -32 12 -39
+-5z"/>
+</g>
+</svg>
+</file>
+
+<file path="public/favicon.svg">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 128 128">
+    <path d="M50.4 78.5a75.1 75.1 0 0 0-28.5 6.9l24.2-65.7c.7-2 1.9-3.2 3.4-3.2h29c1.5 0 2.7 1.2 3.4 3.2l24.2 65.7s-11.6-7-28.5-7L67 45.5c-.4-1.7-1.6-2.8-2.9-2.8-1.3 0-2.5 1.1-2.9 2.7L50.4 78.5Zm-1.1 28.2Zm-4.2-20.2c-2 6.6-.6 15.8 4.2 20.2a17.5 17.5 0 0 1 .2-.7 5.5 5.5 0 0 1 5.7-4.5c2.8.1 4.3 1.5 4.7 4.7.2 1.1.2 2.3.2 3.5v.4c0 2.7.7 5.2 2.2 7.4a13 13 0 0 0 5.7 4.9v-.3l-.2-.3c-1.8-5.6-.5-9.5 4.4-12.8l1.5-1a73 73 0 0 0 3.2-2.2 16 16 0 0 0 6.8-11.4c.3-2 .1-4-.6-6l-.8.6-1.6 1a37 37 0 0 1-22.4 2.7c-5-.7-9.7-2-13.2-6.2Z" />
+    <style>
+        path { fill: #000; }
+        @media (prefers-color-scheme: dark) {
+            path { fill: #FFF; }
+        }
+    </style>
+</svg>
+</file>
+
+<file path="sandbox/copy_and_publish_eventbrite_event.js">
+// mindfulina/sandbox/copy_and_publish_eventbrite_event.js
+// Script to copy a template Eventbrite event and then publish the new (copied) event.
+
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// ES module equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load .env file from the sandbox directory
+dotenv.config({ path: path.resolve(__dirname, '.env') });
+
+const EVENTBRITE_PRIVATE_TOKEN = process.env.EVENTBRITE_PRIVATE_TOKEN;
+
+const TEMPLATE_EVENT_ID = '1371879341039'; // Your template event ID
+const NEW_EVENT_TIMEZONE = 'Pacific/Honolulu'; // Timezone for the new event's display
+const TEMPLATE_EVENT_DURATION_MINUTES = 120; // Duration of your template event (e.g., 10:00 to 12:00 is 2 hours)
+
+async function apiCall(url, method, token, body = null) {
+  console.log(`\nAttempting ${method} request to: ${url}`);
+  if (body) {
+    console.log(`Request body: ${JSON.stringify(body, null, 2)}`);
+  }
+  const headers = {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  };
+  const options = { method, headers };
+  if (body && (method === 'POST' || method === 'PUT' || method === 'PATCH')) {
+    options.body = JSON.stringify(body);
+  }
+
+  const response = await fetch(url, options);
+  const responseBodyText = await response.text();
+  let responseData;
+
+  try {
+    responseData = responseBodyText ? JSON.parse(responseBodyText) : {};
+  } catch (e) {
+    console.warn(`Could not parse response as JSON. Status: ${response.status}. Raw text: ${responseBodyText.substring(0, 500)}`);
+    if (!response.ok) {
+        throw new Error(`Eventbrite API Error: ${response.status} - ${response.statusText}. Response was not valid JSON.`);
+    }
+    responseData = { details: "Response was not JSON but request was successful.", raw_text: responseBodyText };
+  }
+
+  if (!response.ok) {
+    console.error(`API Error (${method} ${url}) - Status: ${response.status}`);
+    console.error("Error details:", JSON.stringify(responseData, null, 2));
+    const errorDetail = responseData?.error_detail;
+    let specificErrorMessage = "";
+    if (typeof errorDetail === 'object' && errorDetail !== null) {
+        for (const key in errorDetail) {
+            if (Array.isArray(errorDetail[key]) && errorDetail[key].length > 0) {
+                 specificErrorMessage += `${key}: ${errorDetail[key].join(', ')}. `;}
+            else if (typeof errorDetail[key] === 'string') {
+                 specificErrorMessage += `${key}: ${errorDetail[key]}. `;}
+        }
+    }
+    const errorMessage = responseData?.error_description || specificErrorMessage || responseData?.error || responseData?.error_message || response.statusText;
+    throw new Error(`Eventbrite API Error: ${response.status} - ${errorMessage.trim()}`);
+  }
+  console.log(`API Success (${method} ${url}) - Status: ${response.status}`);
+  // To see full response data for debugging, uncomment the next line:
+  // console.log("Full response data:", JSON.stringify(responseData, null, 2));
+  return responseData;
+}
+
+async function copyAndPublishEvent() {
+  if (!EVENTBRITE_PRIVATE_TOKEN || EVENTBRITE_PRIVATE_TOKEN === 'YOUR_EVENTBRITE_PRIVATE_TOKEN') {
+    console.error("ERROR: EVENTBRITE_PRIVATE_TOKEN is not correctly set in your .env file.");
+    return;
+  }
+
+  console.log(`Attempting to copy event ID: ${TEMPLATE_EVENT_ID} and then publish the copy.`);
+
+  // --- Define new event details ---
+  const newEventName = `Copied Event (from ${TEMPLATE_EVENT_ID}) - ${new Date().toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' })}`;
+  
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1); 
+  
+  const year = tomorrow.getFullYear();
+  const month = tomorrow.getMonth(); // 0-indexed for Date.UTC
+  const day = tomorrow.getDate();
+  
+  const newEventStartHourLocal = 10; // 10 AM in NEW_EVENT_TIMEZONE
+  const newEventStartMinuteLocal = 0;
+
+  // Calculate UTC for the API. Pacific/Honolulu is UTC-10.
+  // 10:00 AM HNL is 10 (local) + 10 (offset from UTC) = 20:00 UTC.
+  const startDateUTC = new Date(Date.UTC(year, month, day, newEventStartHourLocal + 10, newEventStartMinuteLocal, 0));
+  const endDateUTC = new Date(startDateUTC.getTime() + TEMPLATE_EVENT_DURATION_MINUTES * 60 * 1000);
+
+  const newEventStartUTCStr = startDateUTC.toISOString().slice(0, 19) + 'Z';
+  const newEventEndUTCStr = endDateUTC.toISOString().slice(0, 19) + 'Z';
+
+  console.log(`New event name: "${newEventName}"`);
+  console.log(`New event intended local start (${NEW_EVENT_TIMEZONE}): ${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}T${String(newEventStartHourLocal).padStart(2,'0')}:${String(newEventStartMinuteLocal).padStart(2,'0')}:00`);
+  console.log(`New event start (UTC for API): ${newEventStartUTCStr}`);
+  console.log(`New event end (UTC for API): ${newEventEndUTCStr}`);
+  console.log(`New event timezone (for display on Eventbrite): ${NEW_EVENT_TIMEZONE}`);
+
+  let copiedEventId;
+  let copiedEventUrl;
+
+  try {
+    // --- Step 1: Copy the Event ---
+    console.log("\n--- Step 1: Copying Event ---");
+    const copyEventUrl = `https://www.eventbriteapi.com/v3/events/${TEMPLATE_EVENT_ID}/copy/`;
+    const copyPayload = {
+      name: newEventName,
+      start_date: newEventStartUTCStr,
+      end_date: newEventEndUTCStr,
+      timezone: NEW_EVENT_TIMEZONE, 
+    };
+    
+    const copiedEventData = await apiCall(copyEventUrl, 'POST', EVENTBRITE_PRIVATE_TOKEN, copyPayload);
+
+    if (!copiedEventData || !copiedEventData.id || !copiedEventData.url) {
+      console.error("Event copy call response did not include an event ID or URL in the expected format.");
+      console.error("Full response from copy API:", JSON.stringify(copiedEventData, null, 2));
+      throw new Error("Failed to retrieve necessary details (ID, URL) from event copy response.");
+    }
+    copiedEventId = copiedEventData.id;
+    copiedEventUrl = copiedEventData.url; 
+    
+    console.log(`Event copied successfully. New Event ID: ${copiedEventId}`);
+    console.log(`New Event URL: ${copiedEventUrl}`);
+
+
+    // --- Step 2: Publish the Copied Event ---
+    console.log("\n--- Step 2: Publishing Copied Event ---");
+    const publishUrl = `https://www.eventbriteapi.com/v3/events/${copiedEventId}/publish/`;
+    const publishResult = await apiCall(publishUrl, 'POST', EVENTBRITE_PRIVATE_TOKEN); 
+    
+    if (publishResult && publishResult.published === true) {
+        console.log(`\nSuccessfully published copied event (ID: ${copiedEventId})!`);
+        console.log(`Event URL: ${copiedEventUrl}`);
+    } else {
+        console.error("\nCopied event was NOT published successfully according to the API response.");
+        console.error("Publish API Response:", JSON.stringify(publishResult, null, 2));
+        if (copiedEventId && copiedEventUrl) {
+            console.log(`The copied event (ID: ${copiedEventId}) exists but may still be a draft. Please check the Eventbrite dashboard.`);
+            console.log(`Link to the (potentially draft) event: ${copiedEventUrl}`);
+        }
+        throw new Error(`Event was copied (ID: ${copiedEventId}) but failed to publish or publication status unclear.`);
+    }
+
+  } catch (error) {
+    console.error("\n--- An error occurred during the copy and/or publish process ---");
+    // The error message should have been logged by apiCall or within the try block's specific error handling.
+    if (copiedEventId && !error.message.includes(`ID: ${copiedEventId}`)) { 
+        // Add context if the error message doesn't already mention the copied event ID
+        console.error(`The process failed. If the event was copied, its ID is: ${copiedEventId}.`);
+        if(copiedEventUrl) console.error(`Link to this (potentially draft) event: ${copiedEventUrl}`);
+    }
+  }
+}
+
+copyAndPublishEvent();
+</file>
+
+<file path="sandbox/create_eventbrite_free_event.js">
+// mindfulina/sandbox/create_full_eventbrite_event.js
+// Script to create a full event, add structured content (text & image), create ticket class, and publish.
+// Uses a pre-uploaded image ID.
+
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// ES module equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load .env file from the sandbox directory
+dotenv.config({ path: path.resolve(__dirname, '.env') });
+
+const EVENTBRITE_PRIVATE_TOKEN = process.env.EVENTBRITE_PRIVATE_TOKEN;
+const EVENTBRITE_ORGANIZER_ID = process.env.EVENTBRITE_ORGANIZER_ID;
+
+// --- Configuration ---
+const EVENTBRITE_VENUE_ID = '266927653'; 
+const EVENT_CAPACITY = 25;
+const EVENT_TIMEZONE = 'Pacific/Honolulu';
+const EVENT_DURATION_MINUTES = 45;
+// *** YOUR UPLOADED IMAGE ID ***
+const ACTUAL_UPLOADED_IMAGE_ID = '1032924873'; 
+
+const DEFAULT_EVENT_DESCRIPTION_HTML_CONTENT = `<p>Join us for a rejuvenating sound bath to reset and relax your mind, body, and spirit.</p>
+<h2>What to know</h2>
+<p>Mākālei Beach Park features a small beach used by surfers, plus a tree-shaded area with picnic tables. Dogs allowed. Located at 3111 Diamond Head Rd, Honolulu, HI 96815.</p> 
+<h2>Before You Arrive</h2>
+<p>Consider taking a peaceful walk along the shoreline to connect with nature.</p>
+<h2>What to Bring</h2>
+<ul>
+  <li>Towel, yoga mat, or blanket</li>
+  <li>Swimsuit and sunscreen</li>
+  <li>Optional: hat, sunglasses, water bottle</li>
+</ul>
+<p>Let the ocean breeze and sound healing waves guide you into deep rest. See you there.</p>`;
+
+async function apiCall(url, method, token, body = null) {
+  console.log(`\nAttempting ${method} request to: ${url}`);
+  if (body) {
+    console.log(`Request body: ${JSON.stringify(body, null, 2)}`);
+  }
+  const headers = {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  };
+  const options = { method, headers };
+  if (body) {
+    options.body = JSON.stringify(body);
+  }
+  const response = await fetch(url, options);
+  const responseBodyText = await response.text(); 
+  let responseData;
+  try {
+    responseData = responseBodyText ? JSON.parse(responseBodyText) : {};
+  } catch (e) {
+    console.warn(`Could not parse response as JSON. Status: ${response.status}. Raw text: ${responseBodyText.substring(0, 500)}`);
+    if (!response.ok) {
+        throw new Error(`Eventbrite API Error: ${response.status} - ${response.statusText}. Response was not valid JSON.`);
+    }
+    responseData = { details: "Response was not JSON but request was successful."};
+  }
+  if (!response.ok) {
+    console.error(`API Error (${method} ${url}) - Status: ${response.status}`);
+    console.error("Error details:", JSON.stringify(responseData, null, 2));
+    const errorDetail = responseData?.error_detail;
+    let specificErrorMessage = "";
+    if (typeof errorDetail === 'object' && errorDetail !== null) {
+        for (const key in errorDetail) {
+            if (Array.isArray(errorDetail[key]) && errorDetail[key].length > 0) {
+                 specificErrorMessage += `${key}: ${errorDetail[key].join(', ')}. `;}
+            else if (typeof errorDetail[key] === 'string') {
+                 specificErrorMessage += `${key}: ${errorDetail[key]}. `;}
+        }
+    }
+    const errorMessage = responseData?.error_description || specificErrorMessage || responseData?.error || responseData?.error_message || response.statusText;
+    throw new Error(`Eventbrite API Error: ${response.status} - ${errorMessage.trim()}`);
+  }
+  console.log(`API Success (${method} ${url}) - Status: ${response.status}`);
+  console.log("Response data:", JSON.stringify(responseData, null, 2));
+  return responseData;
+}
+
+async function createAndPublishEvent() {
+  if (!EVENTBRITE_PRIVATE_TOKEN || EVENTBRITE_PRIVATE_TOKEN === 'YOUR_EVENTBRITE_PRIVATE_TOKEN') {
+    console.error("ERROR: EVENTBRITE_PRIVATE_TOKEN is not correctly set in your .env file.");
+    return;
+  }
+  if (!EVENTBRITE_ORGANIZER_ID || EVENTBRITE_ORGANIZER_ID === 'YOUR_EVENTBRITE_ORGANIZER_ID') {
+    console.error("ERROR: EVENTBRITE_ORGANIZER_ID is not correctly set in your .env file.");
+    return;
+  }
+   if (!EVENTBRITE_VENUE_ID) {
+    console.error("ERROR: EVENTBRITE_VENUE_ID is not set in the script constants.");
+    return;
+  }
+   if (!ACTUAL_UPLOADED_IMAGE_ID || ACTUAL_UPLOADED_IMAGE_ID === 'YOUR_UPLOADED_IMAGE_ID_WOULD_GO_HERE') {
+    console.error("ERROR: ACTUAL_UPLOADED_IMAGE_ID is not set to a real ID. Please update the constant.");
+    return; 
+   }
+
+  const eventTitle = `Full Test (Logo & Struct. Content Img) - (${new Date().toLocaleTimeString()})`;
+  const now = new Date();
+  const startTime = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 10, 0, 0); 
+  const endTime = new Date(startTime.getTime() + (EVENT_DURATION_MINUTES * 60 * 1000)); 
+  const eventbriteStartUTC = startTime.toISOString().slice(0, 19) + 'Z';
+  const eventbriteEndUTC = endTime.toISOString().slice(0, 19) + 'Z';
+
+  console.log(`Event Title: ${eventTitle}`);
+  console.log(`Eventbrite Start Time UTC (Formatted): ${eventbriteStartUTC}`);
+  console.log(`Eventbrite End Time UTC (Formatted): ${eventbriteEndUTC}`);
+  console.log(`Using Image ID: ${ACTUAL_UPLOADED_IMAGE_ID}`);
+
+
+  let eventbriteEventId;
+  let eventbriteEventUrl;
+
+  try {
+    // --- Step 1: Create Base Event (with logo_id, no summary/description) ---
+    console.log("--- Step 1: Creating Base Event (with logo_id) ---");
+    const eventPayload = {
+      event: {
+        name: { html: eventTitle }, 
+        start: { timezone: EVENT_TIMEZONE, utc: eventbriteStartUTC },
+        end: { timezone: EVENT_TIMEZONE, utc: eventbriteEndUTC },
+        currency: "USD",
+        venue_id: EVENTBRITE_VENUE_ID,
+        capacity: EVENT_CAPACITY,
+        listed: true, 
+        shareable: true,
+        online_event: false,
+        logo_id: ACTUAL_UPLOADED_IMAGE_ID, 
+      },
+    };
+    const createEventUrl = `https://www.eventbriteapi.com/v3/organizations/${EVENTBRITE_ORGANIZER_ID}/events/`;
+    const createdEvent = await apiCall(createEventUrl, 'POST', EVENTBRITE_PRIVATE_TOKEN, eventPayload);
+    
+    if (!createdEvent || !createdEvent.id) {
+        throw new Error("Event creation call succeeded but did not return an event ID.");
+    }
+    eventbriteEventId = createdEvent.id;
+    eventbriteEventUrl = createdEvent.url;
+    console.log(`Base event created successfully. ID: ${eventbriteEventId}, URL: ${eventbriteEventUrl}`);
+
+    // --- Step 2: Set Structured Content (Description and Image Module) ---
+    console.log("\n--- Step 2: Setting Structured Content ---");
+    const structuredContentModules = [
+      {
+        type: "text",
+        data: { body: { alignment: "left", text: DEFAULT_EVENT_DESCRIPTION_HTML_CONTENT } },
+      },
+      { // Adding the image module using the uploaded image ID
+        type: "image",
+        data: { image: { image_id: ACTUAL_UPLOADED_IMAGE_ID } },
+        // layout: "image_top", // Optional layout: "image_left", "image_right", "image_full_width"
+      }
+    ];
+    
+    const structuredContentPayload = {
+      modules: structuredContentModules,
+      publish: true, 
+      purpose: "listing", 
+    };
+    const structuredContentUrl = `https://www.eventbriteapi.com/v3/events/${eventbriteEventId}/structured_content/1/`;
+    await apiCall(structuredContentUrl, 'POST', EVENTBRITE_PRIVATE_TOKEN, structuredContentPayload);
+    console.log("Structured content (text & image) set successfully.");
+
+    // --- Step 3: Create Free Ticket Class ---
+    console.log("\n--- Step 3: Creating Ticket Class ---");
+    const ticketClassPayload = {
+      ticket_class: {
+        name: "General Admission",
+        free: true,
+        quantity_total: EVENT_CAPACITY,
+        minimum_quantity: 1,    
+        maximum_quantity: 10,   
+      },
+    };
+    const createTicketClassUrl = `https://www.eventbriteapi.com/v3/events/${eventbriteEventId}/ticket_classes/`;
+    await apiCall(createTicketClassUrl, 'POST', EVENTBRITE_PRIVATE_TOKEN, ticketClassPayload);
+    console.log("Ticket class created successfully.");
+
+    // --- Step 4: Publish Event ---
+    console.log("\n--- Step 4: Publishing Event ---");
+    const publishUrl = `https://www.eventbriteapi.com/v3/events/${eventbriteEventId}/publish/`;
+    const publishResult = await apiCall(publishUrl, 'POST', EVENTBRITE_PRIVATE_TOKEN);
+    
+    if (publishResult && publishResult.published) {
+        console.log(`\nEvent published successfully! Event URL: ${eventbriteEventUrl}`);
+    } else {
+        console.error("\nEvent was not published successfully according to the API response.");
+        console.error("Publish API Response:", JSON.stringify(publishResult, null, 2));
+        console.log(`Event ID: ${eventbriteEventId}. URL: ${eventbriteEventUrl}. Check dashboard.`);
+    }
+
+  } catch (error) {
+    console.error("\n--- An error occurred during the process ---");
+    console.error("Error message:", error.message);
+    if (eventbriteEventId) {
+        console.error(`Process failed. Event (ID: ${eventbriteEventId}) might exist in a partial state. Check dashboard.`);
+        if(eventbriteEventUrl) console.error(`Link to potentially created event: ${eventbriteEventUrl}`);
+    }
+  }
+}
+
+createAndPublishEvent();
+</file>
+
+<file path="sandbox/list_eventbrite_events.js">
+// mindfulina/sandbox/list_eventbrite_events.js
+// Script to list events for an organization from Eventbrite.
+
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// ES module equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load .env file from the sandbox directory
+dotenv.config({ path: path.resolve(__dirname, '.env') });
+
+const EVENTBRITE_PRIVATE_TOKEN = process.env.EVENTBRITE_PRIVATE_TOKEN;
+const EVENTBRITE_ORGANIZER_ID = process.env.EVENTBRITE_ORGANIZER_ID;
+
+async function apiCall(url, method, token, body = null) {
+  console.log(`\nAttempting ${method} request to: ${url}`);
+  const headers = {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  };
+  const options = { method, headers };
+  if (body && method !== 'GET') { // Body should generally not be sent with GET
+    options.body = JSON.stringify(body);
+  }
+
+  try {
+    const response = await fetch(url, options);
+    const responseBodyText = await response.text();
+    let responseData;
+
+    try {
+      responseData = responseBodyText ? JSON.parse(responseBodyText) : {};
+    } catch (e) {
+      console.warn(`Could not parse response as JSON. Status: ${response.status}. Raw text: ${responseBodyText.substring(0, 500)}`);
+      if (!response.ok) {
+        throw new Error(`Eventbrite API Error: ${response.status} - ${response.statusText}. Response was not valid JSON.`);
+      }
+      return { details: "Response was not JSON but request was successful.", raw: responseBodyText.substring(0, 1000) }; // Return raw snippet if OK but not JSON
+    }
+
+    if (!response.ok) {
+      console.error(`API Error (${method} ${url}) - Status: ${response.status}`);
+      console.error("Error details:", JSON.stringify(responseData, null, 2));
+      const errorDetail = responseData?.error_detail;
+      let specificErrorMessage = "";
+      if (typeof errorDetail === 'object' && errorDetail !== null) {
+          for (const key in errorDetail) {
+              if (Array.isArray(errorDetail[key]) && errorDetail[key].length > 0) {
+                   specificErrorMessage += `${key}: ${errorDetail[key].join(', ')}. `;}
+              else if (typeof errorDetail[key] === 'string') {
+                   specificErrorMessage += `${key}: ${errorDetail[key]}. `;}
+          }
+      }
+      const errorMessage = responseData?.error_description || specificErrorMessage || responseData?.error || responseData?.error_message || response.statusText;
+      throw new Error(`Eventbrite API Error: ${response.status} - ${errorMessage.trim()}`);
+    }
+
+    console.log(`API Success (${method} ${url}) - Status: ${response.status}`);
+    // console.log("Full response data:", JSON.stringify(responseData, null, 2)); // Optionally log full response
+    return responseData;
+  } catch (error) {
+    console.error("\n--- An error occurred during the API call ---");
+    console.error("Error message:", error.message);
+    if (error.cause) console.error("Cause:", error.cause); // Log native fetch error cause if present
+    throw error; 
+  }
+}
+
+async function listOrgEvents() {
+  if (!EVENTBRITE_PRIVATE_TOKEN || EVENTBRITE_PRIVATE_TOKEN === 'YOUR_EVENTBRITE_PRIVATE_TOKEN') {
+    console.error("ERROR: EVENTBRITE_PRIVATE_TOKEN is not correctly set in your .env file.");
+    return;
+  }
+  if (!EVENTBRITE_ORGANIZER_ID || EVENTBRITE_ORGANIZER_ID === 'YOUR_EVENTBRITE_ORGANIZER_ID') {
+    console.error("ERROR: EVENTBRITE_ORGANIZER_ID is not correctly set in your .env file.");
+    return;
+  }
+
+  console.log(`Listing events for Organization ID: ${EVENTBRITE_ORGANIZER_ID}`);
+
+  const params = new URLSearchParams({
+    page_size: '10', // Number of events per page
+    status: "draft,live,started,ended,completed,canceled", // Fetch a variety of statuses
+    order_by: "start_desc", // Order by start date, descending (newest first)
+    // time_filter: 'all', // 'all', 'current_future', 'past'
+    // expand: 'venue,ticket_classes,organizer' // Example: To get more details; be mindful of response size
+  });
+
+  const listEventsUrl = `https://www.eventbriteapi.com/v3/organizations/${EVENTBRITE_ORGANIZER_ID}/events/?${params.toString()}`;
+
+  try {
+    const result = await apiCall(listEventsUrl, 'GET', EVENTBRITE_PRIVATE_TOKEN);
+    
+    if (result && result.events) {
+      console.log("\n--- Events Found ---");
+      if (result.events.length === 0) {
+        console.log("No events found for this organization with the specified filters.");
+      } else {
+        result.events.forEach(event => {
+          console.log(`\n  Event Name: ${event.name?.text || 'N/A'}`);
+          console.log(`  Event ID: ${event.id}`);
+          console.log(`  Status: ${event.status || 'N/A'}`);
+          console.log(`  Start Date (Local): ${event.start?.local || 'N/A'}`);
+          console.log(`  End Date (Local): ${event.end?.local || 'N/A'}`);
+          console.log(`  Is Free: ${event.is_free === undefined ? 'N/A' : event.is_free}`);
+          console.log(`  Currency: ${event.currency || 'N/A'}`);
+          console.log(`  URL: ${event.url || 'N/A'}`);
+          // To see tax_settings if available, you'd likely need to fetch the individual event details
+          // using /events/{event_id}/ and potentially an 'expand' parameter.
+          // It's unlikely to be in the summary list here.
+        });
+      }
+
+      console.log("\n--- Pagination ---");
+      if (result.pagination) {
+        console.log(`  Page Number: ${result.pagination.page_number}`);
+        console.log(`  Page Size: ${result.pagination.page_size}`);
+        console.log(`  Total Events (approx.): ${result.pagination.object_count}`);
+        console.log(`  Page Count: ${result.pagination.page_count}`);
+        console.log(`  Has More Items: ${result.pagination.has_more_items}`);
+        if (result.pagination.continuation) {
+          console.log(`  Continuation token for next page: ${result.pagination.continuation}`);
+        }
+      } else {
+        console.log("  Pagination information not available.");
+      }
+    } else {
+      console.log("\nNo events data returned or result format unexpected.");
+      console.log("Full response (or raw snippet if not JSON):", JSON.stringify(result, null, 2));
+    }
+
+  } catch (error) {
+    console.error("\nFailed to list events. The error was logged above by the apiCall function.");
+  }
+}
+
+listOrgEvents();
+</file>
+
+<file path="src/components/Hero.astro">
+<!-- 
+  Updated: Hero.astro
+  Removed background image and decorative wave as requested
+-->
+
+<!-- Hero component intentionally left empty -->
+</file>
+
+<file path="src/content/brand/brand-identity.md">
+# Mindfulina - Brand Identity Guide
+
+1. Logo & Wordmark Style
+Primary Wordmark: 'Mindfulina' in a golden cursive script.
+Accent Style: Logo variations may include sunburst or rainbow motifs.
+Usage Tip: Use white or watercolor pastel backgrounds for harmony; keep gold text and lines for contrast.
+2. Fonts
+Logo / Wordmark: Likely "Shorelines Script" or similar (Alt: Dancing Script, Pacifico) Headings: Trajan Pro / Cinzel (Alt: Cinzel)
+Body Text: Garamond / Georgia (Alt: Libre Baskerville)
+Suggested Sizes:
+- H1 - 48-64 pt
+- H2 - 36-48 pt
+- Body - 16-20 pt
+- Callouts - 22-26 pt (in caps or bold)
+3. Color Palette
+Gold: #D4A437 - Logo text, accents, headings
+Sunset Coral: #F4B4A8 - Background gradients, highlights Seafoam Green: #B8D9C5 - Background gradients, calm accents Sky Blue: #C9E9F6 - Optional accent
+Blush Pink: #FADCE5 - Gentle watercolor gradient
+White: #FFFFFF - Text background, logo base
+4. Visual Aesthetic / Brand Vibe
+Mood: Gentle, uplifting, soulful
+Textures: Watercolor blends, sun beams, soft gradients Iconography: Simple sunbursts, rainbows, nature motifs Voice/Tone: Warm, inclusive, soothing
+</file>
+
+<file path="src/content/events/2025-04-27-sunset-sound-bath.md">
+---
+title: "Morning Ocean Sound Bath"
+date: "2025-04-27T10:00:00-10:00"
+location: "Mākālei Beach Park, Honolulu"
+cover: "/images/wide-shot.jpeg"
+---
+
+Join us for a rejuvenating 30-minute sound bath to reset and relax your mind, body, and spirit.
+
+## What to know
+Mākālei Beach Park features a small beach used by surfers, plus a tree-shaded area with picnic tables. Dogs allowed. Located at 3111 Diamond Head Rd, Honolulu, HI 96815. 
+
+## Before You Arrive
+Consider taking a peaceful walk along the shoreline to connect with nature.
+
+## What to Bring
+- Towel, yoga mat, or blanket
+- Swimsuit and sunscreen
+- Optional: hat, sunglasses, water bottle
+
+Let the ocean breeze and sound healing waves guide you into deep rest. See you there.
+</file>
+
+<file path="src/content/events/2025-05-18.md">
+---
+title: "Morning Ocean Sound Bath"
+date: "2025-05-18T10:00:00-10:00"
+location: "Mākālei Beach Park, Honolulu"
+cover: "/images/wide-shot.jpeg"
+---
+
+Join us for a rejuvenating 30-minute sound bath to reset and relax your mind, body, and spirit.
+
+## What to know
+Mākālei Beach Park features a small beach used by surfers, plus a tree-shaded area with picnic tables. Dogs allowed. Located at 3111 Diamond Head Rd, Honolulu, HI 96815. 
+
+## Before You Arrive
+Consider taking a peaceful walk along the shoreline to connect with nature.
+
+## What to Bring
+- Towel, yoga mat, or blanket
+- Swimsuit and sunscreen
+- Optional: hat, sunglasses, water bottle
+
+Let the ocean breeze and sound healing waves guide you into deep rest. See you there.
+</file>
+
+<file path="src/content/config.ts">
+// mindfulina/src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+
+export const collections = {
+  events: defineCollection({
+    schema: z.object({
+      title: z.string(),
+      date: z.string(),         // ISO8601 e.g. "2025-05-10T18:00:00-10:00"
+      location: z.string(),
+      cover: z.string().optional(),    // image path under /public
+      description: z.string().optional(), // Description in frontmatter, if any
+      googleCalendarEventId: z.string().optional(), // For tracking/linking
+      isAllDay: z.boolean().optional(),         // From GCal
+      eventbriteLink: z.string().optional()   // For the Eventbrite "Buy Tickets" link
+    })
+  })
+  // If you have other collections, like 'brand', and want to stop the auto-generation warning,
+  // you would define them here too. For example:
+  // brand: defineCollection({
+  //   schema: z.object({
+  //     // define brand schema fields here if needed, e.g.,
+  //     // title: z.string(), 
+  //     // etc.
+  //   })
+  // })
+};
+</file>
+
+<file path="src/layouts/EventLayout.astro">
+<!-- 
+  Updated: EventLayout.astro 
+  Updated with new theme components and styling
+-->
+---
+import '../styles/global.css';
+
+interface Props { title?: string }
+const { title = 'Mindfulina Events' } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="font-body">
+    <!-- Header -->
+    <header class="text-center py-8">
+      <div class="flex justify-center items-center flex-col">
+        <img src="/images/logo.png" alt="Mindfulina Logo" class="h-60 w-auto mb-2" />
+      </div>
+    </header>
+
+    <!-- Main slot -->
+    <main class="content-section">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center text-sm py-10 text-gray-500">
+      © {new Date().getFullYear()} Mindfulina
+    </footer>
+  </body>
+</html>
+</file>
+
+<file path="src/pages/brand.astro">
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Mindfulina - Brand Identity">
+  <div class="content-section">
+    <h1>Mindfulina Brand Identity</h1>
+    <p class="text-xl mb-8">A comprehensive guide to our visual language and brand elements.</p>
+    
+    <!-- Color Palette -->
+    <section class="mb-12">
+      <h2>Color Palette</h2>
+      
+      <div class="space-y-4">
+        <h3>Primary Colors</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-6 rounded-lg bg-primary text-white">
+            <strong class="block">Primary (Ocean)</strong>
+            <span class="text-white/90">#0e7f9e</span>
+          </div>
+          <div class="p-6 rounded-lg bg-secondary text-white">
+            <strong class="block">Secondary (Hibiscus)</strong>
+            <span class="text-white/90">#ff5e6c</span>
+          </div>
+          <div class="p-6 rounded-lg bg-accent border border-gray-200">
+            <strong class="block">Accent (Sand)</strong>
+            <span class="text-gray-700">#fde7c3</span>
+          </div>
+        </div>
+        
+        <h3>Ocean Shades</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-6 rounded-lg bg-ocean-light text-white">
+            <strong>Ocean Light</strong>
+            <span class="block text-white/90">#45a5c4</span>
+          </div>
+          <div class="p-6 rounded-lg bg-ocean text-white">
+            <strong>Ocean</strong>
+            <span class="block text-white/90">#0e7f9e</span>
+          </div>
+          <div class="p-6 rounded-lg bg-ocean-dark text-white">
+            <strong>Ocean Dark</strong>
+            <span class="block text-white/90">#0a5b71</span>
+          </div>
+        </div>
+        
+        <h3>Hibiscus Shades</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-6 rounded-lg bg-hibisc-light text-white">
+            <strong>Hibiscus Light</strong>
+            <span class="block text-white/90">#ff8c96</span>
+          </div>
+          <div class="p-6 rounded-lg bg-hibisc text-white">
+            <strong>Hibiscus</strong>
+            <span class="block text-white/90">#ff5e6c</span>
+          </div>
+          <div class="p-6 rounded-lg bg-hibisc-dark text-white">
+            <strong>Hibiscus Dark</strong>
+            <span class="block text-white/90">#e63e4c</span>
+          </div>
+        </div>
+        
+        <h3>Sand Shades</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-6 rounded-lg bg-sand-light border border-gray-200">
+            <strong>Sand Light</strong>
+            <span class="block text-gray-700">#fff2dc</span>
+          </div>
+          <div class="p-6 rounded-lg bg-sand border border-gray-200">
+            <strong>Sand</strong>
+            <span class="block text-gray-700">#fde7c3</span>
+          </div>
+          <div class="p-6 rounded-lg bg-sand-dark border border-gray-200">
+            <strong>Sand Dark</strong>
+            <span class="block text-gray-700">#f8d49b</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Typography -->
+    <section class="mb-12">
+      <h2>Typography</h2>
+      
+      <div class="card p-8 space-y-6">
+        <div>
+          <h3>Display Font: Pacifico</h3>
+          <p class="font-display text-3xl">Mindfulina Sound Healing</p>
+          <p class="text-sm text-gray-500">Used for main headings and logo text</p>
+        </div>
+        
+        <div>
+          <h3>Serif Font: Lora</h3>
+          <p class="font-serif text-2xl">Healing through sound vibration</p>
+          <p class="font-serif">Lora is used for section headings and accent text. It conveys elegance and tranquility.</p>
+          <p class="text-sm text-gray-500">Used for secondary headings and quotes</p>
+        </div>
+        
+        <div>
+          <h3>Body Font: Inter</h3>
+          <p class="font-body">
+            Inter is our primary body text font. It's clean, modern, and highly readable at all sizes. 
+            All paragraph text, navigation items, and most UI elements use this font.
+          </p>
+          <p class="text-sm text-gray-500">Used for body text and UI elements</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- UI Components -->
+    <section class="mb-12">
+      <h2>UI Components</h2>
+      
+      <div class="card p-8 space-y-8">
+        <div>
+          <h3>Buttons</h3>
+          <div class="flex flex-wrap gap-4">
+            <button class="btn-primary">Primary Button</button>
+            <button class="btn-secondary">Secondary Button</button>
+            <button class="btn-outline">Outline Button</button>
+          </div>
+        </div>
+        
+        <div>
+          <h3>Cards</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="card p-4">
+              <h4 class="font-serif text-ocean text-lg mb-2">Basic Card</h4>
+              <p class="text-sm">Cards use a subtle white background with slight transparency and blur effect.</p>
+            </div>
+            <div class="card p-4 border-l-4 border-hibisc">
+              <h4 class="font-serif text-hibisc text-lg mb-2">Accent Card</h4>
+              <p class="text-sm">Cards can include accent borders for emphasis.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3>Links & Text Styles</h3>
+          <p>
+            Regular paragraph text with <a href="#">standard links</a> that use our primary color.
+            Text can be <strong>bold for emphasis</strong> or use <span class="text-secondary">color for highlighting</span>.
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Example Content -->
+    <section class="mb-12">
+      <h2>Example Event Card</h2>
+      
+      <div class="card p-6">
+        <h3 class="font-display text-secondary text-2xl">Morning Ocean Sound Bath</h3>
+        <p><strong>When:</strong> Sunday, April 27, 2025 at 10:00 AM</p>
+        <p><strong>Where:</strong> Mākālei Beach Park, Honolulu</p>
+        
+        <div class="my-4">
+          <img src="/images/wide-shot.jpeg" alt="Event cover image" class="rounded-lg shadow-soft w-full h-48 object-cover">
+        </div>
+        
+        <div class="prose my-4">
+          <p>Join us for a rejuvenating 30-minute sound bath to reset and relax your mind, body, and spirit.</p>
+          
+          <h4 class="font-serif text-ocean-dark text-lg mt-4 mb-2">Before You Arrive</h4>
+          <p>Consider taking a peaceful walk along the shoreline to connect with nature.</p>
+          
+          <h4 class="font-serif text-ocean-dark text-lg mt-4 mb-2">What to Bring</h4>
+          <ul class="list-disc pl-5">
+            <li>Towel, yoga mat, or blanket</li>
+            <li>Swimsuit and sunscreen</li>
+            <li>Optional: hat, sunglasses, water bottle</li>
+          </ul>
+        </div>
+        
+        <div class="mt-6">
+          <a href="#" class="btn-primary">Register Now</a>
+        </div>
+      </div>
+    </section>
+    
+    <a href="/" class="btn-outline mt-8 inline-block">← Back to Home</a>
+  </div>
+</BaseLayout>
+</file>
+
+<file path="src/utils/format.ts">
+/**
+ * Formats a date in Hawaiian time (HST) with semantic HTML time element
+ */
+export const formatHawaiian = (iso: string) => {
+  const date = new Date(iso);
+  const formatted = date.toLocaleString('en-US', {
+    dateStyle: 'full',
+    timeStyle: 'short',
+    timeZone: 'Pacific/Honolulu'
+  }) + ' HST';
+  
+  return `<time datetime="${iso}">${formatted}</time>`;
+};
+
+/**
+ * Generates a Google Calendar event link with pre-filled fields
+ */
+export const getGoogleCalendarLink = (event: {
+  title: string;
+  date: string;
+  location: string;
+  description?: string;
+}) => {
+  // Format parameters for Google Calendar URL
+  const startTime = new Date(event.date);
+  const endTime = new Date(startTime.getTime() + 30 * 60000); // Add 30 minutes for end time
+  
+  const formatGoogleDate = (date: Date) => {
+    return date.toISOString().replace(/-|:|\.\d+/g, '');
+  };
+  
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: event.title,
+    dates: `${formatGoogleDate(startTime)}/${formatGoogleDate(endTime)}`,
+    location: event.location,
+    details: event.description || 'Join us for a sound healing session with Mindfulina'
+  });
+  
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+};
+</file>
+
+<file path="tsconfig.json">
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"]
+}
+</file>
+
+<file path="eventbrite_ops/upload_image_to_eventbrite.js">
+// mindfulina/eventbrite_ops/upload_image_to_eventbrite.js
+// Script to perform the full 3-step image upload process to Eventbrite.
+// 1. Get upload instructions from Eventbrite.
+// 2. POST image file to the provided S3 URL.
+// 3. POST to Eventbrite to finalize the upload and get the image ID.
+
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import fs from 'fs';
+import { FormData } from 'formdata-node';
+import { fileFromPath } from 'formdata-node/file-from-path';
+
+// ES module equivalent of __dirname for this script's location
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Determine project root assuming this script is in mindfulina/eventbrite_ops/
+const projectRoot = path.resolve(__dirname, '../'); // Goes up one level from eventbrite_ops to mindfulina
+
+// Load .env file from the project root
+dotenv.config({ path: path.resolve(projectRoot, '.env') });
+
+
+const EVENTBRITE_PRIVATE_TOKEN = process.env.EVENTBRITE_PRIVATE_TOKEN;
+// Path to the image relative to the project root
+const RELATIVE_IMAGE_PATH = 'public/images/eventbrite-cover.jpeg'
+const IMAGE_FILE_PATH = path.resolve(projectRoot, RELATIVE_IMAGE_PATH);
+
+async function fullImageUpload() {
+  if (!EVENTBRITE_PRIVATE_TOKEN || EVENTBRITE_PRIVATE_TOKEN === 'YOUR_EVENTBRITE_PRIVATE_TOKEN') {
+    console.error("ERROR: EVENTBRITE_PRIVATE_TOKEN is not correctly set in your .env file in the project root (mindfulina/.env).");
+    return;
+  }
+
+  if (!fs.existsSync(IMAGE_FILE_PATH)) {
+    console.error(`ERROR: Image file not found at ${IMAGE_FILE_PATH}`);
+    console.error(`Please ensure '${RELATIVE_IMAGE_PATH}' exists in your project.`);
+    return;
+  }
+  console.log(`Found image file at: ${IMAGE_FILE_PATH}`);
+
+  let uploadToken;
+  let finalImageId;
+
+  try {
+    // --- Step 1: Get Upload Instructions from Eventbrite ---
+    const initialGetUrl = 'https://www.eventbriteapi.com/v3/media/upload/?type=image-event-logo';
+    console.log(`\n--- Step 1: GET ${initialGetUrl} to obtain upload instructions ---`);
+    
+    const step1Response = await fetch(initialGetUrl, {
+      method: 'GET',
+      headers: { 'Authorization': `Bearer ${EVENTBRITE_PRIVATE_TOKEN}` },
+    });
+    const step1Data = await step1Response.json();
+
+    if (!step1Response.ok || !step1Data.upload_url || !step1Data.upload_data || !step1Data.file_parameter_name || !step1Data.upload_token) {
+      console.error("Step 1 Failed: Did not receive valid upload instructions from Eventbrite.");
+      console.error("Response Status:", step1Response.status);
+      console.error("Response Data:", JSON.stringify(step1Data, null, 2));
+      throw new Error("Failed to get upload instructions from Eventbrite.");
+    }
+    console.log("Step 1 Success: Received upload instructions.");
+    uploadToken = step1Data.upload_token; 
+    const s3UploadUrl = step1Data.upload_url;
+    const s3UploadData = step1Data.upload_data;
+    const s3FileParamName = step1Data.file_parameter_name;
+
+    // --- Step 2: Upload Image File to S3 ---
+    console.log(`\n--- Step 2: POSTing image to S3 URL: ${s3UploadUrl} ---`);
+    const imageFile = await fileFromPath(IMAGE_FILE_PATH);
+    const s3FormData = new FormData();
+
+    for (const key in s3UploadData) {
+      s3FormData.set(key, s3UploadData[key]);
+    }
+    s3FormData.set(s3FileParamName, imageFile);
+
+    const step2Response = await fetch(s3UploadUrl, {
+      method: 'POST',
+      body: s3FormData,
+    });
+
+    const step2Status = step2Response.status;
+    const step2ResponseText = await step2Response.text(); // Read text regardless of status for S3
+
+    if (!step2Response.ok) {
+      console.error(`Step 2 Failed: Error uploading file to S3. Status: ${step2Status}`);
+      console.error("S3 Response Text (first 500 chars):", step2ResponseText.substring(0,500));
+      throw new Error(`Failed to upload file to S3: ${step2Status} ${step2Response.statusText}`);
+    }
+    
+    console.log(`Step 2 Success: Image uploaded to S3. Status: ${step2Status}`);
+    if (step2ResponseText) { // S3 might return empty body on 200/204 for POST
+         console.log("S3 Success Response (first 500 chars):", step2ResponseText.substring(0,500));
+    }
+
+
+    // --- Step 3: Finalize Upload with Eventbrite ---
+    console.log(`\n--- Step 3: POST to Eventbrite /media/upload/ to finalize with upload_token ---`);
+    const finalizeUrl = 'https://www.eventbriteapi.com/v3/media/upload/';
+    const finalizePayload = { upload_token: uploadToken };
+    
+    const step3Response = await fetch(finalizeUrl, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${EVENTBRITE_PRIVATE_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(finalizePayload),
+    });
+    const step3Data = await step3Response.json();
+
+    if (!step3Response.ok || !step3Data.id) {
+      console.error("Step 3 Failed: Error finalizing upload with Eventbrite.");
+      console.error("Response Status:", step3Response.status);
+      console.error("Response Data:", JSON.stringify(step3Data, null, 2));
+      throw new Error("Failed to finalize upload with Eventbrite.");
+    }
+
+    finalImageId = step3Data.id;
+    console.log("Step 3 Success: Upload finalized with Eventbrite.");
+    console.log("\n===================================================");
+    console.log("🎉 IMAGE UPLOADED SUCCESSFULLY! 🎉");
+    console.log(`Eventbrite Image ID (logo_id): ${finalImageId}`);
+    console.log(`Image URL (from finalization response): ${step3Data.url || step3Data.cdn_url || 'N/A'}`);
+    console.log("Crop Mask (if provided):", JSON.stringify(step3Data.crop_mask, null, 2));
+    console.log("You can use this Image ID to set event logos or in structured content.");
+    console.log("===================================================");
+
+  } catch (error) {
+    console.error("\n--- An error occurred during the full image upload process ---");
+    console.error("Error message:", error.message);
+    if (uploadToken && !finalImageId) {
+        console.error(`An upload_token (${uploadToken}) was obtained, but the process may have failed before finalization or during it. Check Eventbrite media library if unsure.`);
+    }
+  }
+}
+
+fullImageUpload();
+</file>
+
+<file path=".gitignore">
+# build output
+dist/
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+
+# repomix-output.xml
+</file>
+
+<file path="prd.md">
+# Automated Event Creation Pipeline
+
+## 1. Goal
+Automate the creation of event pages on the Mindfulina website and corresponding listings on Eventbrite, triggered by a single event creation in a designated Google Calendar. This will streamline the event management process, reduce manual effort, and ensure consistency.
+
+## 2. Scope (MVP - Minimum Viable Product)
+- **Trigger:** Creating a new event in a *designated Google Calendar* for Mindfulina.
+- **Website Update:** Automatically create a new Markdown file in `src/content/events/` in the GitHub repository, using details from the Google Calendar event. This will trigger an automatic rebuild and deployment of the Astro site.
+- **Eventbrite Creation:** Automatically create a new, free event on Eventbrite using details from the Google Calendar event.
+- **Data Flow:** Google Calendar -> Google Apps Script -> Cloudflare Worker -> GitHub API & Eventbrite API.
+
+## 3. Key Steps & Components
+
+### 3.1. Google Calendar & Google Apps Script (GAS)
+1.  **Designated Calendar:** Create and use a specific Google Calendar solely for Mindfulina events that are intended for automation. All events created/updated in this calendar will be processed by the script.
+2.  **GAS Trigger Setup:**
+    *   Create a Google Apps Script project.
+    *   Configure an `onEventAdded` and/or `onEventUpdated` trigger for the script, specifically targeting the *ID of the designated Mindfulina calendar*.
+3.  **GAS Logic:**
+    *   When an event is added or updated in the designated calendar, the trigger will fire.
+    *   The script will extract essential details from the event:
+        *   Title
+        *   Start Time & End Time (or calculate end time assuming a default duration, e.g., 30 minutes, if not explicitly set differently or if the GCal event is an all-day event)
+        *   Location
+        *   Description
+        *   Google Calendar Event ID (for future reference/idempotency)
+    *   Format these details into a JSON payload.
+    *   Make an HTTP POST request (acting as a webhook) to a dedicated Cloudflare Worker endpoint, sending the JSON payload.
+
+### 3.2. Cloudflare Worker
+1.  **Endpoint Creation:** Develop an HTTP POST endpoint to securely receive data from the Google Apps Script.
+2.  **Secrets Management:**
+    *   Store GitHub Personal Access Token (PAT) with `repo` scope as a Cloudflare Worker secret.
+    *   Store Eventbrite API Key (OAuth token or private token) as a Cloudflare Worker secret.
+3.  **Data Processing & Validation:**
+    *   Validate the incoming JSON payload from GAS.
+    *   Sanitize and format event title (e.g., create a URL-friendly slug for the website filename).
+    *   Format dates/times:
+        *   For website frontmatter: ISO8601 (as per `src/content/config.ts`).
+        *   For Eventbrite API: As per Eventbrite's requirements (typically UTC).
+4.  **GitHub Integration (Create Website Event Page):**
+    *   **File Naming:** Generate a filename like `YYYY-MM-DD-slugified-title.md`.
+    *   **Content Generation:** Construct Markdown content with frontmatter based on `src/content/config.ts`:
+        *   `title`: Event title.
+        *   `date`: ISO8601 formatted date/time.
+        *   `location`: Event location.
+        *   `cover`: Use a default image path (e.g., `/images/default-event-cover.jpg`) or make it optional.
+        *   `description`: (Optional) A short summary if needed, or leave for the main content.
+        *   The main body of the Markdown will be the description from Google Calendar.
+    *   **API Call:** Use the GitHub API (e.g., via `@octokit/core.js`) to commit and push the new Markdown file to the `src/content/events/` directory.
+5.  **Eventbrite Integration (Create Eventbrite Listing):**
+    *   **API Call:** Use the Eventbrite API (e.g., via `fetch`) to create a new event.
+    *   **Map Data:**
+        *   Event Name: Event title.
+        *   Start Date/Time & End Date/Time (ensure correct timezone handling for Eventbrite, usually UTC).
+        *   Venue/Location details.
+        *   Description (from Google Calendar).
+        *   Ticket Class: Create a free ticket type.
+        *   Organizer ID: Use your Mindfulina organizer ID.
+        *   Status: Publish the event.
+6.  **Error Handling & Logging:**
+    *   Implement comprehensive error handling for all API calls (GitHub, Eventbrite).
+    *   Log key actions, successes, and any errors to Cloudflare Worker logs for debugging.
+
+## 4. Data to be Handled (Summary)
+- **Input (from Google Calendar):** Event Title, Start DateTime, End DateTime, Location, Description.
+- **Output (for Website - Markdown):** Processed Title, ISO8601 Date, Location, Cover Image Path, Description.
+- **Output (for Eventbrite):** Event Name, Start/End DateTimes (UTC), Venue, Description, Ticket Info (Free), Organizer Info.
+
+## 5. Success Criteria (MVP)
+- Creating a new event in the designated Google Calendar successfully and automatically:
+    - Commits a new event Markdown file to the GitHub repository.
+    - Triggers the Astro website to rebuild and deploy with the new event page visible.
+    - Creates and publishes a corresponding free event on Eventbrite.
+- API keys are securely stored and accessed.
+- Basic operational logging is in place within the Cloudflare Worker.
+
+## 6. Future Considerations (Post-MVP)
+- Automating updates/cancellations of events synced from Google Calendar.
+- Allowing specification of a custom cover image through the Google Calendar event (e.g., a link in the description or an attachment).
+- Implementing notifications for successful synchronizations or critical failures.
+- Potentially adding the generated Eventbrite link back to the Google Calendar event description or the website event page automatically.
+</file>
+
+<file path="tailwind.config.mjs">
+// Mindfulina brand theme configuration
+export default {
+  content: ['./src/**/*.{astro,html,js,jsx,ts,tsx,md}'],
+  theme: {
+    extend: {
+      colors: {
+        // Primary palette
+        primary: '#0e7f9e',     // ocean blue-green
+        secondary: '#ff5e6c',   // hibiscus pink
+        accent: '#fde7c3',      // sand
+        
+        // Extended palette
+        ocean: {
+          DEFAULT: '#0e7f9e',
+          light: '#45a5c4',
+          dark: '#0a5b71'
+        },
+        sand: {
+          DEFAULT: '#fde7c3',
+          light: '#fff2dc',
+          dark: '#f8d49b'
+        },
+        hibisc: {
+          DEFAULT: '#ff5e6c',
+          light: '#ff8c96',
+          dark: '#e63e4c'
+        },
+        leaf: {
+          DEFAULT: '#5cb85c',
+          light: '#7ed17e',
+          dark: '#3d8b3d'
+        }
+      },
+      fontFamily: {
+        display: ['"Pacifico"', 'cursive'],   // hand-lettered header font
+        body: ['"Inter"', 'sans-serif'],      // clean, readable body text
+        serif: ['"Lora"', 'serif']            // elegant serif for certain headings
+      },
+      borderRadius: {
+        'xl': '1rem',
+        '2xl': '1.5rem',
+        '3xl': '2rem',
+      },
+      boxShadow: {
+        'soft': '0 4px 20px rgba(0, 0, 0, 0.05)',
+        'inner-soft': 'inset 0 2px 10px rgba(0, 0, 0, 0.05)'
+      }
+    },
+  },
+  plugins: [],
+};
+</file>
+
+<file path="google-apps-script/calendarTrigger.gs">
+// Google Apps Script: Calendar Trigger for Mindfulina Event Automation
+// Uses Advanced Calendar Service for precise identification of newly created events.
+// below is alina.dvortsen@gmail.com's calendar Mindfulina Event (Automated) calendar
+const DESIGNATED_CALENDAR_ID = '59304c420efed529578b52fcf9f05481fc59372a74721d10a1587f08fcd15174@group.calendar.google.com';
+
+// Placeholder: Replace with your actual Cloudflare Worker URL once deployed
+const CLOUDFLARE_WORKER_URL = 'YOUR_CLOUDFLARE_WORKER_URL_GOES_HERE';
+
+const SCRIPT_PROPERTIES = PropertiesService.getScriptProperties();
+const PROCESSED_EVENT_CREATION_PREFIX = 'PROCESSED_EVENT_CREATION_'; // Appended with eventId
+
+// Time window (in milliseconds) to consider an event "newly created" by comparing its 'created' timestamp to 'now'.
+const NEW_EVENT_THRESHOLD_MS = 2 * 60 * 1000; // 2 minutes
+// Time window (in milliseconds) for how far back to query events using 'timeMin' for Calendar.Events.list.
+const EVENT_QUERY_LOOKBACK_MS = 5 * 60 * 1000; // 5 minutes
+// Max difference (in milliseconds) between 'created' and 'updated' for an event to be considered brand new.
+const CREATED_UPDATED_MAX_DIFF_MS = 15 * 1000; // 15 seconds
+
+
+/**
+ * Main function triggered by Google Calendar event updates.
+ * This function processes events from the DESIGNATED_CALENDAR_ID.
+ * IMPORTANT: Enable the "Calendar API" (Advanced Google Service) in the Apps Script editor
+ * under "Services +" for this script to work.
+ * @param {Object} e The event object from the Google Calendar trigger.
+ */
+function onCalendarEventUpdate(e) {
+  if (!e || typeof e.calendarId === 'undefined') {
+    Logger.log('Trigger fired with incomplete event object or missing calendarId. Raw object: ' + JSON.stringify(e));
+    return;
+  }
+
+  if (e.calendarId !== DESIGNATED_CALENDAR_ID) {
+    Logger.log('Trigger fired for an irrelevant calendar (' + e.calendarId + '). Skipping.');
+    return;
+  }
+
+  Logger.log('Designated calendar update detected. Calendar ID: ' + e.calendarId + ', TriggerUID: ' + (e.triggerUid || 'N/A'));
+  
+  // Brief pause for Google's infrastructure to settle.
+  Utilities.sleep(5000); // 5 seconds
+
+  try {
+    const now = new Date();
+    // timeMin for Calendar.Events.list often refers to event start times for filtering.
+    // For "orderBy: 'updated'", it helps narrow the search.
+    const timeMinQuery = new Date(now.getTime() - EVENT_QUERY_LOOKBACK_MS).toISOString();
+
+    // Use Advanced Calendar Service
+    const response = Calendar.Events.list(DESIGNATED_CALENDAR_ID, {
+      orderBy: 'updated',       // Get most recently updated events first
+      timeMin: timeMinQuery,    
+      maxResults: 5,           
+      singleEvents: true,       
+      showDeleted: false,
+      // Request specific fields to make the response smaller and faster
+      fields: 'items(id,summary,created,updated,start,end,location,description),nextPageToken' 
+    });
+
+    if (!response || !response.items || response.items.length === 0) {
+      Logger.log('No events found in the query window using Advanced Calendar Service. timeMin: ' + timeMinQuery);
+      return;
+    }
+
+    Logger.log(response.items.length + ' event(s) found by Advanced Service (ordered by updated desc).');
+
+    let newlyCreatedEvent = null;
+
+    for (let i = 0; i < response.items.length; i++) {
+      const eventItem = response.items[i];
+      if (!eventItem.created || !eventItem.updated || !eventItem.id || !eventItem.summary) {
+        Logger.log('  Event item missing critical fields (created, updated, id, or summary). Skipping. Item: ' + JSON.stringify(eventItem).substring(0, 200));
+        continue;
+      }
+      const createdDate = new Date(eventItem.created);
+      const updatedDate = new Date(eventItem.updated);
+
+      Logger.log('  Checking event: "' + eventItem.summary + '" (ID: ' + eventItem.id + '), Created: ' + createdDate.toISOString() + ', Updated: ' + updatedDate.toISOString());
+
+      // 1. Check if 'created' is very recent
+      if ((now.getTime() - createdDate.getTime()) < NEW_EVENT_THRESHOLD_MS) {
+        // 2. For a brand new event, 'created' and 'updated' timestamps should be very close.
+        if (Math.abs(updatedDate.getTime() - createdDate.getTime()) < CREATED_UPDATED_MAX_DIFF_MS) { 
+          const processedKey = PROCESSED_EVENT_CREATION_PREFIX + eventItem.id;
+          if (SCRIPT_PROPERTIES.getProperty(processedKey)) {
+            Logger.log('    Event ID ' + eventItem.id + ' was already processed for creation. Skipping.');
+            continue; 
+          }
+          newlyCreatedEvent = eventItem;
+          Logger.log('    -> Identified as NEWLY CREATED event: "' + newlyCreatedEvent.summary + '"');
+          break; 
+        } else {
+          Logger.log('    Event created recently, but updated ('+updatedDate.toISOString()+') / created ('+createdDate.toISOString()+') timestamps differ significantly. Not treated as the initial creation trigger.');
+        }
+      } else {
+         Logger.log('    Event not created within the NEW_EVENT_THRESHOLD_MS ('+ (NEW_EVENT_THRESHOLD_MS / 1000) +'s ago).');
+      }
+    }
+
+    if (newlyCreatedEvent) {
+      processEventWithAdvancedApiObject(newlyCreatedEvent);
+      const processedKey = PROCESSED_EVENT_CREATION_PREFIX + newlyCreatedEvent.id;
+      SCRIPT_PROPERTIES.setProperty(processedKey, new Date().toISOString());
+      Logger.log('Marked event ID ' + newlyCreatedEvent.id + ' as processed for creation at ' + SCRIPT_PROPERTIES.getProperty(processedKey));
+    } else {
+      Logger.log('No definitively *newly created* event identified within the threshold from the ' + response.items.length + ' fetched events that hasn\'t already been processed.');
+    }
+
+  } catch (err) {
+    let errorMessage = err.toString();
+    if (err.stack) {
+        errorMessage += ' Stack: ' + err.stack;
+    }
+    Logger.log('ERROR in onCalendarEventUpdate (Advanced Service): ' + errorMessage);
+    if (err.message && (err.message.toLowerCase().includes("calendar is not defined") || err.message.toLowerCase().includes("calendar.events is undefined"))) {
+        Logger.log("IMPORTANT: The 'Calendar' Advanced Service might not be enabled, or permissions are missing. Please enable it in the Apps Script editor under 'Services +' and ensure API usage is allowed for this project if it's a GCP-linked project.");
+    }
+  }
+}
+
+/**
+ * Processes the details of a Mindfulina event (from Advanced Calendar API object)
+ * and sends them to the Cloudflare Worker.
+ * @param {Object} eventItem The event item object from Calendar.Events.list().
+ */
+function processEventWithAdvancedApiObject(eventItem) {
+  const eventTitle = eventItem.summary || 'Untitled Event'; 
+  
+  // Handle all-day vs timed events for start and end times
+  let startTime, endTime;
+  if (eventItem.start) {
+    startTime = eventItem.start.dateTime || eventItem.start.date; // dateTime if timed, date if all-day
+  } else {
+    Logger.log("Warning: eventItem.start is undefined for event ID " + eventItem.id + ". Defaulting start time.");
+    startTime = new Date().toISOString(); // Fallback, should not happen for valid events
+  }
+
+  if (eventItem.end) {
+    endTime = eventItem.end.dateTime || eventItem.end.date; // dateTime if timed, date if all-day
+  } else {
+    Logger.log("Warning: eventItem.end is undefined for event ID " + eventItem.id + ". Defaulting end time to start time.");
+    endTime = startTime; // Fallback
+  }
+  
+  const location = eventItem.location || '';
+  const description = eventItem.description || '';
+  const gcalEventId = eventItem.id;
+
+  Logger.log('Processing Event Details (Advanced API):');
+  Logger.log('  Title: ' + eventTitle);
+  Logger.log('  Start Time (from API): ' + startTime);
+  Logger.log('  End Time (from API): ' + endTime);
+  Logger.log('  Location: ' + location);
+  Logger.log('  Description (first 100 chars): ' + (description ? description.substring(0,100) : "N/A"));
+  Logger.log('  Google Calendar Event ID: ' + gcalEventId);
+
+  const payload = {
+    title: eventTitle,
+    startTime: startTime, 
+    endTime: endTime,     
+    location: location,
+    description: description,
+    googleCalendarEventId: gcalEventId,
+    isAllDay: !!eventItem.start.date, // True if start.date exists (all-day event)
+    processedAt: new Date().toISOString()
+  };
+
+  const options = {
+    method: 'post',
+    contentType: 'application/json',
+    payload: JSON.stringify(payload),
+    muteHttpExceptions: true
+  };
+
+  Logger.log('Attempting to send payload to Cloudflare Worker: ' + CLOUDFLARE_WORKER_URL);
+  // Logger.log('Full payload being sent: ' + JSON.stringify(payload, null, 2)); // Uncomment for debugging
+
+  try {
+    const response = UrlFetchApp.fetch(CLOUDFLARE_WORKER_URL, options);
+    const responseCode = response.getResponseCode();
+    const responseBody = response.getContentText();
+
+    Logger.log('Webhook Response Code: ' + responseCode);
+    // Log only a snippet of body to avoid flooding logs if it's large
+    Logger.log('Webhook Response Body (first 500 chars): ' + (responseBody ? responseBody.substring(0,500) : "N/A"));
+
+    if (responseCode >= 200 && responseCode < 300) {
+      Logger.log('Event successfully sent to Cloudflare Worker.');
+    } else {
+      Logger.log('ERROR sending event to Cloudflare Worker. Status: ' + responseCode + ', Full Body: ' + (responseBody || "N/A"));
+    }
+  } catch (error) {
+    Logger.log('CRITICAL FAILURE: Exception during UrlFetchApp.fetch: ' + error.toString() + ' Stack: ' + (error.stack || 'N/A'));
+  }
+}
+
+
+/**
+ * Helper to manually test processing for a specific event ID using Advanced API.
+ * You must enable "Calendar API" advanced service in Apps Script.
+ */
+function runManualTestForSpecificEvent() {
+  const TEST_EVENT_ID_TO_PROCESS = 'PASTE_YOUR_GCAL_EVENT_ID_HERE_FOR_TESTING'; // Replace with actual event ID
+  
+  if (CLOUDFLARE_WORKER_URL === 'YOUR_CLOUDFLARE_WORKER_URL_GOES_HERE') {
+    Logger.log("Warning: CLOUDFLARE_WORKER_URL is a placeholder. Webhook call will fail if not updated.");
+  }
+  if (!TEST_EVENT_ID_TO_PROCESS || TEST_EVENT_ID_TO_PROCESS === 'PASTE_YOUR_GCAL_EVENT_ID_HERE_FOR_TESTING') {
+    Logger.log("Please update TEST_EVENT_ID_TO_PROCESS with a valid Google Calendar Event ID from the DESIGNATED_CALENDAR_ID.");
+    return;
+  }
+  Logger.log('Manually testing processing for event ID: ' + TEST_EVENT_ID_TO_PROCESS);
+  
+  try {
+    const eventItem = Calendar.Events.get(DESIGNATED_CALENDAR_ID, TEST_EVENT_ID_TO_PROCESS, {
+        fields: 'id,summary,created,updated,start,end,location,description' // Request specific fields
+    });
+    if (eventItem) {
+      Logger.log('Successfully fetched event via Advanced API. Title: ' + eventItem.summary);
+      processEventWithAdvancedApiObject(eventItem);
+    } else {
+      Logger.log('Manual test: Event not found with ID (Advanced API): ' + TEST_EVENT_ID_TO_PROCESS);
+    }
+  } catch (error) {
+     let errorMessage = error.toString();
+    if (error.stack) {
+        errorMessage += ' Stack: ' + error.stack;
+    }
+    Logger.log('Manual test: Error (Advanced API): ' + errorMessage);
+     if (error.message && (error.message.toLowerCase().includes("calendar is not defined") || error.message.toLowerCase().includes("calendar.events is undefined"))) {
+        Logger.log("IMPORTANT: The 'Calendar' Advanced Service might not be enabled. Please enable it in the Apps Script editor under 'Services +'.");
+    }
+  }
+}
+
+/**
+ * Utility to list recent events from the designated calendar using Advanced API.
+ * Helps find event IDs for testing.
+ * You must enable "Calendar API" advanced service in Apps Script.
+ */
+function listRecentEventsForTesting() {
+  Logger.log('Listing recent events using Advanced Calendar Service...');
+  try {
+    const now = new Date();
+    const timeMinQuery = new Date(now.getTime() - (7 * 24 * 60 * 60 * 1000)).toISOString(); // Look back 7 days
+
+    const response = Calendar.Events.list(DESIGNATED_CALENDAR_ID, {
+      orderBy: 'updated', // Most recently updated first
+      timeMin: timeMinQuery,
+      maxResults: 10,
+      singleEvents: true,
+      showDeleted: false,
+      fields: 'items(id,summary,created,updated,start)' // Request only necessary fields
+    });
+
+    if (!response || !response.items || response.items.length === 0) {
+      Logger.log('No events found in the last 7 days (ordered by updated).');
+      return;
+    }
+    
+    Logger.log('Recent events (last 7 days, ordered by updated desc, max 10) in calendar ID ' + DESIGNATED_CALENDAR_ID + ':');
+    response.items.forEach(function(eventItem) {
+      const created = eventItem.created ? new Date(eventItem.created).toLocaleString() : "N/A";
+      const updated = eventItem.updated ? new Date(eventItem.updated).toLocaleString() : "N/A";
+      let startDisplay = "N/A";
+      if(eventItem.start) {
+          startDisplay = eventItem.start.dateTime ? new Date(eventItem.start.dateTime).toLocaleString() : eventItem.start.date;
+      }
+      Logger.log('  Title: "' + eventItem.summary + '", Start: ' + startDisplay + ', Created: ' + created + ', Updated: ' + updated + ', Event ID: "' + eventItem.id + '"');
+    });
+
+  } catch (error) {
+     let errorMessage = error.toString();
+    if (error.stack) {
+        errorMessage += ' Stack: ' + error.stack;
+    }
+    Logger.log('Error in listRecentEventsForTesting (Advanced API): ' + errorMessage);
+     if (error.message && (error.message.toLowerCase().includes("calendar is not defined") || error.message.toLowerCase().includes("calendar.events is undefined"))) {
+        Logger.log("IMPORTANT: The 'Calendar' Advanced Service might not be enabled. Please enable it in the Apps Script editor under 'Services +'.");
+    }
+  }
+}
+</file>
+
+<file path="README.md">
+# Mindfulina
+
+Code is deployed with CI CD on Cloudflare
+
+## Automated Event Creation Process
+
+This project features an automated pipeline to create new event pages on the website directly from Google Calendar entries:
+
+1.  **Event Creation in Google Calendar:** New events are created in a designated private Google Calendar for Mindfulina.
+2.  **Google Apps Script Trigger:** A Google Apps Script, attached to this designated calendar, uses the Advanced Calendar Service to detect newly created events.
+3.  **Webhook to Cloudflare Worker:** Upon detecting a new event, the Apps Script extracts its details (title, date, time, location, description) and sends them via an HTTP POST request to a dedicated Cloudflare Worker.
+4.  **Cloudflare Worker Processing:** The Cloudflare Worker:
+    *   Receives the event data.
+    *   Formats the data into a Markdown file structure suitable for the Astro content collection (`src/content/events/`).
+    *   Uses the GitHub API to commit and push this new Markdown file to the `mindfulina` repository.
+5.  **CI/CD Deployment:** The new commit to the GitHub repository automatically triggers a rebuild and deployment of the Astro website via Cloudflare Pages' CI/CD integration.
+6.  **Event Live on Website:** Once the deployment is complete, the new event page becomes live on the Mindfulina website.
+
+This automation streamlines content management for new events, ensuring consistency and reducing manual effort.
+</file>
+
+<file path="src/styles/global.css">
+/* 
+ * Mindfulina Global Styles
+ * Updated theme with consistent brand colors and typography
+ */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply min-h-screen bg-gradient-to-br from-sand-light via-white to-ocean-light/10 text-gray-800 font-body;
+  }
+
+  /* Typography */
+  h1 {
+    @apply font-display text-secondary text-4xl mb-4;
+  }
+  
+  h2, h3 {
+    @apply font-serif text-ocean-dark;
+  }
+  
+  h2 {
+    @apply text-2xl mb-3 mt-6;
+  }
+  
+  h3 {
+    @apply text-xl mb-2 mt-4;
+  }
+  
+  p {
+    @apply mb-4;
+  }
+  
+  a {
+    @apply text-primary underline decoration-2 hover:text-secondary transition-colors duration-200;
+  }
+  
+  ul, ol {
+    @apply mb-4 pl-5;
+  }
+  
+  li {
+    @apply mb-1;
+  }
+  
+  strong {
+    @apply font-semibold text-gray-900;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-soft;
+  }
+  
+  .btn {
+    @apply inline-block px-6 py-3 rounded-xl font-medium transition-all duration-200 no-underline;
+  }
+  
+  .btn-primary {
+    @apply btn bg-primary text-white hover:bg-ocean-dark;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-secondary text-white hover:bg-hibisc-dark;
+  }
+  
+  .btn-outline {
+    @apply btn border-2 border-ocean text-ocean hover:bg-ocean hover:text-white;
+  }
+  
+  .content-section {
+    @apply max-w-3xl mx-auto px-4 py-6;
+  }
+}
+</file>
+
+<file path="astro.config.mjs">
+// @ts-check
+import { defineConfig } from 'astro/config';
+import tailwind from '@astrojs/tailwind';
+
+// https://astro.build/config
+export default defineConfig({
+  integrations: [tailwind()],
+  output: "static"  // explicit, optional
+});
+</file>
+
+<file path="package.json">
+{
+  "name": "mindfulina",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.7.4",
+    "dotenv": "^16.5.0",
+    "formdata-node": "^6.0.3",
+    "tailwindcss": "^3.3.5"
+  },
+  "devDependencies": {
+    "@astrojs/tailwind": "^5.0.0"
+  }
+}
+</file>
+
+<file path="src/content/events/2025-06-22-morning-ocean-sound-bath.md">
+---
+title: "Morning Ocean Sound Bath"
+date: "2025-06-22T09:45:00-10:00"
+location: "Mākālei Beach Park, Honolulu"
+cover: "/images/wide-shot.jpeg"
+googleCalendarEventId: "25hmh8ksg0uqtmv4e4nk84it26"
+isAllDay: false
+eventbriteLink: "https://www.eventbrite.com/e/morning-ocean-sound-bath-tickets-1371898538459"
+---
+
+Join us for a sound bath to reset and relax your mind, body, and spirit — reconnecting with your mana and the healing rhythms of the moana.
+
+## Before You Arrive
+Consider moving your body beforehand; take a gentle walk, stretch, or run before the session to release stagnant energy.
+
+## Bring
+- Towel, mat, or blanket for the ‘āina
+- Eye mask if you wish to shut out visual stimulation and the sun
+- Swimsuit, sunscreen, and water bottle if you feel called to connect with the moana after our gathering
+
+Let the makani (breeze) and sounds of the moana guide your naʻau (inner heart) into deep rest.
+
+E komo mai — all are welcome!
+</file>
+
+<file path=".github/workflows/deploy-cf-worker.yml">
+name: Deploy Cloudflare Worker
+
+on:
+  push:
+    branches:
+      - main # Or your default branch
+    paths:
+      - 'cloudflare-worker/**' 
+      - '.github/workflows/deploy-cf-worker.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy Worker to Cloudflare
+    defaults:
+      run:
+        working-directory: ./cloudflare-worker
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' 
+
+      - name: Install Wrangler
+        run: npm install wrangler # Installs wrangler locally
+
+      - name: Upload GitHub Token Secret for Worker Runtime
+        # No step-level 'if' condition here
+        run: |
+          if [ -n "${{ secrets.WORKER_GITHUB_TOKEN }}" ]; then
+            echo "Uploading GITHUB_TOKEN secret..."
+            echo "${{ secrets.WORKER_GITHUB_TOKEN }}" | npx wrangler secret put GITHUB_TOKEN
+          else
+            echo "WORKER_GITHUB_TOKEN secret is not set in GitHub. Skipping upload."
+          fi
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+
+      - name: Upload Eventbrite Private Token Secret for Worker Runtime
+        # No step-level 'if' condition here
+        run: |
+          if [ -n "${{ secrets.EVENTBRITE_PRIVATE_TOKEN }}" ]; then
+            echo "Uploading EVENTBRITE_PRIVATE_TOKEN secret..."
+            echo "${{ secrets.EVENTBRITE_PRIVATE_TOKEN }}" | npx wrangler secret put EVENTBRITE_PRIVATE_TOKEN
+          else
+            echo "EVENTBRITE_PRIVATE_TOKEN secret is not set in GitHub. Skipping upload."
+          fi
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+
+      
+
+      - name: Deploy Cloudflare Worker
+        run: npx wrangler deploy
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+</file>
+
+<file path="src/layouts/BaseLayout.astro">
+<!-- 
+  Updated: BaseLayout has been simplified by moving the hero and wave to a separate component
+  Updated: Reduced padding for better mobile experience
+  Updated: Reduced spacing between logo and content
+-->
+---
+import '../styles/global.css';
+
+interface Props { title?: string }
+const { title = 'Mindfulina' } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="font-sans">
+    <!-- Header -->
+    <header class="text-center py-4">
+      <div class="flex justify-center items-center flex-col">
+        <img src="/images/logo.png" alt="Mindfulina Logo" class="h-60 w-auto" />
+      </div>
+    </header>
+
+    <!-- Main slot -->
+    <main class="max-w-3xl mx-auto pt-2 p-4">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center text-sm py-10 text-gray-500">
+      © {new Date().getFullYear()} Mindfulina
+    </footer>
+  </body>
+</html>
+</file>
+
+<file path="src/pages/events/[...slug].astro">
+---
+import { getCollection } from 'astro:content';
+import Event from '../../layouts/EventLayout.astro';
+import { formatHawaiian, getGoogleCalendarLink } from '../../utils/format';
+
+export async function getStaticPaths() {
+  const events = await getCollection('events');
+  return events.map(event => ({
+    params: { slug: event.slug }, props: { event },
+  }));
+}
+
+const { event } = Astro.props;
+const { Content } = await event.render();
+const pageTitle = `Mindfulina – ${event.data.title}`;
+const calendarLink = getGoogleCalendarLink({
+  title: event.data.title,
+  date: event.data.date,
+  location: event.data.location,
+  description: event.data.description
+});
+---
+
+<Event title={pageTitle}>
+  <article class="bg-white/60 backdrop-blur-md p-8 rounded-2xl shadow-lg">
+    <h1 class="text-3xl font-bold mb-4">{event.data.title}</h1>
+    <p><strong>When:</strong> <Fragment set:html={formatHawaiian(event.data.date)} /></p>
+    <p><strong>Where:</strong> {event.data.location}</p>
+
+    <!-- Eventbrite "Buy Tickets" Link -->
+    {event.data.eventbriteLink && (
+      <div class="my-4"> {/* Added margin for spacing */}
+        <a 
+          href={event.data.eventbriteLink} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="btn-primary" /* Using existing primary button style */
+        >
+          Buy Tickets on Eventbrite
+        </a>
+      </div>
+    )}
+
+    <p class="mt-2">
+      <a href={calendarLink} target="_blank" rel="noopener noreferrer" class="text-sm inline-flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        Add to Google Calendar
+      </a>
+    </p>
+    
+    <!-- Display cover image if available -->
+    {event.data.cover && <img src={event.data.cover} alt={event.data.title + " cover image"} class="my-4 rounded-lg" />}
+    <div class="prose mt-6">
+      <Content />
+    </div>
+    <div class="text-center">
+      <a href="/events" class="mt-8 inline-block">← Back to All Events</a>
+    </div>
+  </article>
+</Event>
+</file>
+
+<file path="src/pages/events/index.astro">
+---
+import { getCollection } from 'astro:content';
+import Event from '../../layouts/EventLayout.astro';
+import { formatHawaiian } from '../../utils/format';
+
+const events = await getCollection('events');
+const upcoming = events
+  .filter(e => new Date(e.data.date) >= new Date())
+  .sort((a, b) => +new Date(a.data.date) - +new Date(b.data.date));
+
+const pageTitle = 'Mindfulina – Upcoming Events';
+---
+
+<Event title={pageTitle}>
+  <h1 class="text-3xl font-bold mb-8 text-center">Upcoming Events</h1>
+  {upcoming.length > 0 ? (
+    <ul class="space-y-8">
+      {upcoming.map(event => (
+        <li class="bg-white/60 backdrop-blur-md p-6 rounded-2xl shadow-lg overflow-hidden">
+          <div class="flex flex-col md:flex-row gap-6">
+            {event.data.cover && (
+              <div class="md:w-1/3">
+                <img src={event.data.cover} alt={event.data.title} class="w-full h-48 object-cover rounded-lg" />
+              </div>
+            )}
+            <div class="md:w-2/3">
+              <a href={`/events/${event.slug}`} class="text-xl font-semibold no-underline hover:underline block mb-2">{event.data.title}</a>
+              <p class="text-sm text-gray-700"><Fragment set:html={formatHawaiian(event.data.date)} /></p>
+              <p class="text-sm text-gray-700 mb-3">{event.data.location}</p>
+              <a href={`/events/${event.slug}`} class="text-ocean hover:text-hibisc">Learn more &rarr;</a>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <div class="bg-white/60 backdrop-blur-md p-8 rounded-2xl shadow-lg text-center">
+      <p>No upcoming events scheduled. Please check back later!</p>
+      <div class="mt-6">
+        <img src="/images/tall-shot.jpeg" alt="Mindfulina sound bath" class="max-w-md mx-auto rounded-lg shadow-md" />
+      </div>
+    </div>
+  )}
+  <div class="text-center mt-8">
+    <a href="/" class="inline-block">← Back to Next Event</a>
+  </div>
+</Event>
+</file>
+
+<file path="cloudflare-worker/eventbriteManager.js">
+// mindfulina/cloudflare-worker/eventbriteManager.js
+
+// Constants for Eventbrite event creation
+const EVENT_CAPACITY = 25;
+const EVENT_TIMEZONE = 'Pacific/Honolulu'; // Default timezone for Eventbrite events
+const DEFAULT_EVENTBRITE_IMAGE_ID = '1033232763'; // Default uploaded image ID
+const EVENTBRITE_TEMPLATE_ID = '1371879341039'; // ID of the template event to copy
+
+// Default HTML content if GCal description is empty
+const DEFAULT_EVENTBRITE_DESCRIPTION_HTML = `<p>Join us for a sound bath to reset and relax your mind, body, and spirit — reconnecting with your mana and the healing rhythms of the moana.</p>
+<h2>Before You Arrive:</h2>
+<p>Consider moving your body beforehand; take a gentle walk, stretch, or run before the session to release stagnant energy.</p>
+<h2>Bring:</h2>
+<ul>
+  <li>Towel, mat, or blanket for the ‘āina</li>
+  <li>Eye mask if you wish to shut out visual stimulation and the sun</li>
+  <li>Swimsuit, sunscreen, and water bottle if you feel called to connect with the moana after our gathering</li>
+</ul>
+<p>Let the makani (breeze) and sounds of the moana guide your naʻau (inner heart) into deep rest.</p>
+<p>E komo mai — all are welcome!</p>`;
+
+async function eventbriteApiCall(url, method, token, body = null) {
+  // console.log(`Worker/eventbriteManager: API Call - ${method} ${url}`);
+  // if (body && method !== 'GET') console.log(`Worker/eventbriteManager: Request Body - ${JSON.stringify(body, null, 2)}`);
+
+  const headers = {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json',
+    'User-Agent': 'Mindfulina-Cloudflare-Worker/1.0.3', 
+  };
+  const options = { method, headers };
+  if (body) {
+    options.body = JSON.stringify(body);
+  }
+  const response = await fetch(url, options);
+  const responseBodyText = await response.text();
+  let responseData;
+  try {
+    responseData = responseBodyText ? JSON.parse(responseBodyText) : {};
+  } catch (e) {
+    console.error(`Worker/eventbriteManager: API Call to ${url} - Non-JSON response. Status: ${response.status}. Body: ${responseBodyText.substring(0, 500)}`);
+    if (!response.ok) {
+      throw new Error(`Eventbrite API Error: ${response.status} - ${response.statusText}. Response was not valid JSON.`);
+    }
+    return { success: true, details: "Response was not JSON but request was successful.", status: response.status, raw_text: responseBodyText };
+  }
+  if (!response.ok) {
+    console.error(`Worker/eventbriteManager: API Error (${method} ${url}) - Status: ${response.status}. Details: ${JSON.stringify(responseData, null,2)}`);
+    const errorDetail = responseData?.error_detail;
+    let specificErrorMessage = "";
+    if (typeof errorDetail === 'object' && errorDetail !== null) {
+        for (const key in errorDetail) {
+            if (Array.isArray(errorDetail[key]) && errorDetail[key].length > 0) {
+                 specificErrorMessage += `${key}: ${errorDetail[key].join(', ')}. `;}
+            else if (typeof errorDetail[key] === 'string') {
+                 specificErrorMessage += `${key}: ${errorDetail[key]}. `;}
+        }
+    }
+    const errorMessage = responseData?.error_description || specificErrorMessage || responseData?.error || responseData?.error_message || response.statusText;
+    throw new Error(`Eventbrite API Error: ${response.status} - ${errorMessage.trim()}`);
+  }
+  // console.log(`Worker/eventbriteManager: API Success (${method} ${url}) - Status: ${response.status}`);
+  return responseData;
+}
+
+function formatDescriptionToHtml(textDescription) {
+    if (!textDescription || textDescription.trim() === "") {
+        return DEFAULT_EVENTBRITE_DESCRIPTION_HTML;
+    }
+    const escapedText = textDescription
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    return escapedText.split(/\n\s*\n/).map(paragraph => 
+        `<p>${paragraph.split('\n').join('<br />')}</p>`
+    ).join('');
+}
+
+/**
+ * Creates an event on Eventbrite by copying a template and updating its content.
+ * @param {object} gcalEventData - Event data from Google Calendar. Expected: title, startTime, endTime, googleCalendarEventId, [description]
+ * @param {string} ebToken - Eventbrite Private Token.
+ * @param {string} ebOrganizerId - Eventbrite Organizer ID (less critical for copy, but good for context).
+ * @param {string} ebVenueId - Eventbrite Venue ID (less critical for copy, but good for context).
+ * @param {string} [imageIdToUse=DEFAULT_EVENTBRITE_IMAGE_ID] - Eventbrite Image ID for logo and structured content.
+ * @returns {Promise<object>} - Result of the event creation process.
+ */
+export async function createMindfulinaEventOnEventbrite(
+    gcalEventData, 
+    ebToken, 
+    ebOrganizerId, 
+    ebVenueId,     
+    imageIdToUse = DEFAULT_EVENTBRITE_IMAGE_ID
+) {
+  const { title, startTime: gcalStartTime, endTime: gcalEndTime, description: gcalDescription, googleCalendarEventId } = gcalEventData;
+
+  if (!ebToken) { 
+    console.error("Worker/eventbriteManager: Missing required Eventbrite Token.");
+    throw new Error("Configuration error: Missing Eventbrite token.");
+  }
+  if (!gcalStartTime || !gcalEndTime || !googleCalendarEventId) {
+      console.error("Worker/eventbriteManager: Missing startTime, endTime, or googleCalendarEventId from gcalEventData.");
+      throw new Error("Event data error: startTime, endTime, and googleCalendarEventId are required.");
+  }
+
+  // Use the Google Calendar title directly, or a default if it's missing.
+  const newEventName = title || "Mindfulina Event";
+  
+  const startTimeObj = new Date(gcalStartTime);
+  const endTimeObj = new Date(gcalEndTime);
+
+  const eventbriteStartUTC = startTimeObj.toISOString().slice(0, 19) + 'Z';
+  const eventbriteEndUTC = endTimeObj.toISOString().slice(0, 19) + 'Z';
+  
+  let copiedEventId;
+  let copiedEventUrl;
+
+  try {
+    // --- Step 1: Copy the Template Event ---
+    console.log(`Worker/eventbriteManager: Copying template event ID: ${EVENTBRITE_TEMPLATE_ID} to create "${newEventName}"...`);
+    const copyEventUrlApi = `https://www.eventbriteapi.com/v3/events/${EVENTBRITE_TEMPLATE_ID}/copy/`;
+    const copyPayload = {
+      name: newEventName, // Use the GCal title (or default)
+      start_date: eventbriteStartUTC,
+      end_date: eventbriteEndUTC,
+      timezone: EVENT_TIMEZONE, 
+    };
+    const copiedEventData = await eventbriteApiCall(copyEventUrlApi, 'POST', ebToken, copyPayload);
+    
+    if (!copiedEventData || !copiedEventData.id || !copiedEventData.url) {
+        console.error("Worker/eventbriteManager: Event copy call response did not include an event ID or URL.", copiedEventData);
+        throw new Error("Failed to retrieve necessary details (ID, URL) from event copy response.");
+    }
+    copiedEventId = copiedEventData.id;
+    copiedEventUrl = copiedEventData.url;
+    console.log(`Worker/eventbriteManager: Event copied. New ID: ${copiedEventId}, URL: ${copiedEventUrl}`);
+
+    // --- Step 2: Update Logo of the Copied Event ---
+    if (imageIdToUse) {
+      console.log(`Worker/eventbriteManager: Updating logo for event ID: ${copiedEventId} with image ID: ${imageIdToUse}...`);
+      const updateEventUrlApi = `https://www.eventbriteapi.com/v3/events/${copiedEventId}/`;
+      const updateLogoPayload = { event: { logo_id: imageIdToUse } };
+      await eventbriteApiCall(updateEventUrlApi, 'POST', ebToken, updateLogoPayload);
+      console.log(`Worker/eventbriteManager: Logo updated for event ID: ${copiedEventId}`);
+    } else {
+      console.log(`Worker/eventbriteManager: No imageIdToUse provided, skipping logo update for copied event.`);
+    }
+
+    // --- Step 3: Update Structured Content (Description and Image) ---
+    console.log(`Worker/eventbriteManager: Updating structured content for event ID: ${copiedEventId}...`);
+    const eventHtmlDescription = formatDescriptionToHtml(gcalDescription);
+    const structuredContentModules = [{ type: "text", data: { body: { alignment: "left", text: eventHtmlDescription } } }];
+    if (imageIdToUse) {
+      structuredContentModules.push({ type: "image", data: { image: { image_id: imageIdToUse } } });
+    }
+    const structuredContentPayload = { modules: structuredContentModules, publish: true, purpose: "listing" }; 
+    const structuredContentUrlApi = `https://www.eventbriteapi.com/v3/events/${copiedEventId}/structured_content/1/`;
+    await eventbriteApiCall(structuredContentUrlApi, 'POST', ebToken, structuredContentPayload);
+    console.log(`Worker/eventbriteManager: Structured content updated for event ID: ${copiedEventId}`);
+
+    // --- Step 4: Update Ticket Class Capacity ---
+    console.log(`Worker/eventbriteManager: Fetching ticket classes for event ID: ${copiedEventId} to verify/update capacity...`);
+    const listTicketClassesUrlApi = `https://www.eventbriteapi.com/v3/events/${copiedEventId}/ticket_classes/`;
+    const ticketClassesData = await eventbriteApiCall(listTicketClassesUrlApi, 'GET', ebToken);
+
+    if (ticketClassesData && ticketClassesData.ticket_classes && ticketClassesData.ticket_classes.length > 0) {
+      const mainTicketClass = ticketClassesData.ticket_classes[0]; 
+      if (mainTicketClass.quantity_total !== EVENT_CAPACITY) {
+        console.log(`Worker/eventbriteManager: Updating capacity of ticket class ID ${mainTicketClass.id} from ${mainTicketClass.quantity_total} to ${EVENT_CAPACITY}...`);
+        const updateTicketClassUrlApi = `https://www.eventbriteapi.com/v3/events/${copiedEventId}/ticket_classes/${mainTicketClass.id}/`;
+        const updateTicketPayload = { ticket_class: { quantity_total: EVENT_CAPACITY } };
+        await eventbriteApiCall(updateTicketClassUrlApi, 'POST', ebToken, updateTicketPayload);
+        console.log(`Worker/eventbriteManager: Capacity updated for ticket class ID ${mainTicketClass.id}.`);
+      } else {
+        console.log(`Worker/eventbriteManager: Ticket class capacity (${mainTicketClass.quantity_total}) already matches EVENT_CAPACITY (${EVENT_CAPACITY}). No update needed.`);
+      }
+    } else {
+      console.warn(`Worker/eventbriteManager: No ticket classes found for event ID ${copiedEventId}, or API response malformed. Skipping capacity update. The template should have a ticket class.`);
+    }
+
+    // --- Step 5: Publish Event ---
+    console.log(`Worker/eventbriteManager: Publishing event ID: ${copiedEventId}...`);
+    const publishUrlApi = `https://www.eventbriteapi.com/v3/events/${copiedEventId}/publish/`;
+    const publishResult = await eventbriteApiCall(publishUrlApi, 'POST', ebToken); 
+    console.log(`Worker/eventbriteManager: Event publish attempt completed for ID: ${copiedEventId}. Result: ${JSON.stringify(publishResult)}`);
+
+    return { 
+      success: true, 
+      message: "Eventbrite event copied, updated, and publish process completed.", 
+      eventId: copiedEventId, 
+      eventUrl: copiedEventUrl,
+      published: publishResult?.published || false 
+    };
+  } catch (error) {
+    console.error(`Worker/eventbriteManager: Error in copy/update/publish for GCal event "${title}" (ID: ${googleCalendarEventId}):`, error.stack || error.message);
+    return { 
+      success: false, 
+      message: `Eventbrite integration (copy/update/publish) failed: ${error.message}`, 
+      eventId: copiedEventId, 
+      eventUrl: copiedEventUrl, 
+      errorDetails: error.message, 
+      published: false
+    };
+  }
+}
+</file>
+
+<file path="src/pages/index.astro">
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import { formatHawaiian, getGoogleCalendarLink } from '../utils/format';
+
+const events = await getCollection('events');
+const upcoming = events
+  .filter(e => new Date(e.data.date) >= new Date())
+  .sort((a, b) => +new Date(a.data.date) - +new Date(b.data.date));
+
+const next = upcoming[0];
+const pageTitle = next ? `Mindfulina – ${next.data.title}` : 'Mindfulina – Next Event';
+// Render the content if available
+const { Content } = next ? await next.render() : { Content: null };
+const calendarLink = next ? getGoogleCalendarLink({
+  title: next.data.title,
+  date: next.data.date,
+  location: next.data.location,
+  description: next.data.description
+}) : '';
+---
+
+<Base title={pageTitle}>
+  <div class="hidden md:block">
+    <Hero />
+  </div>
+  
+	{next ? (
+			<article class="bg-white/60 backdrop-blur-md p-8 rounded-2xl shadow-lg">
+				<h1 class="text-3xl font-bold mb-4">{next.data.title}</h1>
+				<p><strong>When:</strong> <Fragment set:html={formatHawaiian(next.data.date)} /></p>
+				<p><strong>Where:</strong> {next.data.location}</p>
+				<p class="mt-2">
+          <a href={calendarLink} target="_blank" class="text-sm inline-flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            Add to Google Calendar
+          </a>
+        </p>
+				{next.data.cover && <img src={next.data.cover} alt={next.data.title + " cover image"} class="my-4 rounded-lg" />}
+				<div class="prose mt-6">
+					<Content />
+				</div>
+				<a href="/events" class="mt-8 inline-block">See all upcoming sessions →</a>
+			</article>
+		) : (
+			<div class="bg-white/60 backdrop-blur-md p-8 rounded-2xl shadow-lg text-center">
+        <h1 class="text-3xl font-bold mb-4">Sound Healing Sessions</h1>
+        <div class="flex justify-center">
+          <img src="/images/tall-shot.jpeg" alt="Mindfulina sound bath" class="rounded-lg shadow-md max-h-96 object-cover mb-6" />
+        </div>
+        <p class="mt-4 text-lg">Experience the soothing vibrations of crystal bowls in a beautiful oceanside setting.</p>
+        <p class="mt-2">Upcoming events will be announced soon!</p>
+      </div>
+		)}
+</Base>
+</file>
+
+<file path="todo.md">
+[x] have google calendar events sync events
+  [] create a free Eventbrite event with the eventrite api
+  [] make the event on the site that links to to Eventbrite
+  
+  
+  [] make it themed like in whatsapp chat
+  
+  [] have html created from markdown. so no need for html template.
+  
+[] format site so past events are not shown on homepage. if no future events, show a link to past events and some default like 'check back again for more events'
+[] future events shoud truly be in the future, not just all events ever...
+</file>
+
+<file path="cloudflare-worker/eventAutomation.js">
+// mindfulina/cloudflare-worker/eventAutomation.js
+// Main Cloudflare Worker for Mindfulina Event Automation.
+// Orchestrates GitHub and Eventbrite integrations.
+
+import { createGithubEventFile } from './githubManager.js';
+import { createMindfulinaEventOnEventbrite } from './eventbriteManager.js';
+
+// Eventbrite Configuration Constants
+const EVENTBRITE_ORGANIZER_ID = '2736604261351'; 
+const EVENTBRITE_VENUE_ID = '266927653';     
+
+export default {
+  async fetch(request, env, ctx) {
+    if (request.method !== 'POST') {
+      return new Response('Expected POST request from Google Apps Script', { status: 405 });
+    }
+
+    if (env.APPS_SCRIPT_SECRET) {
+      const authHeader = request.headers.get('X-AppsScript-Secret');
+      if (authHeader !== env.APPS_SCRIPT_SECRET) {
+        console.error('Worker/Automation: Unauthorized - Missing or incorrect X-AppsScript-Secret header.');
+        return new Response('Unauthorized', { status: 401 });
+      }
+      console.log('Worker/Automation: X-AppsScript-Secret validated.');
+    }
+
+    let eventData;
+    try {
+      eventData = await request.json();
+    } catch (e) {
+      console.error('Worker/Automation: Failed to parse JSON body:', e);
+      return new Response('Invalid JSON payload', { status: 400 });
+    }
+
+    console.log('Worker/Automation: Received event data:', JSON.stringify(eventData, null, 2));
+
+    if (!eventData.title || !eventData.startTime || !eventData.endTime || !eventData.googleCalendarEventId) {
+      console.error('Worker/Automation: Missing critical event data fields (title, startTime, endTime, googleCalendarEventId).');
+      return new Response('Missing required event data fields from Google Calendar', { status: 400 });
+    }
+    if (!env.GITHUB_TOKEN) {
+        console.error('Worker/Automation: Missing GITHUB_TOKEN secret.');
+        return new Response('Configuration error: GitHub token not set.', { status: 500 });
+    }
+    if (!env.EVENTBRITE_PRIVATE_TOKEN) {
+        console.error('Worker/Automation: Missing EVENTBRITE_PRIVATE_TOKEN secret.');
+        return new Response('Configuration error: Eventbrite token not set.', { status: 500 });
+    }
+
+    let githubResultSummary = { success: false, message: "GitHub processing not initiated.", fileUrl: null, status: null, error: null };
+    let eventbriteResultSummary = { success: false, message: "Eventbrite processing not initiated.", eventUrl: null, eventId: null, published: false, error: null };
+
+    try {
+      // --- Step 1: Create Eventbrite Event (to get the link) ---
+      console.log('Worker/Automation: Attempting to create Eventbrite event...');
+      eventbriteResultSummary = await createMindfulinaEventOnEventbrite(
+        eventData,
+        env.EVENTBRITE_PRIVATE_TOKEN,
+        EVENTBRITE_ORGANIZER_ID, 
+        EVENTBRITE_VENUE_ID      
+      );
+
+      if (eventbriteResultSummary.success && eventbriteResultSummary.published) {
+          console.log(`Worker/Automation: Eventbrite event created and published successfully. URL: ${eventbriteResultSummary.eventUrl}`);
+      } else if (eventbriteResultSummary.success && !eventbriteResultSummary.published) {
+          console.warn(`Worker/Automation: Eventbrite event created (ID: ${eventbriteResultSummary.eventId}) but NOT published. URL: ${eventbriteResultSummary.eventUrl}`);
+          // This is considered a partial success for Eventbrite, but overall success depends on GitHub too,
+          // and the website might not want to link to an unpublished event.
+      } else {
+          console.error(`Worker/Automation: Eventbrite event processing failed. Message: ${eventbriteResultSummary.message}`);
+      }
+
+      // --- Step 2: Create GitHub Event File (with Eventbrite link if available and published) ---
+      console.log('Worker/Automation: Attempting to create GitHub event file...');
+      // Only pass the Eventbrite link if the event was successfully created AND published.
+      const eventbriteLinkForGithub = (eventbriteResultSummary.success && eventbriteResultSummary.published) ? eventbriteResultSummary.eventUrl : '';
+      
+      const githubApiResponse = await createGithubEventFile(eventData, env.GITHUB_TOKEN, eventbriteLinkForGithub);
+      
+      githubResultSummary.status = githubApiResponse.status; 
+      const githubResponseText = await githubApiResponse.text(); 
+
+      if (!githubApiResponse.ok) { 
+        const errorMsg = `Failed to create GitHub file: ${githubResultSummary.status} - ${githubResponseText.substring(0, 200)}`;
+        console.error(`Worker/Automation: ${errorMsg}`);
+        githubResultSummary.message = errorMsg;
+        githubResultSummary.error = githubResponseText;
+        githubResultSummary.success = false; 
+      } else {
+        githubResultSummary.success = true;
+        githubResultSummary.message = 'GitHub event file processed successfully.';
+        try {
+          const githubJson = JSON.parse(githubResponseText);
+          if (githubJson.content && githubJson.content.html_url) {
+            githubResultSummary.fileUrl = githubJson.content.html_url;
+          }
+        } catch (parseError) {
+          console.warn("Worker/Automation: Could not parse GitHub response JSON to get html_url, but operation succeeded based on status.", parseError);
+        }
+        console.log(`Worker/Automation: Successfully created/updated GitHub file. URL: ${githubResultSummary.fileUrl || 'N/A'}`);
+      }
+      
+      // --- Step 3: Construct Final Response ---
+      // Overall success means Eventbrite event was created AND published, AND GitHub file was created.
+      const overallSuccess = eventbriteResultSummary.success && eventbriteResultSummary.published && githubResultSummary.success;
+      
+      // Use 207 Multi-Status if any part succeeded but not all critical parts.
+      // 200 if all critical parts (Eventbrite published, GitHub created) succeeded.
+      // 500 if both failed, or a critical part like Eventbrite creation (even if not published) plus GitHub failed.
+      let finalStatus;
+      if (overallSuccess) {
+        finalStatus = 200;
+      } else if (eventbriteResultSummary.success || githubResultSummary.success) { // At least one part had some form of success
+        finalStatus = 207; // Multi-Status
+      } else {
+        finalStatus = 500; // Both operations failed entirely
+      }
+
+      return new Response(JSON.stringify({ 
+        overallStatus: overallSuccess ? "Success" : "One or more operations faced issues or did not complete successfully.",
+        eventbrite: eventbriteResultSummary,
+        github: githubResultSummary
+      }), { status: finalStatus, headers: { 'Content-Type': 'application/json' }});
+
+    } catch (error) { 
+      console.error('Worker/Automation: Unhandled error during event processing orchestration:', error.stack || error);
+      return new Response(JSON.stringify({
+        overallStatus: "Critical Orchestration Failure",
+        message: 'Internal Server Error: ' + (error.message || "Unknown error"),
+        eventbrite: eventbriteResultSummary, // Include partial results if available
+        github: githubResultSummary,     // Include partial results if available
+        errorDetails: error.stack 
+      }), { status: 500, headers: { 'Content-Type': 'application/json' }});
+    }
+  },
+};
+</file>
+
+<file path="cloudflare-worker/githubManager.js">
+// mindfulina/cloudflare-worker/githubManager.js
+// Constants for GitHub interaction (website page creation)
+const GITHUB_REPO_OWNER = "thekizoch";
+const GITHUB_REPO_NAME = "mindfulina";
+const GITHUB_BRANCH = "main";
+
+// Defaults for the website Markdown content
+const DEFAULT_WEBSITE_COVER_IMAGE = "/images/wide-shot.jpeg"; // Default cover image for the website event page
+const DEFAULT_WEBSITE_LOCATION = "Mākālei Beach Park, Honolulu";
+const DEFAULT_WEBSITE_EVENT_DESCRIPTION_MARKDOWN = `Join us for a sound bath to reset and relax your mind, body, and spirit — reconnecting with your mana and the healing rhythms of the moana.
+
+## Before You Arrive
+Consider moving your body beforehand; take a gentle walk, stretch, or run before the session to release stagnant energy.
+
+## Bring
+- Towel, mat, or blanket for the ‘āina
+- Eye mask if you wish to shut out visual stimulation and the sun
+- Swimsuit, sunscreen, and water bottle if you feel called to connect with the moana after our gathering
+
+Let the makani (breeze) and sounds of the moana guide your naʻau (inner heart) into deep rest.
+
+E komo mai — all are welcome!`;
+
+
+
+
+/**
+ * Creates an event Markdown file in the GitHub repository
+ * @param {object} eventData - Event data from Google Calendar (title, startTime, isAllDay, googleCalendarEventId, location, description).
+ * @param {string} githubToken - GitHub PAT.
+ * @param {string} [eventbriteLink] - Optional Eventbrite link for the event.
+ * @returns {Promise<Response>} - The raw response from the GitHub API.
+ */
+export async function createGithubEventFile(eventData, githubToken, eventbriteLink = '') {
+  const { title, startTime, isAllDay, googleCalendarEventId, location, description } = eventData;
+
+  const locationToUse = (location && location.trim() !== '') ? location : DEFAULT_WEBSITE_LOCATION;
+  const descriptionToUse = (description && description.trim() !== '') ? description : DEFAULT_WEBSITE_EVENT_DESCRIPTION_MARKDOWN;
+
+  let slug = 'event';
+  if (title) {
+    slug = title.toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w-]+/g, '')
+      .replace(/--+/g, '-')
+      .replace(/^-+/, '')
+      .replace(/-+$/, '');
+    if (!slug) slug = 'event';
+  }
+
+  const date = new Date(startTime);
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const year = date.getFullYear();
+  const datePrefix = `${year}-${month}-${day}`;
+
+  const eventPath = `src/content/events/${datePrefix}-${slug}.md`;
+  console.log(`Worker/githubManager: Determined event file path: ${eventPath}`);
+
+  const frontmatterContent = `---
+title: "${title ? title.replace(/"/g, '\\"') : 'Mindfulina Event'}"
+date: "${startTime}"
+location: "${locationToUse.replace(/"/g, '\\"')}"
+cover: "${DEFAULT_WEBSITE_COVER_IMAGE}"
+googleCalendarEventId: "${googleCalendarEventId}"
+isAllDay: ${isAllDay || false}
+eventbriteLink: "${eventbriteLink || ''}"
+---
+
+${descriptionToUse}
+`;
+
+  const utf8Bytes = new TextEncoder().encode(frontmatterContent);
+  let binaryString = '';
+  utf8Bytes.forEach(byte => {
+    binaryString += String.fromCharCode(byte);
+  });
+  const fileContentBase64 = btoa(binaryString);
+
+
+  const githubApiUrl = `https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/contents/${eventPath}`;
+  console.log(`Worker/githubManager: GitHub API URL for PUT: ${githubApiUrl}`);
+
+  const commitMessage = `feat: Add event "${title || 'New Event'}" from GCal ID ${googleCalendarEventId}`;
+
+  const requestBody = {
+    message: commitMessage,
+    content: fileContentBase64,
+    branch: GITHUB_BRANCH,
+  };
+
+  console.log(`Worker/githubManager: Sending PUT request to GitHub with message: "${commitMessage}"`);
+
+  return fetch(githubApiUrl, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `token ${githubToken}`,
+      'User-Agent': 'Mindfulina-Event-Automation-Worker/1.1.1', // Version bump
+      'Content-Type': 'application/json',
+      'Accept': 'application/vnd.github.v3+json',
+    },
+    body: JSON.stringify(requestBody),
+  });
+}
+</file>
+
+</files>
