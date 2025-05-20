@@ -9,12 +9,12 @@
 
 @layer base {
   body {
-    @apply min-h-screen bg-gradient-to-br from-blushPink/60 via-brandWhite to-seafoamGreen/60 text-textGray font-body;
+    @apply min-h-screen bg-gradient-to-br from-blushPink via-skyBlue/50 to-seafoamGreen text-textGray font-body;
   }
 
   /* Typography */
   h1 {
-    @apply font-display text-gold text-5xl mb-4;
+    @apply font-display text-gold text-5xl mb-4 font-bold text-center;
   }
   
   h2, h3 {

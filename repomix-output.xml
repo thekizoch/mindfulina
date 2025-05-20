@@ -115,101 +115,6 @@ compatibility_date = "2025-05-16" # Replace with the actual current date when se
 account_id = "" # Will be sourced from CF_ACCOUNT_ID GitHub secret during CI/CD
 </file>
 
-<file path="public/images/logo.svg">
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
- "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
- width="300.000000pt" height="300.000000pt" viewBox="0 0 300.000000 300.000000"
- preserveAspectRatio="xMidYMid meet">
-<metadata>
-Created by potrace 1.10, written by Peter Selinger 2001-2011
-</metadata>
-<g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)"
-fill="#000000" stroke="none">
-<path d="M1482 2118 c3 -181 5 -213 18 -213 13 0 15 31 18 213 2 208 2 212
--18 212 -20 0 -21 -4 -18 -212z"/>
-<path d="M1120 2222 c0 -25 159 -347 171 -347 8 0 13 8 11 18 -7 39 -156 337
--169 337 -7 0 -13 -4 -13 -8z"/>
-<path d="M1815 2153 c-96 -201 -126 -276 -113 -284 9 -6 19 5 35 39 12 26 49
-105 83 176 55 118 63 146 41 146 -5 0 -26 -35 -46 -77z"/>
-<path d="M1361 2061 c-20 -13 16 -161 40 -161 15 0 15 5 2 58 -8 31 -18 69
--21 84 -5 20 -11 25 -21 19z"/>
-<path d="M1626 2059 c-9 -26 -36 -137 -36 -148 0 -6 6 -11 14 -11 18 0 53 147
-38 162 -8 8 -13 7 -16 -3z"/>
-<path d="M860 1998 c0 -22 269 -272 276 -255 3 9 -41 59 -121 138 -122 120
--155 145 -155 117z"/>
-<path d="M1999 1894 c-68 -64 -130 -122 -138 -130 -13 -11 -12 -14 3 -20 12
--5 38 13 94 68 42 40 103 97 136 125 50 44 65 73 37 73 -4 0 -63 -52 -132
--116z"/>
-<path d="M1826 1886 c-50 -70 -53 -76 -32 -76 17 0 107 120 100 132 -11 17
--25 5 -68 -56z"/>
-<path d="M1106 1928 c4 -7 26 -37 47 -66 36 -48 56 -60 60 -38 4 16 -79 115
--96 116 -12 0 -16 -4 -11 -12z"/>
-<path d="M1422 1849 c-154 -26 -296 -161 -336 -318 l-12 -46 -45 5 c-131 13
--329 -8 -328 -35 0 -6 21 -8 52 -5 29 3 115 5 192 5 124 -1 159 -5 307 -38
-215 -48 299 -49 471 -8 194 47 248 54 375 47 65 -3 136 -9 160 -12 33 -5 42
--3 42 9 0 23 -108 39 -251 39 l-127 -1 -5 32 c-9 58 -60 149 -112 202 -98 101
--244 148 -383 124z m233 -60 c84 -32 181 -131 212 -214 34 -90 35 -87 -27
--100 -30 -7 -102 -25 -159 -40 -133 -35 -227 -32 -434 15 -167 39 -158 28
--107 135 52 108 124 173 239 217 65 25 196 19 276 -13z"/>
-<path d="M940 1736 c0 -17 126 -90 140 -81 16 10 3 22 -64 60 -71 39 -76 41
--76 21z"/>
-<path d="M1987 1716 c-72 -41 -84 -53 -71 -66 13 -13 138 61 142 84 5 22 -5
-20 -71 -18z"/>
-<path d="M712 1685 c4 -22 319 -137 330 -121 11 16 4 20 -147 76 -175 65 -188
-68 -183 45z"/>
-<path d="M2110 1641 c-101 -37 -155 -62 -155 -72 0 -8 5 -14 10 -14 6 0 82 25
-168 55 122 43 157 59 157 73 0 9 -6 17 -12 16 -7 0 -83 -26 -168 -58z"/>
-<path d="M1032 1395 c3 -20 45 -34 188 -65 194 -42 408 -36 626 15 117 28 151
-42 137 56 -7 7 -47 1 -112 -16 -131 -33 -277 -55 -366 -55 -108 0 -334 38
--458 76 -14 4 -18 1 -15 -11z"/>
-<path d="M484 1231 c-22 -10 -57 -38 -78 -62 -31 -37 -36 -50 -34 -84 2 -29 8
--41 21 -43 13 -3 17 3 17 25 0 39 32 87 81 123 78 56 76 15 -10 -180 -28 -63
--51 -125 -51 -137 0 -31 36 -31 44 0 3 12 27 62 53 112 49 90 139 195 169 195
-19 0 17 -7 -48 -169 -27 -68 -47 -130 -44 -137 12 -31 35 -10 71 62 38 79 151
-211 173 203 7 -3 -5 -42 -35 -109 -49 -113 -62 -174 -44 -209 12 -21 51 -28
-85 -15 28 11 17 24 -16 22 -33 -3 -33 -3 -31 39 1 23 20 85 42 139 45 108 51
-148 22 163 -23 13 -97 -32 -126 -78 -29 -45 -46 -46 -24 -1 20 42 27 89 15
-108 -16 26 -65 13 -111 -29 l-45 -42 6 45 c6 40 3 47 -17 62 -29 20 -35 20
--85 -3z"/>
-<path d="M1963 1178 c-59 -61 -100 -132 -114 -195 -10 -45 -19 -59 -48 -79
--34 -23 -36 -23 -39 -6 -2 11 6 43 17 73 24 63 25 69 8 69 -6 0 -23 -20 -36
--44 -23 -45 -87 -116 -103 -116 -18 0 -6 50 26 102 26 43 30 58 20 62 -8 3
--21 -6 -31 -21 -40 -59 -74 -83 -115 -83 l-40 0 56 62 c85 93 118 177 74 186
--36 7 -135 -124 -158 -209 -6 -21 -25 -50 -45 -68 -77 -67 -73 -24 12 145 37
-74 64 136 60 140 -15 16 -39 -10 -76 -84 -37 -74 -41 -78 -68 -75 -37 6 -89
--30 -126 -85 -31 -46 -61 -67 -83 -58 -12 4 -10 15 7 61 36 96 3 114 -69 38
--27 -27 -43 -39 -39 -27 19 63 19 64 4 64 -8 0 -25 -21 -38 -47 -29 -56 -93
--113 -110 -96 -9 9 -4 27 20 72 34 66 39 91 17 91 -17 0 -62 -84 -71 -133 -8
--40 6 -67 32 -67 8 0 30 12 49 27 l35 26 -6 -26 c-10 -37 19 -37 39 1 19 36
-102 128 110 122 3 -3 -2 -26 -10 -50 -26 -74 15 -117 70 -75 17 13 21 13 33
--5 22 -31 48 -24 94 23 32 32 40 37 34 20 -9 -32 3 -63 24 -63 10 0 30 9 44
-20 l26 21 -15 -45 c-19 -55 -15 -115 8 -130 40 -25 109 92 95 162 -5 26 -3 29
-33 39 l39 10 3 -36 c4 -49 34 -53 81 -11 35 30 36 31 39 8 4 -32 39 -34 74 -5
-l29 25 17 -29 c25 -42 67 -39 117 6 32 29 38 32 34 15 -6 -23 12 -50 35 -50 8
-0 30 11 49 25 33 26 33 26 30 4 -4 -36 18 -32 46 9 15 20 45 56 68 77 37 36
-41 37 34 15 -15 -52 -17 -91 -5 -105 17 -21 54 -19 75 5 18 20 18 20 29 -2 18
--36 44 -34 88 9 31 30 39 33 34 17 -7 -24 15 -54 41 -54 19 0 103 82 103 100
-0 7 -20 -6 -45 -29 -24 -22 -49 -41 -54 -41 -22 0 -20 22 4 69 30 60 30 61 5
-61 -10 0 -24 -10 -31 -21 -19 -36 -91 -109 -106 -109 -12 0 -13 7 -8 28 15 63
-90 127 134 115 17 -4 20 -2 15 11 -10 25 -61 20 -102 -11 -21 -15 -55 -49 -78
--77 -39 -50 -84 -73 -84 -43 0 7 7 35 16 60 16 48 14 77 -6 77 -6 0 -36 -23
--66 -51 -57 -55 -63 -56 -38 -8 18 37 12 68 -11 49 -8 -6 -19 -27 -25 -45 -12
--37 -81 -105 -106 -105 -19 0 -13 25 27 99 16 29 26 58 23 62 -13 21 -35 6
--58 -39 -28 -55 -97 -122 -126 -122 -22 0 -43 32 -34 54 3 8 36 46 74 84 73
-75 112 150 93 181 -18 28 -37 23 -80 -21z m38 -55 c-26 -49 -111 -143 -111
--123 0 38 122 208 128 177 2 -8 -6 -33 -17 -54z m-382 -5 c-19 -37 -81 -119
--86 -114 -6 6 34 84 65 125 27 36 42 29 21 -11z m-239 -108 c0 -12 -80 -110
--102 -124 -30 -19 -34 5 -7 52 28 52 109 105 109 72z m128 -145 c4 -35 -24
--111 -43 -119 -20 -7 -19 11 2 90 18 66 35 79 41 29z"/>
-<path d="M955 1120 c-8 -13 4 -50 16 -50 11 0 29 41 22 53 -6 10 -31 9 -38 -3z"/>
-<path d="M2086 1115 c-6 -18 2 -45 15 -45 12 0 31 39 24 50 -9 15 -32 12 -39
--5z"/>
-</g>
-</svg>
-</file>
-
 <file path="public/favicon.svg">
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 128 128">
     <path d="M50.4 78.5a75.1 75.1 0 0 0-28.5 6.9l24.2-65.7c.7-2 1.9-3.2 3.4-3.2h29c1.5 0 2.7 1.2 3.4 3.2l24.2 65.7s-11.6-7-28.5-7L67 45.5c-.4-1.7-1.6-2.8-2.9-2.8-1.3 0-2.5 1.1-2.9 2.7L50.4 78.5Zm-1.1 28.2Zm-4.2-20.2c-2 6.6-.6 15.8 4.2 20.2a17.5 17.5 0 0 1 .2-.7 5.5 5.5 0 0 1 5.7-4.5c2.8.1 4.3 1.5 4.7 4.7.2 1.1.2 2.3.2 3.5v.4c0 2.7.7 5.2 2.2 7.4a13 13 0 0 0 5.7 4.9v-.3l-.2-.3c-1.8-5.6-.5-9.5 4.4-12.8l1.5-1a73 73 0 0 0 3.2-2.2 16 16 0 0 0 6.8-11.4c.3-2 .1-4-.6-6l-.8.6-1.6 1a37 37 0 0 1-22.4 2.7c-5-.7-9.7-2-13.2-6.2Z" />
@@ -751,31 +656,6 @@ listOrgEvents();
 <!-- Hero component intentionally left empty -->
 </file>
 
-<file path="src/content/brand/brand-identity.md">
-# Mindfulina - Brand Identity Guide
-
-1. Logo & Wordmark Style
-Primary Wordmark: 'Mindfulina' in a golden cursive script.
-Accent Style: Logo variations may include sunburst or rainbow motifs.
-Usage Tip: Use white or watercolor pastel backgrounds for harmony; keep gold text and lines for contrast.
-2. Fonts
-Logo / Wordmark: Likely "Shorelines Script" or similar (Alt: Dancing Script, Pacifico) Headings: Trajan Pro / Cinzel (Alt: Cinzel)
-Body Text: Garamond / Georgia (Alt: Libre Baskerville)
-Suggested Sizes:
-- H1 - 48-64 pt
-- H2 - 36-48 pt
-- Body - 16-20 pt
-- Callouts - 22-26 pt (in caps or bold)
-3. Color Palette
-Gold: #D4A437 - Logo text, accents, headings
-Sunset Coral: #F4B4A8 - Background gradients, highlights Seafoam Green: #B8D9C5 - Background gradients, calm accents Sky Blue: #C9E9F6 - Optional accent
-Blush Pink: #FADCE5 - Gentle watercolor gradient
-White: #FFFFFF - Text background, logo base
-4. Visual Aesthetic / Brand Vibe
-Mood: Gentle, uplifting, soulful
-Textures: Watercolor blends, sun beams, soft gradients Iconography: Simple sunbursts, rainbows, nature motifs Voice/Tone: Warm, inclusive, soothing
-</file>
-
 <file path="src/content/events/2025-04-27-sunset-sound-bath.md">
 ---
 title: "Morning Ocean Sound Bath"
@@ -822,46 +702,6 @@ Consider taking a peaceful walk along the shoreline to connect with nature.
 - Optional: hat, sunglasses, water bottle
 
 Let the ocean breeze and sound healing waves guide you into deep rest. See you there.
-</file>
-
-<file path="src/layouts/EventLayout.astro">
-<!-- 
-  Updated: EventLayout.astro 
-  Updated with new theme components and styling
--->
----
-import '../styles/global.css';
-
-interface Props { title?: string }
-const { title = 'Mindfulina Events' } = Astro.props;
----
-
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" href="/favicon.svg" />
-    <title>{title}</title>
-  </head>
-  <body class="font-body">
-    <!-- Header -->
-    <header class="text-center py-8">
-      <div class="flex justify-center items-center flex-col">
-        <img src="/images/logo.png" alt="Mindfulina Logo" class="h-60 w-auto mb-2" />
-      </div>
-    </header>
-
-    <!-- Main slot -->
-    <main class="content-section">
-      <slot />
-    </main>
-
-    <!-- Footer -->
-    <footer class="text-center text-sm py-10 text-gray-500">
-      © {new Date().getFullYear()} Mindfulina
-    </footer>
-  </body>
-</html>
 </file>
 
 <file path="src/pages/brand.astro">
@@ -1245,6 +1085,139 @@ async function fullImageUpload() {
 fullImageUpload();
 </file>
 
+<file path="public/images/logo.svg">
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+ "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="300.000000pt" height="300.000000pt" viewBox="0 0 300.000000 300.000000"
+ preserveAspectRatio="xMidYMid meet">
+<metadata>
+Created by potrace 1.10, written by Peter Selinger 2001-2011
+</metadata>
+<g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)"
+fill="#D4A437" stroke="none">
+<path d="M1482 2118 c3 -181 5 -213 18 -213 13 0 15 31 18 213 2 208 2 212
+-18 212 -20 0 -21 -4 -18 -212z"/>
+<path d="M1120 2222 c0 -25 159 -347 171 -347 8 0 13 8 11 18 -7 39 -156 337
+-169 337 -7 0 -13 -4 -13 -8z"/>
+<path d="M1815 2153 c-96 -201 -126 -276 -113 -284 9 -6 19 5 35 39 12 26 49
+105 83 176 55 118 63 146 41 146 -5 0 -26 -35 -46 -77z"/>
+<path d="M1361 2061 c-20 -13 16 -161 40 -161 15 0 15 5 2 58 -8 31 -18 69
+-21 84 -5 20 -11 25 -21 19z"/>
+<path d="M1626 2059 c-9 -26 -36 -137 -36 -148 0 -6 6 -11 14 -11 18 0 53 147
+38 162 -8 8 -13 7 -16 -3z"/>
+<path d="M860 1998 c0 -22 269 -272 276 -255 3 9 -41 59 -121 138 -122 120
+-155 145 -155 117z"/>
+<path d="M1999 1894 c-68 -64 -130 -122 -138 -130 -13 -11 -12 -14 3 -20 12
+-5 38 13 94 68 42 40 103 97 136 125 50 44 65 73 37 73 -4 0 -63 -52 -132
+-116z"/>
+<path d="M1826 1886 c-50 -70 -53 -76 -32 -76 17 0 107 120 100 132 -11 17
+-25 5 -68 -56z"/>
+<path d="M1106 1928 c4 -7 26 -37 47 -66 36 -48 56 -60 60 -38 4 16 -79 115
+-96 116 -12 0 -16 -4 -11 -12z"/>
+<path d="M1422 1849 c-154 -26 -296 -161 -336 -318 l-12 -46 -45 5 c-131 13
+-329 -8 -328 -35 0 -6 21 -8 52 -5 29 3 115 5 192 5 124 -1 159 -5 307 -38
+215 -48 299 -49 471 -8 194 47 248 54 375 47 65 -3 136 -9 160 -12 33 -5 42
+-3 42 9 0 23 -108 39 -251 39 l-127 -1 -5 32 c-9 58 -60 149 -112 202 -98 101
+-244 148 -383 124z m233 -60 c84 -32 181 -131 212 -214 34 -90 35 -87 -27
+-100 -30 -7 -102 -25 -159 -40 -133 -35 -227 -32 -434 15 -167 39 -158 28
+-107 135 52 108 124 173 239 217 65 25 196 19 276 -13z"/>
+<path d="M940 1736 c0 -17 126 -90 140 -81 16 10 3 22 -64 60 -71 39 -76 41
+-76 21z"/>
+<path d="M1987 1716 c-72 -41 -84 -53 -71 -66 13 -13 138 61 142 84 5 22 -5
+20 -71 -18z"/>
+<path d="M712 1685 c4 -22 319 -137 330 -121 11 16 4 20 -147 76 -175 65 -188
+68 -183 45z"/>
+<path d="M2110 1641 c-101 -37 -155 -62 -155 -72 0 -8 5 -14 10 -14 6 0 82 25
+168 55 122 43 157 59 157 73 0 9 -6 17 -12 16 -7 0 -83 -26 -168 -58z"/>
+<path d="M1032 1395 c3 -20 45 -34 188 -65 194 -42 408 -36 626 15 117 28 151
+42 137 56 -7 7 -47 1 -112 -16 -131 -33 -277 -55 -366 -55 -108 0 -334 38
+-458 76 -14 4 -18 1 -15 -11z"/>
+<path d="M484 1231 c-22 -10 -57 -38 -78 -62 -31 -37 -36 -50 -34 -84 2 -29 8
+-41 21 -43 13 -3 17 3 17 25 0 39 32 87 81 123 78 56 76 15 -10 -180 -28 -63
+-51 -125 -51 -137 0 -31 36 -31 44 0 3 12 27 62 53 112 49 90 139 195 169 195
+19 0 17 -7 -48 -169 -27 -68 -47 -130 -44 -137 12 -31 35 -10 71 62 38 79 151
+211 173 203 7 -3 -5 -42 -35 -109 -49 -113 -62 -174 -44 -209 12 -21 51 -28
+85 -15 28 11 17 24 -16 22 -33 -3 -33 -3 -31 39 1 23 20 85 42 139 45 108 51
+148 22 163 -23 13 -97 -32 -126 -78 -29 -45 -46 -46 -24 -1 20 42 27 89 15
+108 -16 26 -65 13 -111 -29 l-45 -42 6 45 c6 40 3 47 -17 62 -29 20 -35 20
+-85 -3z"/>
+<path d="M1963 1178 c-59 -61 -100 -132 -114 -195 -10 -45 -19 -59 -48 -79
+-34 -23 -36 -23 -39 -6 -2 11 6 43 17 73 24 63 25 69 8 69 -6 0 -23 -20 -36
+-44 -23 -45 -87 -116 -103 -116 -18 0 -6 50 26 102 26 43 30 58 20 62 -8 3
+-21 -6 -31 -21 -40 -59 -74 -83 -115 -83 l-40 0 56 62 c85 93 118 177 74 186
+-36 7 -135 -124 -158 -209 -6 -21 -25 -50 -45 -68 -77 -67 -73 -24 12 145 37
+74 64 136 60 140 -15 16 -39 -10 -76 -84 -37 -74 -41 -78 -68 -75 -37 6 -89
+-30 -126 -85 -31 -46 -61 -67 -83 -58 -12 4 -10 15 7 61 36 96 3 114 -69 38
+-27 -27 -43 -39 -39 -27 19 63 19 64 4 64 -8 0 -25 -21 -38 -47 -29 -56 -93
+-113 -110 -96 -9 9 -4 27 20 72 34 66 39 91 17 91 -17 0 -62 -84 -71 -133 -8
+-40 6 -67 32 -67 8 0 30 12 49 27 l35 26 -6 -26 c-10 -37 19 -37 39 1 19 36
+102 128 110 122 3 -3 -2 -26 -10 -50 -26 -74 15 -117 70 -75 17 13 21 13 33
+-5 22 -31 48 -24 94 23 32 32 40 37 34 20 -9 -32 3 -63 24 -63 10 0 30 9 44
+20 l26 21 -15 -45 c-19 -55 -15 -115 8 -130 40 -25 109 92 95 162 -5 26 -3 29
+33 39 l39 10 3 -36 c4 -49 34 -53 81 -11 35 30 36 31 39 8 4 -32 39 -34 74 -5
+l29 25 17 -29 c25 -42 67 -39 117 6 32 29 38 32 34 15 -6 -23 12 -50 35 -50 8
+0 30 11 49 25 33 26 33 26 30 4 -4 -36 18 -32 46 9 15 20 45 56 68 77 37 36
+41 37 34 15 -15 -52 -17 -91 -5 -105 17 -21 54 -19 75 5 18 20 18 20 29 -2 18
+-36 44 -34 88 9 31 30 39 33 34 17 -7 -24 15 -54 41 -54 19 0 103 82 103 100
+0 7 -20 -6 -45 -29 -24 -22 -49 -41 -54 -41 -22 0 -20 22 4 69 30 60 30 61 5
+61 -10 0 -24 -10 -31 -21 -19 -36 -91 -109 -106 -109 -12 0 -13 7 -8 28 15 63
+90 127 134 115 17 -4 20 -2 15 11 -10 25 -61 20 -102 -11 -21 -15 -55 -49 -78
+-77 -39 -50 -84 -73 -84 -43 0 7 7 35 16 60 16 48 14 77 -6 77 -6 0 -36 -23
+-66 -51 -57 -55 -63 -56 -38 -8 18 37 12 68 -11 49 -8 -6 -19 -27 -25 -45 -12
+-37 -81 -105 -106 -105 -19 0 -13 25 27 99 16 29 26 58 23 62 -13 21 -35 6
+-58 -39 -28 -55 -97 -122 -126 -122 -22 0 -43 32 -34 54 3 8 36 46 74 84 73
+75 112 150 93 181 -18 28 -37 23 -80 -21z m38 -55 c-26 -49 -111 -143 -111
+-123 0 38 122 208 128 177 2 -8 -6 -33 -17 -54z m-382 -5 c-19 -37 -81 -119
+-86 -114 -6 6 34 84 65 125 27 36 42 29 21 -11z m-239 -108 c0 -12 -80 -110
+-102 -124 -30 -19 -34 5 -7 52 28 52 109 105 109 72z m128 -145 c4 -35 -24
+-111 -43 -119 -20 -7 -19 11 2 90 18 66 35 79 41 29z"/>
+<path d="M955 1120 c-8 -13 4 -50 16 -50 11 0 29 41 22 53 -6 10 -31 9 -38 -3z"/>
+<path d="M2086 1115 c-6 -18 2 -45 15 -45 12 0 31 39 24 50 -9 15 -32 12 -39
+-5z"/>
+</g>
+</svg>
+</file>
+
+<file path="src/content/brand/brand-identity.md">
+# Mindfulina - Brand Identity Guide
+
+1. Logo & Wordmark Style
+Primary Wordmark: 'Mindfulina' in a golden cursive script.
+Accent Style: Logo variations may include sunburst or rainbow motifs.
+Usage Tip: Use white or watercolor pastel backgrounds for harmony; keep gold text and lines for contrast.
+
+2. Fonts
+Logo / Wordmark: Likely "Shorelines Script" or similar (Alt: Dancing Script, Pacifico) 
+
+Headings: Trajan Pro / Cinzel (Alt: Cinzel)
+
+Body Text: Garamond / Georgia (Alt: Libre Baskerville)
+
+Suggested Sizes:
+- H1 - 36 pt
+- H2 - 24 pt
+- Body - 16 pt
+- Callouts - 18 pt (in caps or bold)
+
+3. Color Palette
+Gold: #D4A437 - Logo text, accents, headings
+
+Sunset Coral: #F4B4A8 - Background gradients, highlights 
+
+Seafoam Green: #B8D9C5 - Background gradients, calm accents 
+
+Sky Blue: #C9E9F6 - Optional accent
+
+Blush Pink: #FADCE5 - Gentle watercolor gradient
+
+White: #FFFFFF - Text background, logo base
+4. Visual Aesthetic / Brand Vibe
+Mood: Gentle, uplifting, soulful
+Textures: Watercolor blends, sun beams, soft gradients Iconography: Simple sunbursts, rainbows, nature motifs Voice/Tone: Warm, inclusive, soothing
+</file>
+
 <file path="src/content/config.ts">
 // mindfulina/src/content/config.ts
 import { defineCollection, z } from 'astro:content';
@@ -1272,6 +1245,46 @@ export const collections = {
   //   })
   // })
 };
+</file>
+
+<file path="src/layouts/EventLayout.astro">
+<!-- 
+  Updated: EventLayout.astro 
+  Updated with new theme components and styling
+-->
+---
+import '../styles/global.css';
+
+interface Props { title?: string }
+const { title = 'Mindfulina Events' } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="font-body">
+    <!-- Header -->
+    <header class="text-center py-8">
+      <div class="flex justify-center items-center flex-col">
+        <img src="/images/logo.svg" alt="Mindfulina Logo" class="h-60 w-auto mb-2" />
+      </div>
+    </header>
+
+    <!-- Main slot -->
+    <main class="content-section">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center text-sm py-10 text-gray-500">
+      © {new Date().getFullYear()} Mindfulina
+    </footer>
+  </body>
+</html>
 </file>
 
 <file path="prd.md">
@@ -1357,60 +1370,6 @@ Automate the creation of event pages on the Mindfulina website and corresponding
 - Allowing specification of a custom cover image through the Google Calendar event (e.g., a link in the description or an attachment).
 - Implementing notifications for successful synchronizations or critical failures.
 - Potentially adding the generated Eventbrite link back to the Google Calendar event description or the website event page automatically.
-</file>
-
-<file path="tailwind.config.mjs">
-// Mindfulina brand theme configuration
-export default {
-  content: ['./src/**/*.{astro,html,js,jsx,ts,tsx,md}'],
-  theme: {
-    extend: {
-      colors: {
-        // Primary palette
-        primary: '#0e7f9e',     // ocean blue-green
-        secondary: '#ff5e6c',   // hibiscus pink
-        accent: '#fde7c3',      // sand
-        
-        // Extended palette
-        ocean: {
-          DEFAULT: '#0e7f9e',
-          light: '#45a5c4',
-          dark: '#0a5b71'
-        },
-        sand: {
-          DEFAULT: '#fde7c3',
-          light: '#fff2dc',
-          dark: '#f8d49b'
-        },
-        hibisc: {
-          DEFAULT: '#ff5e6c',
-          light: '#ff8c96',
-          dark: '#e63e4c'
-        },
-        leaf: {
-          DEFAULT: '#5cb85c',
-          light: '#7ed17e',
-          dark: '#3d8b3d'
-        }
-      },
-      fontFamily: {
-        display: ['"Pacifico"', 'cursive'],   // hand-lettered header font
-        body: ['"Inter"', 'sans-serif'],      // clean, readable body text
-        serif: ['"Lora"', 'serif']            // elegant serif for certain headings
-      },
-      borderRadius: {
-        'xl': '1rem',
-        '2xl': '1.5rem',
-        '3xl': '2rem',
-      },
-      boxShadow: {
-        'soft': '0 4px 20px rgba(0, 0, 0, 0.05)',
-        'inner-soft': 'inset 0 2px 10px rgba(0, 0, 0, 0.05)'
-      }
-    },
-  },
-  plugins: [],
-};
 </file>
 
 <file path="google-apps-script/calendarTrigger.gs">
@@ -1749,84 +1708,39 @@ This project features an automated pipeline to create new event pages on the web
 This automation streamlines content management for new events, ensuring consistency and reducing manual effort.
 </file>
 
-<file path="src/styles/global.css">
-/* 
- * Mindfulina Global Styles
- * Updated theme with consistent brand colors and typography
- */
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600&display=swap');
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  body {
-    @apply min-h-screen bg-gradient-to-br from-sand-light via-white to-ocean-light/10 text-gray-800 font-body;
-  }
-
-  /* Typography */
-  h1 {
-    @apply font-display text-secondary text-4xl mb-4;
-  }
-  
-  h2, h3 {
-    @apply font-serif text-ocean-dark;
-  }
-  
-  h2 {
-    @apply text-2xl mb-3 mt-6;
-  }
-  
-  h3 {
-    @apply text-xl mb-2 mt-4;
-  }
-  
-  p {
-    @apply mb-4;
-  }
-  
-  a {
-    @apply text-primary underline decoration-2 hover:text-secondary transition-colors duration-200;
-  }
-  
-  ul, ol {
-    @apply mb-4 pl-5;
-  }
-  
-  li {
-    @apply mb-1;
-  }
-  
-  strong {
-    @apply font-semibold text-gray-900;
-  }
-}
-
-@layer components {
-  .card {
-    @apply bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-soft;
-  }
-  
-  .btn {
-    @apply inline-block px-6 py-3 rounded-xl font-medium transition-all duration-200 no-underline;
-  }
-  
-  .btn-primary {
-    @apply btn bg-primary text-white hover:bg-ocean-dark;
-  }
-  
-  .btn-secondary {
-    @apply btn bg-secondary text-white hover:bg-hibisc-dark;
-  }
-  
-  .btn-outline {
-    @apply btn border-2 border-ocean text-ocean hover:bg-ocean hover:text-white;
-  }
-  
-  .content-section {
-    @apply max-w-3xl mx-auto px-4 py-6;
-  }
-}
+<file path="tailwind.config.mjs">
+// Mindfulina brand theme configuration
+export default {
+  content: ['./src/**/*.{astro,html,js,jsx,ts,tsx,md}'],
+  theme: {
+    extend: {
+      colors: {
+        gold: '#D4A437',         // Logo text, accents, headings
+        sunsetCoral: '#F4B4A8',  // Background gradients, highlights
+        seafoamGreen: '#B8D9C5', // Background gradients, calm accents
+        skyBlue: '#C9E9F6',      // Optional accent
+        blushPink: '#FADCE5',    // Gentle watercolor gradient
+        brandWhite: '#FFFFFF',   // Text background, logo base
+        textGray: '#4A4A4A',     // For body text (a softer dark gray)
+      },
+      fontFamily: {
+        display: ['"Pacifico"', 'cursive'],   // hand-lettered header font
+        body: ['"Georgia"', 'serif'],      // Per brand-identity (Garamond / Georgia)
+        serif: ['"Cinzel"', 'serif']            // Per brand-identity (Trajan Pro / Cinzel)
+      },
+      borderRadius: {
+        'xl': '1rem',
+        '2xl': '1.5rem',
+        '3xl': '2rem',
+      },
+      boxShadow: {
+        'soft': '0 4px 20px rgba(0, 0, 0, 0.05)',
+        'inner-soft': 'inset 0 2px 10px rgba(0, 0, 0, 0.05)'
+      }
+    },
+  },
+  plugins: [],
+};
 </file>
 
 <file path="astro.config.mjs">
@@ -1956,47 +1870,6 @@ jobs:
           CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
 </file>
 
-<file path="src/layouts/BaseLayout.astro">
-<!-- 
-  Updated: BaseLayout has been simplified by moving the hero and wave to a separate component
-  Updated: Reduced padding for better mobile experience
-  Updated: Reduced spacing between logo and content
--->
----
-import '../styles/global.css';
-
-interface Props { title?: string }
-const { title = 'Mindfulina' } = Astro.props;
----
-
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" href="/favicon.svg" />
-    <title>{title}</title>
-  </head>
-  <body class="font-sans">
-    <!-- Header -->
-    <header class="text-center py-4">
-      <div class="flex justify-center items-center flex-col">
-        <img src="/images/logo.png" alt="Mindfulina Logo" class="h-60 w-auto" />
-      </div>
-    </header>
-
-    <!-- Main slot -->
-    <main class="max-w-3xl mx-auto pt-2 p-4">
-      <slot />
-    </main>
-
-    <!-- Footer -->
-    <footer class="text-center text-sm py-10 text-gray-500">
-      © {new Date().getFullYear()} Mindfulina
-    </footer>
-  </body>
-</html>
-</file>
-
 <file path="src/pages/events/[...slug].astro">
 ---
 import { getCollection } from 'astro:content';
@@ -2110,6 +1983,86 @@ const pageTitle = 'Mindfulina – Upcoming Events';
     <a href="/" class="inline-block">← Back to Next Event</a>
   </div>
 </Event>
+</file>
+
+<file path="src/styles/global.css">
+/* 
+ * Mindfulina Global Styles
+ * Updated theme with consistent brand colors and typography from brand-identity.md
+ */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Georgia:wght@400;700&family=Cinzel:wght@400;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply min-h-screen bg-gradient-to-br from-blushPink/60 via-brandWhite to-seafoamGreen/60 text-textGray font-body;
+  }
+
+  /* Typography */
+  h1 {
+    @apply font-display text-gold text-5xl mb-4;
+  }
+  
+  h2, h3 {
+    @apply font-serif text-gold;
+  }
+  
+  h2 {
+    @apply text-3xl mb-3 mt-6;
+  }
+  
+  h3 {
+    @apply text-2xl mb-2 mt-4;
+  }
+  
+  p {
+    @apply mb-4;
+  }
+  
+  a {
+    @apply text-gold underline decoration-2 hover:text-seafoamGreen transition-colors duration-200;
+  }
+  
+  ul, ol {
+    @apply mb-4 pl-5;
+  }
+  
+  li {
+    @apply mb-1;
+  }
+  
+  strong {
+    @apply font-semibold; /* Color will be inherited from parent, typically text-textGray */
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-brandWhite/80 backdrop-blur-md p-6 rounded-2xl shadow-soft;
+  }
+  
+  .btn {
+    @apply inline-block px-6 py-3 rounded-xl font-medium transition-all duration-200 no-underline;
+  }
+  
+  .btn-primary {
+    @apply btn bg-gold text-textGray hover:bg-gold/80 hover:text-textGray; /* text-textGray for contrast on gold, ensure hover text color */
+  }
+  
+  .btn-secondary {
+    @apply btn bg-sunsetCoral text-brandWhite hover:bg-sunsetCoral/80;
+  }
+  
+  .btn-outline {
+    @apply btn border-2 border-gold text-gold hover:bg-gold hover:text-brandWhite;
+  }
+  
+  .content-section {
+    @apply max-w-3xl mx-auto px-4 py-6;
+  }
+}
 </file>
 
 <file path="cloudflare-worker/eventbriteManager.js">
@@ -2320,6 +2273,47 @@ export async function createMindfulinaEventOnEventbrite(
     };
   }
 }
+</file>
+
+<file path="src/layouts/BaseLayout.astro">
+<!-- 
+  Updated: BaseLayout has been simplified by moving the hero and wave to a separate component
+  Updated: Reduced padding for better mobile experience
+  Updated: Reduced spacing between logo and content
+-->
+---
+import '../styles/global.css';
+
+interface Props { title?: string }
+const { title = 'Mindfulina' } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="font-sans">
+    <!-- Header -->
+    <header class="text-center py-4">
+      <div class="flex justify-center items-center flex-col">
+        <img src="/images/logo.svg" alt="Mindfulina Logo" class="h-60 w-auto" />
+      </div>
+    </header>
+
+    <!-- Main slot -->
+    <main class="max-w-3xl mx-auto pt-2 p-4">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center text-sm py-10 text-gray-500">
+      © {new Date().getFullYear()} Mindfulina
+    </footer>
+  </body>
+</html>
 </file>
 
 <file path="todo.md">

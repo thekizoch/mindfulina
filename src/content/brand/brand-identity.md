@@ -13,7 +13,7 @@ Headings: Trajan Pro / Cinzel (Alt: Cinzel)
 Body Text: Garamond / Georgia (Alt: Libre Baskerville)
 
 Suggested Sizes:
-- H1 - 36 pt
+- H1 - 36 pt (bold)
 - H2 - 24 pt
 - Body - 16 pt
 - Callouts - 18 pt (in caps or bold)
