@@ -1,3 +1,6 @@
+```javascript
+// mindfulina/cloudflare-worker/githubManager.js
+
 // Constants for GitHub interaction (website page creation)
 const GITHUB_REPO_OWNER = "thekizoch";
 const GITHUB_REPO_NAME = "mindfulina";
@@ -21,15 +24,14 @@ Let the makani (breeze) and sounds of the moana guide your naʻau (inner heart) 
 E komo mai — all are welcome!`;
 
 
-
-
 /**
- * Creates an event Markdown file in the GitHub repository
+ * Creates an event Markdown file in the GitHub repository.
  * @param {object} eventData - Event data from Google Calendar (title, startTime, isAllDay, googleCalendarEventId, location, description).
  * @param {string} githubToken - GitHub PAT.
+ * @param {string|null} [eventbriteUrl=null] - Optional URL to the Eventbrite event page.
  * @returns {Promise<Response>} - The raw response from the GitHub API.
  */
-export async function createGithubEventFile(eventData, githubToken) {
+export async function createGithubEventFile(eventData, githubToken, eventbriteUrl = null) {
   const { title, startTime, isAllDay, googleCalendarEventId, location, description } = eventData;
 
   const locationToUse = (location && location.trim() !== '') ? location : DEFAULT_WEBSITE_LOCATION;
@@ -56,6 +58,13 @@ export async function createGithubEventFile(eventData, githubToken) {
   const eventPath = `src/content/events/${datePrefix}-${slug}.md`;
   console.log(`Worker/githubManager: Determined event file path: ${eventPath}`);
   
+  let buyTicketsSection = "";
+  if (eventbriteUrl) {
+    // This Markdown will be placed *before* the main description.
+    // Your Astro template can use the `eventbriteLink` in the frontmatter for a more structured button.
+    buyTicketsSection = `[Buy Tickets on Eventbrite](${eventbriteUrl})\n\n---\n\n`;
+  }
+
   const frontmatterContent = `---
 title: "${title ? title.replace(/"/g, '\\"') : 'Mindfulina Event'}"
 date: "${startTime}" 
@@ -63,15 +72,13 @@ location: "${locationToUse.replace(/"/g, '\\"')}"
 cover: "${DEFAULT_WEBSITE_COVER_IMAGE}"
 googleCalendarEventId: "${googleCalendarEventId}"
 isAllDay: ${isAllDay || false}
-eventbriteLink: "" # Placeholder, can be updated later if desired
+eventbriteLink: "${eventbriteUrl || ''}" 
 ---
 
-${descriptionToUse}
+${buyTicketsSection}${descriptionToUse}
 `;
 
-  // Convert to Base64: Ensure UTF-8 handling for special characters
-  // For Cloudflare Workers, TextEncoder/TextDecoder are available globally for UTF-8.
-  // btoa only works on ASCII or binary strings from Latin1.
+  // Convert to Base64
   const utf8Bytes = new TextEncoder().encode(frontmatterContent);
   let binaryString = '';
   utf8Bytes.forEach(byte => {
@@ -83,27 +90,25 @@ ${descriptionToUse}
   const githubApiUrl = `https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/contents/${eventPath}`;
   console.log(`Worker/githubManager: GitHub API URL for PUT: ${githubApiUrl}`);
 
-  const commitMessage = `feat: Add event "${title || 'New Event'}" from GCal ID ${googleCalendarEventId}`;
+  const commitMessage = `feat: Add event "${title || 'New Event'}" (GCal: ${googleCalendarEventId})`;
 
   const requestBody = {
     message: commitMessage,
     content: fileContentBase64,
     branch: GITHUB_BRANCH,
-    // TODO: Add committer and author details if desired, though not strictly necessary
-    // committer: { name: "Mindfulina Automation", email: "automation@yourdomain.com" },
-    // author: { name: "Mindfulina Calendar Sync", email: "calendar-sync@yourdomain.com" }
   };
 
-  console.log(`Worker/githubManager: Sending PUT request to GitHub with message: "${commitMessage}"`);
+  console.log(`Worker/githubManager: Sending PUT request to GitHub for event: "${title || 'New Event'}"`);
 
   return fetch(githubApiUrl, {
     method: 'PUT',
     headers: {
       'Authorization': `token ${githubToken}`,
-      'User-Agent': 'Mindfulina-Event-Automation-Worker/1.1.0', // Version update
+      'User-Agent': 'Mindfulina-Event-Automation-Worker/1.1.1', // Version bump
       'Content-Type': 'application/json',
       'Accept': 'application/vnd.github.v3+json',
     },
     body: JSON.stringify(requestBody),
   });
 }
+```
