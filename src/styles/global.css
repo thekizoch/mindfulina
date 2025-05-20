@@ -1,32 +1,32 @@
 /* 
  * Mindfulina Global Styles
- * Updated theme with consistent brand colors and typography
+ * Updated theme with consistent brand colors and typography from brand-identity.md
  */
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Georgia:wght@400;700&family=Cinzel:wght@400;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    @apply min-h-screen bg-gradient-to-br from-sand-light via-white to-ocean-light/10 text-gray-800 font-body;
+    @apply min-h-screen bg-gradient-to-br from-blushPink/60 via-brandWhite to-seafoamGreen/60 text-textGray font-body;
   }
 
   /* Typography */
   h1 {
-    @apply font-display text-secondary text-4xl mb-4;
+    @apply font-display text-gold text-5xl mb-4;
   }
   
   h2, h3 {
-    @apply font-serif text-ocean-dark;
+    @apply font-serif text-gold;
   }
   
   h2 {
-    @apply text-2xl mb-3 mt-6;
+    @apply text-3xl mb-3 mt-6;
   }
   
   h3 {
-    @apply text-xl mb-2 mt-4;
+    @apply text-2xl mb-2 mt-4;
   }
   
   p {
@@ -34,7 +34,7 @@
   }
   
   a {
-    @apply text-primary underline decoration-2 hover:text-secondary transition-colors duration-200;
+    @apply text-gold underline decoration-2 hover:text-sunsetCoral transition-colors duration-200;
   }
   
   ul, ol {
@@ -46,13 +46,13 @@
   }
   
   strong {
-    @apply font-semibold text-gray-900;
+    @apply font-semibold; /* Color will be inherited from parent, typically text-textGray */
   }
 }
 
 @layer components {
   .card {
-    @apply bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-soft;
+    @apply bg-brandWhite/80 backdrop-blur-md p-6 rounded-2xl shadow-soft;
   }
   
   .btn {
@@ -60,15 +60,15 @@
   }
   
   .btn-primary {
-    @apply btn bg-primary text-white hover:bg-ocean-dark;
+    @apply btn bg-gold text-textGray hover:bg-gold/80; /* text-textGray for contrast on gold */
   }
   
   .btn-secondary {
-    @apply btn bg-secondary text-white hover:bg-hibisc-dark;
+    @apply btn bg-sunsetCoral text-brandWhite hover:bg-sunsetCoral/80;
   }
   
   .btn-outline {
-    @apply btn border-2 border-ocean text-ocean hover:bg-ocean hover:text-white;
+    @apply btn border-2 border-gold text-gold hover:bg-gold hover:text-brandWhite;
   }
   
   .content-section {

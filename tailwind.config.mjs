@@ -4,37 +4,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Primary palette
-        primary: '#0e7f9e',     // ocean blue-green
-        secondary: '#ff5e6c',   // hibiscus pink
-        accent: '#fde7c3',      // sand
-        
-        // Extended palette
-        ocean: {
-          DEFAULT: '#0e7f9e',
-          light: '#45a5c4',
-          dark: '#0a5b71'
-        },
-        sand: {
-          DEFAULT: '#fde7c3',
-          light: '#fff2dc',
-          dark: '#f8d49b'
-        },
-        hibisc: {
-          DEFAULT: '#ff5e6c',
-          light: '#ff8c96',
-          dark: '#e63e4c'
-        },
-        leaf: {
-          DEFAULT: '#5cb85c',
-          light: '#7ed17e',
-          dark: '#3d8b3d'
-        }
+        gold: '#D4A437',         // Logo text, accents, headings
+        sunsetCoral: '#F4B4A8',  // Background gradients, highlights
+        seafoamGreen: '#B8D9C5', // Background gradients, calm accents
+        skyBlue: '#C9E9F6',      // Optional accent
+        blushPink: '#FADCE5',    // Gentle watercolor gradient
+        brandWhite: '#FFFFFF',   // Text background, logo base
+        textGray: '#4A4A4A',     // For body text (a softer dark gray)
       },
       fontFamily: {
         display: ['"Pacifico"', 'cursive'],   // hand-lettered header font
-        body: ['"Inter"', 'sans-serif'],      // clean, readable body text
-        serif: ['"Lora"', 'serif']            // elegant serif for certain headings
+        body: ['"Georgia"', 'serif'],      // Per brand-identity (Garamond / Georgia)
+        serif: ['"Cinzel"', 'serif']            // Per brand-identity (Trajan Pro / Cinzel)
       },
       borderRadius: {
         'xl': '1rem',
