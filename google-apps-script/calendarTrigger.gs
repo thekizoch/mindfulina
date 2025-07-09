@@ -125,7 +125,7 @@ function onCalendarEventUpdate(e) {
  * @param {Object} eventItem The event item object from Calendar.Events.list().
  */
 function processEventWithAdvancedApiObject(eventItem) {
-  const eventTitle = eventItem.summary || 'Untitled Event'; 
+  const eventTitle = eventItem.summary || 'Ocean Sound Bath'; 
   
   // Handle all-day vs timed events for start and end times
   let startTime, endTime;
