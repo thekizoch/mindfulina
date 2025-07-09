@@ -1,4 +1,4 @@
-
+[] make it not say morning or ocean sound bathn
 [x] have google calendar events sync events
   [] create a free Eventbrite event with the eventrite api
   [] make the event on the site that links to to Eventbrite

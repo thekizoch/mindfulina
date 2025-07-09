@@ -58,8 +58,8 @@ google-apps-script/
   calendarTrigger.gs
 public/
   images/
+    logo-sunshine.svg
     logo.svg
-  favicon.svg
 sandbox/
   copy_and_publish_eventbrite_event.js
   create_eventbrite_free_event.js
@@ -74,6 +74,7 @@ src/
       2025-04-27-sunset-sound-bath.md
       2025-05-18.md
       2025-06-22-morning-ocean-sound-bath.md
+      2025-07-14-morning-ocean-sound-bath.md
     config.ts
   layouts/
     BaseLayout.astro
@@ -115,15 +116,58 @@ compatibility_date = "2025-05-16" # Replace with the actual current date when se
 account_id = "" # Will be sourced from CF_ACCOUNT_ID GitHub secret during CI/CD
 </file>
 
-<file path="public/favicon.svg">
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 128 128">
-    <path d="M50.4 78.5a75.1 75.1 0 0 0-28.5 6.9l24.2-65.7c.7-2 1.9-3.2 3.4-3.2h29c1.5 0 2.7 1.2 3.4 3.2l24.2 65.7s-11.6-7-28.5-7L67 45.5c-.4-1.7-1.6-2.8-2.9-2.8-1.3 0-2.5 1.1-2.9 2.7L50.4 78.5Zm-1.1 28.2Zm-4.2-20.2c-2 6.6-.6 15.8 4.2 20.2a17.5 17.5 0 0 1 .2-.7 5.5 5.5 0 0 1 5.7-4.5c2.8.1 4.3 1.5 4.7 4.7.2 1.1.2 2.3.2 3.5v.4c0 2.7.7 5.2 2.2 7.4a13 13 0 0 0 5.7 4.9v-.3l-.2-.3c-1.8-5.6-.5-9.5 4.4-12.8l1.5-1a73 73 0 0 0 3.2-2.2 16 16 0 0 0 6.8-11.4c.3-2 .1-4-.6-6l-.8.6-1.6 1a37 37 0 0 1-22.4 2.7c-5-.7-9.7-2-13.2-6.2Z" />
-    <style>
-        path { fill: #000; }
-        @media (prefers-color-scheme: dark) {
-            path { fill: #FFF; }
-        }
-    </style>
+<file path="public/images/logo-sunshine.svg">
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+ "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="300.000000pt" height="300.000000pt" viewBox="0 0 300.000000 300.000000"
+ preserveAspectRatio="xMidYMid meet">
+<metadata>
+Created by potrace 1.10, written by Peter Selinger 2001-2011
+</metadata>
+<g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)"
+fill="#D4A437" stroke="none">
+<path d="M1482 2118 c3 -181 5 -213 18 -213 13 0 15 31 18 213 2 208 2 212
+-18 212 -20 0 -21 -4 -18 -212z"/>
+<path d="M1120 2222 c0 -25 159 -347 171 -347 8 0 13 8 11 18 -7 39 -156 337
+-169 337 -7 0 -13 -4 -13 -8z"/>
+<path d="M1815 2153 c-96 -201 -126 -276 -113 -284 9 -6 19 5 35 39 12 26 49
+105 83 176 55 118 63 146 41 146 -5 0 -26 -35 -46 -77z"/>
+<path d="M1361 2061 c-20 -13 16 -161 40 -161 15 0 15 5 2 58 -8 31 -18 69
+-21 84 -5 20 -11 25 -21 19z"/>
+<path d="M1626 2059 c-9 -26 -36 -137 -36 -148 0 -6 6 -11 14 -11 18 0 53 147
+38 162 -8 8 -13 7 -16 -3z"/>
+<path d="M860 1998 c0 -22 269 -272 276 -255 3 9 -41 59 -121 138 -122 120
+-155 145 -155 117z"/>
+<path d="M1999 1894 c-68 -64 -130 -122 -138 -130 -13 -11 -12 -14 3 -20 12
+-5 38 13 94 68 42 40 103 97 136 125 50 44 65 73 37 73 -4 0 -63 -52 -132
+-116z"/>
+<path d="M1826 1886 c-50 -70 -53 -76 -32 -76 17 0 107 120 100 132 -11 17
+-25 5 -68 -56z"/>
+<path d="M1106 1928 c4 -7 26 -37 47 -66 36 -48 56 -60 60 -38 4 16 -79 115
+-96 116 -12 0 -16 -4 -11 -12z"/>
+<path d="M1422 1849 c-154 -26 -296 -161 -336 -318 l-12 -46 -45 5 c-131 13
+-329 -8 -328 -35 0 -6 21 -8 52 -5 29 3 115 5 192 5 124 -1 159 -5 307 -38
+215 -48 299 -49 471 -8 194 47 248 54 375 47 65 -3 136 -9 160 -12 33 -5 42
+-3 42 9 0 23 -108 39 -251 39 l-127 -1 -5 32 c-9 58 -60 149 -112 202 -98 101
+-244 148 -383 124z m233 -60 c84 -32 181 -131 212 -214 34 -90 35 -87 -27
+-100 -30 -7 -102 -25 -159 -40 -133 -35 -227 -32 -434 15 -167 39 -158 28
+-107 135 52 108 124 173 239 217 65 25 196 19 276 -13z"/>
+<path d="M940 1736 c0 -17 126 -90 140 -81 16 10 3 22 -64 60 -71 39 -76 41
+-76 21z"/>
+<path d="M1987 1716 c-72 -41 -84 -53 -71 -66 13 -13 138 61 142 84 5 22 -5
+20 -71 -18z"/>
+<path d="M712 1685 c4 -22 319 -137 330 -121 11 16 4 20 -147 76 -175 65 -188
+68 -183 45z"/>
+<path d="M2110 1641 c-101 -37 -155 -62 -155 -72 0 -8 5 -14 10 -14 6 0 82 25
+168 55 122 43 157 59 157 73 0 9 -6 17 -12 16 -7 0 -83 -26 -168 -58z"/>
+<path d="M1032 1395 c3 -20 45 -34 188 -65 194 -42 408 -36 626 15 117 28 151
+42 137 56 -7 7 -47 1 -112 -16 -131 -33 -277 -55 -366 -55 -108 0 -334 38
+-458 76 -14 4 -18 1 -15 -11z"/>
+
+
+</g>
 </svg>
 </file>
 
@@ -704,6 +748,32 @@ Consider taking a peaceful walk along the shoreline to connect with nature.
 Let the ocean breeze and sound healing waves guide you into deep rest. See you there.
 </file>
 
+<file path="src/content/events/2025-07-14-morning-ocean-sound-bath.md">
+---
+title: "Morning Ocean Sound Bath"
+date: "2025-07-13T18:00:00-10:00"
+location: "Mākālei Beach Park, Honolulu"
+cover: "/images/wide-shot.jpeg"
+googleCalendarEventId: "3eo5c99ucbj3d1ib5ob1ljt2sq"
+isAllDay: false
+eventbriteLink: "https://www.eventbrite.com/e/morning-ocean-sound-bath-tickets-1474927540979"
+---
+
+Join us for a sound bath to reset and relax your mind, body, and spirit — reconnecting with your mana and the healing rhythms of the moana.
+
+## Before You Arrive
+Consider moving your body beforehand; take a gentle walk, stretch, or run before the session to release stagnant energy.
+
+## Bring
+- Towel, mat, or blanket for the ‘āina
+- Eye mask if you wish to shut out visual stimulation and the sun
+- Swimsuit, sunscreen, and water bottle if you feel called to connect with the moana after our gathering
+
+Let the makani (breeze) and sounds of the moana guide your naʻau (inner heart) into deep rest.
+
+E komo mai — all are welcome!
+</file>
+
 <file path="src/pages/brand.astro">
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -1180,44 +1250,6 @@ l29 25 17 -29 c25 -42 67 -39 117 6 32 29 38 32 34 15 -6 -23 12 -50 35 -50 8
 </svg>
 </file>
 
-<file path="src/content/brand/brand-identity.md">
-# Mindfulina - Brand Identity Guide
-
-1. Logo & Wordmark Style
-Primary Wordmark: 'Mindfulina' in a golden cursive script.
-Accent Style: Logo variations may include sunburst or rainbow motifs.
-Usage Tip: Use white or watercolor pastel backgrounds for harmony; keep gold text and lines for contrast.
-
-2. Fonts
-Logo / Wordmark: Likely "Shorelines Script" or similar (Alt: Dancing Script, Pacifico) 
-
-Headings: Trajan Pro / Cinzel (Alt: Cinzel)
-
-Body Text: Garamond / Georgia (Alt: Libre Baskerville)
-
-Suggested Sizes:
-- H1 - 36 pt
-- H2 - 24 pt
-- Body - 16 pt
-- Callouts - 18 pt (in caps or bold)
-
-3. Color Palette
-Gold: #D4A437 - Logo text, accents, headings
-
-Sunset Coral: #F4B4A8 - Background gradients, highlights 
-
-Seafoam Green: #B8D9C5 - Background gradients, calm accents 
-
-Sky Blue: #C9E9F6 - Optional accent
-
-Blush Pink: #FADCE5 - Gentle watercolor gradient
-
-White: #FFFFFF - Text background, logo base
-4. Visual Aesthetic / Brand Vibe
-Mood: Gentle, uplifting, soulful
-Textures: Watercolor blends, sun beams, soft gradients Iconography: Simple sunbursts, rainbows, nature motifs Voice/Tone: Warm, inclusive, soothing
-</file>
-
 <file path="src/content/config.ts">
 // mindfulina/src/content/config.ts
 import { defineCollection, z } from 'astro:content';
@@ -1245,46 +1277,6 @@ export const collections = {
   //   })
   // })
 };
-</file>
-
-<file path="src/layouts/EventLayout.astro">
-<!-- 
-  Updated: EventLayout.astro 
-  Updated with new theme components and styling
--->
----
-import '../styles/global.css';
-
-interface Props { title?: string }
-const { title = 'Mindfulina Events' } = Astro.props;
----
-
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" href="/favicon.svg" />
-    <title>{title}</title>
-  </head>
-  <body class="font-body">
-    <!-- Header -->
-    <header class="text-center py-8">
-      <div class="flex justify-center items-center flex-col">
-        <img src="/images/logo.svg" alt="Mindfulina Logo" class="h-60 w-auto mb-2" />
-      </div>
-    </header>
-
-    <!-- Main slot -->
-    <main class="content-section">
-      <slot />
-    </main>
-
-    <!-- Footer -->
-    <footer class="text-center text-sm py-10 text-gray-500">
-      © {new Date().getFullYear()} Mindfulina
-    </footer>
-  </body>
-</html>
 </file>
 
 <file path="prd.md">
@@ -1657,6 +1649,84 @@ function listRecentEventsForTesting() {
 }
 </file>
 
+<file path="src/content/brand/brand-identity.md">
+# Mindfulina - Brand Identity Guide
+
+1. Logo & Wordmark Style
+Primary Wordmark: 'Mindfulina' in a golden cursive script.
+Accent Style: Logo variations may include sunburst or rainbow motifs.
+Usage Tip: Use white or watercolor pastel backgrounds for harmony; keep gold text and lines for contrast.
+
+2. Fonts
+Logo / Wordmark: Likely "Shorelines Script" or similar (Alt: Dancing Script, Pacifico) 
+
+Headings: Trajan Pro / Cinzel (Alt: Cinzel)
+
+Body Text: Garamond / Georgia (Alt: Libre Baskerville)
+
+Suggested Sizes:
+- H1 - 36 pt (bold)
+- H2 - 24 pt
+- Body - 16 pt
+- Callouts - 18 pt (in caps or bold)
+
+3. Color Palette
+Gold: #D4A437 - Logo text, accents, headings
+
+Sunset Coral: #F4B4A8 - Background gradients, highlights 
+
+Seafoam Green: #B8D9C5 - Background gradients, calm accents 
+
+Sky Blue: #C9E9F6 - Optional accent
+
+Blush Pink: #FADCE5 - Gentle watercolor gradient
+
+White: #FFFFFF - Text background, logo base
+4. Visual Aesthetic / Brand Vibe
+Mood: Gentle, uplifting, soulful
+Textures: Watercolor blends, sun beams, soft gradients Iconography: Simple sunbursts, rainbows, nature motifs Voice/Tone: Warm, inclusive, soothing
+</file>
+
+<file path="src/layouts/EventLayout.astro">
+<!-- 
+  Updated: EventLayout.astro 
+  Updated with new theme components and styling
+-->
+---
+import '../styles/global.css';
+
+interface Props { title?: string }
+const { title = 'Mindfulina Events' } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/images/logo.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="font-body">
+    <!-- Header -->
+    <header class="text-center py-8">
+      <div class="flex justify-center items-center flex-col">
+        <img src="/images/logo.svg" alt="Mindfulina Logo" class="h-60 w-auto mb-2" />
+      </div>
+    </header>
+
+    <!-- Main slot -->
+    <main class="content-section">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center text-sm py-10 text-gray-500">
+      © {new Date().getFullYear()} Mindfulina
+    </footer>
+  </body>
+</html>
+</file>
+
 <file path=".gitignore">
 # build output
 dist/
@@ -1985,86 +2055,6 @@ const pageTitle = 'Mindfulina – Upcoming Events';
 </Event>
 </file>
 
-<file path="src/styles/global.css">
-/* 
- * Mindfulina Global Styles
- * Updated theme with consistent brand colors and typography from brand-identity.md
- */
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Georgia:wght@400;700&family=Cinzel:wght@400;700&display=swap');
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  body {
-    @apply min-h-screen bg-gradient-to-br from-blushPink/60 via-brandWhite to-seafoamGreen/60 text-textGray font-body;
-  }
-
-  /* Typography */
-  h1 {
-    @apply font-display text-gold text-5xl mb-4;
-  }
-  
-  h2, h3 {
-    @apply font-serif text-gold;
-  }
-  
-  h2 {
-    @apply text-3xl mb-3 mt-6;
-  }
-  
-  h3 {
-    @apply text-2xl mb-2 mt-4;
-  }
-  
-  p {
-    @apply mb-4;
-  }
-  
-  a {
-    @apply text-gold underline decoration-2 hover:text-seafoamGreen transition-colors duration-200;
-  }
-  
-  ul, ol {
-    @apply mb-4 pl-5;
-  }
-  
-  li {
-    @apply mb-1;
-  }
-  
-  strong {
-    @apply font-semibold; /* Color will be inherited from parent, typically text-textGray */
-  }
-}
-
-@layer components {
-  .card {
-    @apply bg-brandWhite/80 backdrop-blur-md p-6 rounded-2xl shadow-soft;
-  }
-  
-  .btn {
-    @apply inline-block px-6 py-3 rounded-xl font-medium transition-all duration-200 no-underline;
-  }
-  
-  .btn-primary {
-    @apply btn bg-gold text-textGray hover:bg-gold/80 hover:text-textGray; /* text-textGray for contrast on gold, ensure hover text color */
-  }
-  
-  .btn-secondary {
-    @apply btn bg-sunsetCoral text-brandWhite hover:bg-sunsetCoral/80;
-  }
-  
-  .btn-outline {
-    @apply btn border-2 border-gold text-gold hover:bg-gold hover:text-brandWhite;
-  }
-  
-  .content-section {
-    @apply max-w-3xl mx-auto px-4 py-6;
-  }
-}
-</file>
-
 <file path="cloudflare-worker/eventbriteManager.js">
 // mindfulina/cloudflare-worker/eventbriteManager.js
 
@@ -2275,6 +2265,101 @@ export async function createMindfulinaEventOnEventbrite(
 }
 </file>
 
+<file path="src/styles/global.css">
+/* 
+ * Mindfulina Global Styles
+ * Updated theme with consistent brand colors and typography from brand-identity.md
+ */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Georgia:wght@400;700&family=Cinzel:wght@400;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply min-h-screen bg-gradient-to-br from-blushPink via-skyBlue/50 to-seafoamGreen text-textGray font-body;
+  }
+
+  /* Typography */
+  h1 {
+    @apply font-display text-gold text-5xl mb-4 font-bold text-center;
+  }
+  
+  h2, h3 {
+    @apply font-serif text-gold;
+  }
+  
+  h2 {
+    @apply text-3xl mb-3 mt-6;
+  }
+  
+  h3 {
+    @apply text-2xl mb-2 mt-4;
+  }
+  
+  p {
+    @apply mb-4;
+  }
+  
+  a {
+    @apply text-gold underline decoration-2 hover:text-seafoamGreen transition-colors duration-200;
+  }
+  
+  ul, ol {
+    @apply mb-4 pl-5;
+  }
+  
+  li {
+    @apply mb-1;
+  }
+  
+  strong {
+    @apply font-semibold; /* Color will be inherited from parent, typically text-textGray */
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-brandWhite/80 backdrop-blur-md p-6 rounded-2xl shadow-soft;
+  }
+  
+  .btn {
+    @apply inline-block px-6 py-3 rounded-xl font-medium transition-all duration-200 no-underline;
+  }
+  
+  .btn-primary {
+    @apply btn bg-gold text-textGray hover:bg-gold/80 hover:text-textGray; /* text-textGray for contrast on gold, ensure hover text color */
+  }
+  
+  .btn-secondary {
+    @apply btn bg-sunsetCoral text-brandWhite hover:bg-sunsetCoral/80;
+  }
+  
+  .btn-outline {
+    @apply btn border-2 border-gold text-gold hover:bg-gold hover:text-brandWhite;
+  }
+  
+  .content-section {
+    @apply max-w-3xl mx-auto px-4 py-6;
+  }
+}
+</file>
+
+<file path="todo.md">
+[] make it not say morning or ocean sound bathn
+[x] have google calendar events sync events
+  [] create a free Eventbrite event with the eventrite api
+  [] make the event on the site that links to to Eventbrite
+  
+  
+  [] make it themed like in whatsapp chat
+  
+  [] have html created from markdown. so no need for html template.
+  
+[] format site so past events are not shown on homepage. if no future events, show a link to past events and some default like 'check back again for more events'
+[] future events shoud truly be in the future, not just all events ever...
+</file>
+
 <file path="src/layouts/BaseLayout.astro">
 <!-- 
   Updated: BaseLayout has been simplified by moving the hero and wave to a separate component
@@ -2292,7 +2377,7 @@ const { title = 'Mindfulina' } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" href="/favicon.svg" />
+    <link rel="icon" href="/images/logo-sunshine.svg" />
     <title>{title}</title>
   </head>
   <body class="font-sans">
@@ -2314,20 +2399,6 @@ const { title = 'Mindfulina' } = Astro.props;
     </footer>
   </body>
 </html>
-</file>
-
-<file path="todo.md">
-[x] have google calendar events sync events
-  [] create a free Eventbrite event with the eventrite api
-  [] make the event on the site that links to to Eventbrite
-  
-  
-  [] make it themed like in whatsapp chat
-  
-  [] have html created from markdown. so no need for html template.
-  
-[] format site so past events are not shown on homepage. if no future events, show a link to past events and some default like 'check back again for more events'
-[] future events shoud truly be in the future, not just all events ever...
 </file>
 
 <file path="src/pages/index.astro">

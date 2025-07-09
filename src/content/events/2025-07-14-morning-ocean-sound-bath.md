@@ -1,5 +1,5 @@
 ---
-title: "Morning Ocean Sound Bath"
+title: "Ocean Sound Bath"
 date: "2025-07-13T18:00:00-10:00"
 location: "Mākālei Beach Park, Honolulu"
 cover: "/images/wide-shot.jpeg"
